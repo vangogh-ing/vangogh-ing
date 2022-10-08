@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { supabase } from "./supabaseClient";
 
 import Auth from "./Components/Auth";
+import Discover from "./Components/Discover";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -22,10 +23,12 @@ export default function App() {
       {!session ? (
         <Routes>
           <Route path="/login" element={<Auth />} />
+          <Route path="/discover" element={<Discover />} />
         </Routes>
       ) : (
         <Routes>
           <Route path="/login" element={<Auth />} />
+          <Route path="/discover" element={<Discover />} />
         </Routes>
       )}
     </div>
