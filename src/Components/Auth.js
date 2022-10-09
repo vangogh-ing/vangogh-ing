@@ -10,12 +10,16 @@ export default function Auth() {
   const handleLogin = async (email, password) => {
     try {
       setLoading(true);
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-      if (error) throw error;
-      alert("Logged in");
+      if (localStorage.length === 0) {
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+        if (error) throw error;
+        alert("Logged in");
+      } else {
+        alert("You're already logged in");
+      }
     } catch (error) {
       alert(error.error_description || error.message);
     } finally {
@@ -28,7 +32,6 @@ export default function Auth() {
       setLoading(true);
 
       const { data } = await supabase.from("User").select().eq("email", email);
-      console.log(data);
 
       if (data.length === 0) {
         const { error } = await supabase.auth.signUp({ email, password });
