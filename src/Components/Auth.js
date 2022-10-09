@@ -37,6 +37,7 @@ export default function Auth() {
         const { error } = await supabase.auth.signUp({ email, password });
         if (error) throw error;
         alert("Signed up");
+        window.location.href = "http://localhost:3000/welcome";
       } else {
         alert("Email already in use");
       }
