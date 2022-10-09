@@ -26,9 +26,17 @@ export default function Auth() {
   const handleSignup = async (email, password) => {
     try {
       setLoading(true);
-      const { error } = await supabase.auth.signUp({ email, password });
-      if (error) throw error;
-      alert("Signed up");
+
+      const { data } = await supabase.from("User").select().eq("email", email);
+      console.log(data);
+
+      if (data.length === 0) {
+        const { error } = await supabase.auth.signUp({ email, password });
+        if (error) throw error;
+        alert("Signed up");
+      } else {
+        alert("Email already in use");
+      }
     } catch (error) {
       alert(error.error_description || error.message);
     } finally {
