@@ -2,8 +2,9 @@ import { supabase } from "../supabaseClient";
 import { useEffect, useState } from "react";
 //inner component
 import DiscoverInfo from "../innerComponents/discoverInfo";
+import CreateEvent from "../innerComponents/createEvent";
 
-const Discover = () => {
+function Discover() {
   const [fetchError, setFetchError] = useState(null);
   const [events, setEvents] = useState(null);
 
@@ -33,10 +34,13 @@ const Discover = () => {
           {events.map((event) => (
             <DiscoverInfo key={event.id} event={event} />
           ))}
+          <div>
+            <CreateEvent />
+          </div>
         </div>
       )}
     </div>
   );
-};
+}
 
 export default Discover;

@@ -1,4 +1,4 @@
-const DiscoverInfo = ({ event }) => {
+function DiscoverInfo({ event }) {
   return (
     <div>
       <h3>{event.title}</h3>
@@ -8,6 +8,6 @@ const DiscoverInfo = ({ event }) => {
       <p>{event.description}</p>
     </div>
   );
-};
+}
 
 export default DiscoverInfo;
