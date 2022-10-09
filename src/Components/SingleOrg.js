@@ -2,6 +2,10 @@ import React, { useEffect, useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 export default function SingleOrg() {
   const { id } = useParams();
 
@@ -45,6 +49,14 @@ export default function SingleOrg() {
     hours,
     webUrl,
   } = singleOrgInfo;
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
 
   // notes: some basic sizing styling applied to image
   // questions for wireframing: should the info be displayed alone, or with a title like "email: "?
@@ -94,22 +106,34 @@ export default function SingleOrg() {
               ) : (
                 <h2>No events posted yet, check again later!</h2>
               )}
-              {relatedEventInfo.length > 0 &&
-                relatedEventInfo.map((event) => (
-                  <div key={event.id}>
-                    <h4>{event.title}</h4>
-                    <img
-                      style={{
-                        maxWidth: "200px",
-                        maxHeight: "200px",
-                        objectFit: "contain",
-                      }}
-                      alt="Event Img"
-                      src={event.imageUrl}
-                    />
-                    <h5>{event.date}</h5>
-                  </div>
-                ))}
+              {relatedEventInfo.length > 0 && (
+                <Slider
+                  {...settings}
+                  style={{
+                    marginLeft: "30px",
+                    width: "25em",
+                    textAlign: "center",
+                  }}
+                >
+                  {relatedEventInfo.map((event) => (
+                    <div key={event.id}>
+                      <h4>{event.title}</h4>
+                      <img
+                        style={{
+                          maxWidth: "200px",
+                          maxHeight: "200px",
+                          objectFit: "contain",
+                          marginLeft: "auto",
+                          marginRight: "auto",
+                        }}
+                        alt="Event Img"
+                        src={event.imageUrl}
+                      />
+                      <h5>{event.date}</h5>
+                    </div>
+                  ))}
+                </Slider>
+              )}
             </div>
           </div>
         )
