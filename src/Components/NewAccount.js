@@ -64,7 +64,7 @@ const Account = ({ session }) => {
   return (
     <div aria-live="polite">
       {loading ? (
-        "Saving ..."
+        "Saving..."
       ) : (
         <div>
           <h1>Welcome!</h1>

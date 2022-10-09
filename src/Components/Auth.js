@@ -17,6 +17,7 @@ export default function Auth() {
         });
         if (error) throw error;
         alert("Logged in");
+        window.location.href = "http://localhost:3000/account";
       } else {
         alert("You're already logged in");
       }
@@ -50,20 +51,26 @@ export default function Auth() {
 
   return (
     <div>
-      <input
-        id="email"
-        type="email"
-        placeholder="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        id="password"
-        type="password"
-        placeholder="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+      {loading ? (
+        "Loading..."
+      ) : (
+        <div>
+          <input
+            id="email"
+            type="email"
+            placeholder="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            id="password"
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+      )}
       <button onClick={() => handleLogin(email, password)}>login</button>
       <button onClick={() => handleSignup(email, password)}>signup</button>
     </div>
