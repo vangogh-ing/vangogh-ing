@@ -35,11 +35,6 @@ const Account = ({ session }) => {
     }
   };
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    window.location.href = "http://localhost:3000/login";
-  };
-
   return (
     <div aria-live="polite">
       {loading ? (
@@ -49,13 +44,6 @@ const Account = ({ session }) => {
           <p>Name: {name || "NOT YET SET"}</p>
           <p>Email: {session.user.email}</p>
           <Link to="/account/edit">Edit Info</Link>
-          <button
-            type="button"
-            className="button block"
-            onClick={handleSignOut}
-          >
-            Sign Out
-          </button>
         </div>
       )}
     </div>
