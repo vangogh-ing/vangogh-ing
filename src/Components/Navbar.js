@@ -4,6 +4,7 @@ import { supabase } from "../supabaseClient";
 export default function Navbar({ session }) {
   const handleSignOut = async () => {
     await supabase.auth.signOut();
+    //LOCAL WORKAROUND - FIX FOR PRODUCTION
     window.location.href = "http://localhost:3000/login";
   };
 

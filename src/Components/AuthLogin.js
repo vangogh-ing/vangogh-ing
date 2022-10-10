@@ -18,6 +18,7 @@ export default function AuthLogin() {
         });
         if (error) throw error;
         alert("Logged in");
+        //LOCAL WORKAROUND - FIX FOR PRODUCTION
         window.location.href = "http://localhost:3000/account";
       } else {
         alert("You're already logged in");

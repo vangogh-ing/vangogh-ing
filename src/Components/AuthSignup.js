@@ -17,6 +17,7 @@ export default function AuthSignIn() {
         const { error } = await supabase.auth.signUp({ email, password });
         if (error) throw error;
         alert("Signed up");
+        //LOCAL WORKAROUND - FIX FOR PRODUCTION
         window.location.href = "http://localhost:3000/welcome";
       } else {
         alert("Email already in use");

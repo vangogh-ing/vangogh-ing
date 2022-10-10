@@ -57,6 +57,7 @@ const Account = ({ session }) => {
       alert(error.message);
     } finally {
       setLoading(false);
+      //LOCAL WORKAROUND - FIX FOR PRODUCTION
       window.location.href = "http://localhost:3000/account";
     }
   };
