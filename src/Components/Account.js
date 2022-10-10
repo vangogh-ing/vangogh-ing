@@ -5,6 +5,7 @@ import { supabase } from "../supabaseClient";
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
     getProfile();
@@ -17,7 +18,7 @@ const Account = ({ session }) => {
 
       let { data, error, status } = await supabase
         .from("User")
-        .select(`name, email`)
+        .select(`name, email, imageUrl`)
         .eq("id", user.id)
         .single();
 
@@ -27,6 +28,7 @@ const Account = ({ session }) => {
 
       if (data) {
         setName(data.name);
+        setImageUrl(data.imageUrl);
       }
     } catch (error) {
       alert(error.message);
@@ -41,7 +43,7 @@ const Account = ({ session }) => {
         "Loading..."
       ) : (
         <div>
-          {/* <img src={publicURL} alt="" /> */}
+          <img src={imageUrl} alt="" />
           <p>Name: {name || "NOT YET SET"}</p>
           <p>Email: {session.user.email}</p>
           <Link to="/account/edit">Edit Info</Link>
