@@ -3,11 +3,8 @@ import { useEffect, useState } from "react";
 //inner components
 import DiscoverInfo from "../innerComponents/discoverInfo";
 import CreateEvent from "../innerComponents/createEvent";
-import { useParams } from "react-router-dom";
 
 function Discover() {
-  const { id } = useParams();
-
   const [fetchError, setFetchError] = useState(null);
   const [events, setEvents] = useState(null);
   const [session, setSession] = useState(null);
@@ -50,9 +47,9 @@ function Discover() {
             <CreateEvent />
           </div>
           {session ? (
-            <h1>Placeholder: LOGGED IN</h1>
+            <h2>Placeholder: LOGGED IN</h2>
           ) : (
-            <h1>Placeholder: NOT LOGGED IN</h1>
+            <h2>Placeholder: NOT LOGGED IN</h2>
           )}
         </div>
       )}

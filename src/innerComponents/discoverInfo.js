@@ -8,7 +8,7 @@ function DiscoverInfo({ event }) {
         <p>
           {event.time} | {event.date} | {event.location}
         </p>
-        <img src={event.imageUrl} />
+        <img src={event.imageUrl} alt="" />
       </Link>
       <p>{event.description}</p>
     </div>
