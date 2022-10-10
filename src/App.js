@@ -7,6 +7,7 @@ import AuthSignup from "./Components/AuthSignup";
 import NewAccount from "./Components/NewAccount";
 import Account from "./Components/Account";
 import EditAccount from "./Components/EditAccount";
+import Navbar from "./Components/Navbar";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -23,6 +24,7 @@ export default function App() {
 
   return (
     <div>
+      <Navbar session={session || null} />
       {!session ? (
         <Routes>
           <Route path="/login" element={<AuthLogin />} />
