@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { supabase } from "./supabaseClient";
 
-import Auth from "./Components/Auth";
+import AuthLogin from "./Components/AuthLogin";
+import AuthSignup from "./Components/AuthSignup";
+import NewAccount from "./Components/NewAccount";
+import Account from "./Components/Account";
+import EditAccount from "./Components/EditAccount";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -21,11 +25,23 @@ export default function App() {
     <div>
       {!session ? (
         <Routes>
-          <Route path="/login" element={<Auth />} />
+          <Route path="/login" element={<AuthLogin />} />
+          <Route path="/signup" element={<AuthSignup />} />
         </Routes>
       ) : (
         <Routes>
-          <Route path="/login" element={<Auth />} />
+          <Route
+            path="/welcome"
+            element={<NewAccount key={session.user.id} session={session} />}
+          />
+          <Route
+            path="/account"
+            element={<Account key={session.user.id} session={session} />}
+          />
+          <Route
+            path="/account/edit"
+            element={<EditAccount key={session.user.id} session={session} />}
+          />
         </Routes>
       )}
     </div>
