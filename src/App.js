@@ -8,6 +8,8 @@ import NewAccount from "./Components/NewAccount";
 import Account from "./Components/Account";
 import EditAccount from "./Components/EditAccount";
 import Navbar from "./Components/Navbar";
+import SingleOrg from "./Components/SingleOrg";
+import SingleEvent from "./Components/SingleEvent";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -29,6 +31,8 @@ export default function App() {
         <Routes>
           <Route path="/login" element={<AuthLogin />} />
           <Route path="/signup" element={<AuthSignup />} />
+          <Route path="/events/:id" element={<SingleEvent />} />
+          <Route path="/orgs/:id" element={<SingleOrg />} />
         </Routes>
       ) : (
         <Routes>
@@ -44,6 +48,8 @@ export default function App() {
             path="/account/edit"
             element={<EditAccount key={session.user.id} session={session} />}
           />
+          <Route path="/events/:id" element={<SingleEvent />} />
+          <Route path="/orgs/:id" element={<SingleOrg />} />
         </Routes>
       )}
     </div>
