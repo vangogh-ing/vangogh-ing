@@ -7,6 +7,7 @@ export default function SingleEvent() {
   const { id } = useParams();
 
   const [singleEventInfo, setSingleEventInfo] = useState({});
+  const [relatedOrgName, setRelatedOrgName] = useState("");
   const [error, setError] = useState("");
   const [session, setSession] = useState(null);
 
@@ -16,8 +17,18 @@ export default function SingleEvent() {
       .select("*")
       .eq("id", id)
       .single();
-    error ? setError(error.message) : setSingleEventInfo(Events);
-  }, [id]);
+    error ? setError(error.message) : await setSingleEventInfo(Events);
+
+    if (singleEventInfo.OrgId) {
+      let { data: Organization } = await supabase
+        .from("Organization")
+        .select("name")
+        .eq("id", singleEventInfo.OrgId)
+        .single();
+
+      setRelatedOrgName(Organization.name);
+    }
+  }, [id, singleEventInfo.OrgId]);
 
   useEffect(() => {
     fetchSingleEvent();
@@ -31,7 +42,8 @@ export default function SingleEvent() {
     });
   }, [fetchSingleEvent]);
 
-  let { title, description, date, time, location, imageUrl } = singleEventInfo;
+  let { title, description, date, time, location, imageUrl, OrgId } =
+    singleEventInfo;
 
   return (
     <div>
@@ -45,6 +57,9 @@ export default function SingleEvent() {
           <div>
             <div className="single-event-info">
               <h1>{title}</h1>
+              <p>
+                Hosted by: <Link to={`/orgs/${OrgId}`}>{relatedOrgName}</Link>
+              </p>
               <img
                 style={{
                   maxWidth: "400px",
@@ -54,7 +69,7 @@ export default function SingleEvent() {
                 alt="Organization Img"
                 src={imageUrl}
               />
-              <h3>{description}</h3>
+              <p>{description}</p>
               <h4>{date}</h4>
               <h4>{time}</h4>
               <h4>{location}</h4>

@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 
 import Slider from "react-slick";
@@ -23,7 +24,7 @@ export default function SingleOrg() {
   }, [id]);
 
   const fetchRelatedEventInfo = useCallback(async () => {
-    let { data: Events, error } = await supabase
+    let { data: Events } = await supabase
       .from("Events")
       .select("*")
       .eq("OrgId", id);
@@ -117,10 +118,12 @@ export default function SingleOrg() {
                 >
                   {relatedEventInfo.map((event) => (
                     <div key={event.id}>
-                      <h4>{event.title}</h4>
+                      <h4>
+                        <Link to={`/events/${event.id}`}>{event.title}</Link>
+                      </h4>
                       <img
                         style={{
-                          maxWidth: "200px",
+                          minWidth: "200px",
                           maxHeight: "200px",
                           objectFit: "contain",
                           marginLeft: "auto",
