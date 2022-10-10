@@ -51,7 +51,7 @@ export default function AuthSignIn() {
           />
         </div>
       )}
-      <button onClick={() => handleSignup(email, password)}>signup</button>
+      <button onClick={() => handleSignup(email, password)}>sign up</button>
     </div>
   );
 }
