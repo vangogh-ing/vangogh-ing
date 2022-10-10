@@ -35,6 +35,27 @@ const Account = ({ session }) => {
     }
   };
 
+  const handleUpload = async (e) => {
+    let file;
+
+    if (e.target.files) {
+      file = e.target.files[0];
+    }
+
+    const { data, error } = await supabase.storage
+      .from("avatars")
+      .upload("public/" + file?.name, file, {
+        cacheControl: "3600",
+        upsert: false,
+      });
+
+    if (data) {
+      console.log(data);
+    } else if (error) {
+      console.log(error);
+    }
+  };
+
   const updateProfile = async (e) => {
     e.preventDefault();
 
@@ -74,6 +95,16 @@ const Account = ({ session }) => {
               type="text"
               value={name || ""}
               onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="name">Upload an avatar</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                handleUpload(e);
+              }}
             />
           </div>
           <div>
