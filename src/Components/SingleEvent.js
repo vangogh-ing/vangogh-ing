@@ -74,12 +74,14 @@ export default function SingleEvent() {
               <h4>{time}</h4>
               <h4>{location}</h4>
             </div>
+            {/* {placeholder add event button} */}
             {session ? (
-              <button>Add Event to Profile</button>
+              <button>Placeholder: Add Event to Profile</button>
             ) : (
               <p>
-                <Link to={"/login"}>Log in</Link> or sign up to add events to
-                your profile!
+                <Link to={"/login"}>Log in</Link> or{" "}
+                <Link to={"/signup"}>sign up</Link> to add events to your
+                profile!
               </p>
             )}
           </div>

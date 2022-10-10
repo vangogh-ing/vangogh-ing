@@ -95,12 +95,14 @@ export default function SingleOrg() {
                 src={imageUrl}
               />
               <h3>{description}</h3>
+              {/* {placeholder follow button} */}
               {session ? (
-                <button>Follow Organization</button>
+                <button>Placeholder: Follow Organization</button>
               ) : (
                 <p>
-                  <Link to={"/login"}>Log in</Link> or sign up to follow
-                  organizations like {name}!
+                  <Link to={"/login"}>Log in</Link> or{" "}
+                  <Link to={"/signup"}>sign up</Link> to follow organizations
+                  like {name}!
                 </p>
               )}
               <h4>Rating: {rating ? rating : "not available"}</h4>
