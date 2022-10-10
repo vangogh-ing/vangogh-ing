@@ -10,6 +10,7 @@ import EditAccount from "./Components/EditAccount";
 import Navbar from "./Components/Navbar";
 import SingleOrg from "./Components/SingleOrg";
 import SingleEvent from "./Components/SingleEvent";
+import Discover from "./Components/Discover";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/signup" element={<AuthSignup />} />
           <Route path="/events/:id" element={<SingleEvent />} />
           <Route path="/orgs/:id" element={<SingleOrg />} />
+          <Route path="/discover" element={<Discover />} />
         </Routes>
       ) : (
         <Routes>
@@ -48,6 +50,7 @@ export default function App() {
             path="/account/edit"
             element={<EditAccount key={session.user.id} session={session} />}
           />
+          <Route path="/discover" element={<Discover />} />
           <Route path="/events/:id" element={<SingleEvent />} />
           <Route path="/orgs/:id" element={<SingleOrg />} />
         </Routes>
