@@ -5,6 +5,7 @@ function DiscoverInfo({ event }) {
       <p>
         {event.time} | {event.date} | {event.location}
       </p>
+      <img src={event.imageUrl} />
       <p>{event.description}</p>
     </div>
   );
