@@ -4,6 +4,8 @@ import { supabase } from "./supabaseClient";
 
 import Auth from "./Components/Auth";
 
+import SingleEvent from "./Components/SingleEvent";
+
 export default function App() {
   const [session, setSession] = useState(null);
 
@@ -22,10 +24,14 @@ export default function App() {
       {!session ? (
         <Routes>
           <Route path="/login" element={<Auth />} />
+
+          <Route path="/events/:id" element={<SingleEvent />} />
         </Routes>
       ) : (
         <Routes>
           <Route path="/login" element={<Auth />} />
+
+          <Route path="/events/:id" element={<SingleEvent />} />
         </Routes>
       )}
     </div>
