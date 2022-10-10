@@ -35,7 +35,7 @@ const Account = ({ session }) => {
     }
   };
 
-  const handleUpload = async (e) => {
+  const handleUploadAvatar = async (e) => {
     let file;
 
     if (e.target.files) {
@@ -50,7 +50,11 @@ const Account = ({ session }) => {
       });
 
     if (data) {
-      console.log(data);
+      const { publicURL, error } = supabase.storage
+        .from("avatars")
+        .getPublicUrl(`public/${file.name}`);
+
+      console.log(publicURL);
     } else if (error) {
       console.log(error);
     }
@@ -103,7 +107,7 @@ const Account = ({ session }) => {
               type="file"
               accept="image/*"
               onChange={(e) => {
-                handleUpload(e);
+                handleUploadAvatar(e);
               }}
             />
           </div>

@@ -41,6 +41,7 @@ const Account = ({ session }) => {
         "Loading..."
       ) : (
         <div>
+          {/* <img src={publicURL} alt="" /> */}
           <p>Name: {name || "NOT YET SET"}</p>
           <p>Email: {session.user.email}</p>
           <Link to="/account/edit">Edit Info</Link>
