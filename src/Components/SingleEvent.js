@@ -17,7 +17,7 @@ export default function SingleEvent() {
       .select("*")
       .eq("id", id)
       .single();
-    error ? setError(error.message) : await setSingleEventInfo(Events);
+    error ? setError(error.message) : setSingleEventInfo(Events);
 
     if (singleEventInfo.OrgId) {
       let { data: Organization } = await supabase

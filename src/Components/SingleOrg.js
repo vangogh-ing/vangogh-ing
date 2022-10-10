@@ -13,6 +13,7 @@ export default function SingleOrg() {
   const [singleOrgInfo, setSingleOrgInfo] = useState({});
   const [relatedEventInfo, setRelatedEventInfo] = useState([]);
   const [error, setError] = useState("");
+  const [session, setSession] = useState(null);
 
   const fetchSingleOrg = useCallback(async () => {
     let { data: Organization, error } = await supabase
@@ -34,6 +35,14 @@ export default function SingleOrg() {
   useEffect(() => {
     fetchSingleOrg();
     fetchRelatedEventInfo();
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
     return () => {
       setSingleOrgInfo({});
     };
@@ -75,7 +84,7 @@ export default function SingleOrg() {
           <div>
             <div className="single-org-info">
               <h1>{name}</h1>
-              <h4>{address}</h4>
+              <p>{address}</p>
               <img
                 style={{
                   maxWidth: "500px",
@@ -86,6 +95,14 @@ export default function SingleOrg() {
                 src={imageUrl}
               />
               <h3>{description}</h3>
+              {session ? (
+                <button>Follow Organization</button>
+              ) : (
+                <p>
+                  <Link to={"/login"}>Log in</Link> or sign up to follow
+                  organizations like {name}!
+                </p>
+              )}
               <h4>Rating: {rating ? rating : "not available"}</h4>
               <h4>
                 Website:{" "}
