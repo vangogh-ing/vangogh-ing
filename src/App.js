@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { supabase } from "./supabaseClient";
 
 import AuthLogin from "./Components/AuthLogin";
-import AuthSignIn from "./Components/AuthSignIn";
+import AuthSignup from "./Components/AuthSignup";
 import NewAccount from "./Components/NewAccount";
 import Account from "./Components/Account";
 import EditAccount from "./Components/EditAccount";
@@ -26,7 +26,7 @@ export default function App() {
       {!session ? (
         <Routes>
           <Route path="/login" element={<AuthLogin />} />
-          <Route path="/signup" element={<AuthSignIn />} />
+          <Route path="/signup" element={<AuthSignup />} />
         </Routes>
       ) : (
         <Routes>
