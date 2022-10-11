@@ -43,6 +43,7 @@ const Account = ({ session }) => {
         };
 
         let { error } = await supabase.from("User").upsert(avatar);
+        setImageUrl(data.publicUrl);
 
         if (error) {
           throw error;
