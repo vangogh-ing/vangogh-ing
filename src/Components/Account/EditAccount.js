@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../../supabaseClient";
 
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true);
@@ -134,7 +134,14 @@ const Account = ({ session }) => {
               {imageUrl === "" ? (
                 "no image uploaded"
               ) : (
-                <img src={imageUrl} alt="" />
+                <img
+                  src={imageUrl}
+                  alt=""
+                  width="150"
+                  height="150"
+                  object-fit="cover"
+                />
+                /* NOTE: inline styling to be moved to css */
               )}
             </div>
             <label htmlFor="name">Upload an avatar</label>

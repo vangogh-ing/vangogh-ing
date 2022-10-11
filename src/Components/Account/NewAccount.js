@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../../supabaseClient";
 
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true);
@@ -69,8 +69,7 @@ const Account = ({ session }) => {
       ) : (
         <div>
           <h1>Welcome!</h1>
-          {/* NOTE: headers should be sequential */}
-          <h3>Want to take a second to fill out your profile?</h3>
+          <h2>Want to take a second to fill out your profile?</h2>
           <div>
             <label htmlFor="name">Name</label>
             <input
