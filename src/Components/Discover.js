@@ -47,11 +47,9 @@ function Discover() {
       {events && (
         <div>
           {events.map((event) => (
-            <DiscoverInfo
-              key={event.id}
-              event={event}
-              onDelete={handleDelete}
-            />
+            <div key={event.id}>
+              <DiscoverInfo event={event} onDelete={handleDelete} />
+            </div>
           ))}
           <div>
             <CreateEvent />

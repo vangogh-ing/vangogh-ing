@@ -30,7 +30,6 @@ function UpdateEvent() {
 
     if (data) {
       setFormError(null);
-      navigate("/discover");
     }
   };
 

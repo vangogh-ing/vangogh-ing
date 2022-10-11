@@ -2,6 +2,7 @@ import React, { useEffect, useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 import { Link } from "react-router-dom";
+import UpdateEvent from "../innerComponents/updateEvent";
 
 export default function SingleEvent() {
   const { id } = useParams();
@@ -74,6 +75,7 @@ export default function SingleEvent() {
               <h4>{time}</h4>
               <h4>{location}</h4>
             </div>
+            <UpdateEvent />
             {/* {placeholder add event button} */}
             {session ? (
               <button>Placeholder: Add Event to Profile</button>
