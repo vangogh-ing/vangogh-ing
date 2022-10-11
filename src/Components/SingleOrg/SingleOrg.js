@@ -1,19 +1,17 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../../supabaseClient";
 
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import SingleOrgEvents from "./SingleOrgEvents";
 
 export default function SingleOrg() {
   const { id } = useParams();
 
   const [singleOrgInfo, setSingleOrgInfo] = useState({});
-  const [relatedEventInfo, setRelatedEventInfo] = useState([]);
   const [error, setError] = useState("");
-  const [session, setSession] = useState(null);
+  const [session, setSession] = useState("");
+  const [alreadyFollows, setAlreadyFollows] = useState(false);
 
   const fetchSingleOrg = useCallback(async () => {
     let { data: Organization, error } = await supabase
@@ -24,29 +22,56 @@ export default function SingleOrg() {
     error ? setError(error.message) : setSingleOrgInfo(Organization);
   }, [id]);
 
-  const fetchRelatedEventInfo = useCallback(async () => {
-    let { data: Events } = await supabase
-      .from("Events")
-      .select("*")
-      .eq("OrgId", id);
-    setRelatedEventInfo(Events);
-  }, [id]);
-
-  useEffect(() => {
-    fetchSingleOrg();
-    fetchRelatedEventInfo();
-
+  const handleSession = useCallback(async () => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
     });
-
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
+  }, []);
+
+  useEffect(() => {
+    fetchSingleOrg();
+    handleSession();
+
     return () => {
       setSingleOrgInfo({});
     };
-  }, [fetchSingleOrg, fetchRelatedEventInfo]);
+  }, [fetchSingleOrg, handleSession]);
+
+  const handleFollowStatus = useCallback(async () => {
+    if (session.user) {
+      let { data: user_followed_orgs, error } = await supabase
+        .from("user_followed_orgs")
+        .select("*")
+        .eq("userId", session.user.id)
+        .eq("orgId", id)
+        .single();
+      user_followed_orgs ? setAlreadyFollows(true) : setAlreadyFollows(false);
+    }
+  }, [session, id]);
+
+  handleFollowStatus();
+
+  const handleFollowOrg = useCallback(async () => {
+    const { data, error } = await supabase
+      .from("user_followed_orgs")
+      .insert([{ userId: session.user.id, orgId: id }]);
+    if (error) console.log(error);
+    handleFollowStatus();
+  }, [session, id, handleFollowStatus]);
+
+  const handleUnfollowOrg = useCallback(async () => {
+    const { data, error } = await supabase
+      .from("user_followed_orgs")
+      .delete()
+      .eq("userId", session.user.id)
+      .eq("orgId", id);
+
+    if (error) console.log(error);
+    handleFollowStatus();
+  }, [session, id, handleFollowStatus]);
 
   let {
     name,
@@ -59,14 +84,6 @@ export default function SingleOrg() {
     hours,
     webUrl,
   } = singleOrgInfo;
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
 
   // notes: some basic sizing styling applied to image
   // questions for wireframing: should the info be displayed alone, or with a title like "email: "?
@@ -97,7 +114,13 @@ export default function SingleOrg() {
               <h3>{description}</h3>
               {/* {placeholder follow button} */}
               {session ? (
-                <button>Placeholder: Follow Organization</button>
+                !alreadyFollows ? (
+                  <button onClick={handleFollowOrg}>Follow Organization</button>
+                ) : (
+                  <button onClick={handleUnfollowOrg}>
+                    Unfollow Organization
+                  </button>
+                )
               ) : (
                 <p>
                   <Link to={"/login"}>Log in</Link> or{" "}
@@ -121,41 +144,7 @@ export default function SingleOrg() {
               <h4>Email: {email ? email : "not available"}</h4>
             </div>
             <div className="related-event-container">
-              {relatedEventInfo.length ? (
-                <h2>Events Happening at {name}</h2>
-              ) : (
-                <h2>No events posted yet, check again later!</h2>
-              )}
-              {relatedEventInfo.length > 0 && (
-                <Slider
-                  {...settings}
-                  style={{
-                    marginLeft: "30px",
-                    width: "25em",
-                    textAlign: "center",
-                  }}
-                >
-                  {relatedEventInfo.map((event) => (
-                    <div key={event.id}>
-                      <h4>
-                        <Link to={`/events/${event.id}`}>{event.title}</Link>
-                      </h4>
-                      <img
-                        style={{
-                          minWidth: "200px",
-                          maxHeight: "200px",
-                          objectFit: "contain",
-                          marginLeft: "auto",
-                          marginRight: "auto",
-                        }}
-                        alt="Event Img"
-                        src={event.imageUrl}
-                      />
-                      <h5>{event.date}</h5>
-                    </div>
-                  ))}
-                </Slider>
-              )}
+              <SingleOrgEvents orgName={name} />
             </div>
           </div>
         )

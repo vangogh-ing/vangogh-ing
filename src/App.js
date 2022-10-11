@@ -8,7 +8,7 @@ import NewAccount from "./Components/NewAccount";
 import Account from "./Components/Account";
 import EditAccount from "./Components/EditAccount";
 import Navbar from "./Components/Navbar";
-import SingleOrg from "./Components/SingleOrg";
+import SingleOrg from "./Components/SingleOrg/SingleOrg";
 import SingleEvent from "./Components/SingleEvent";
 import Discover from "./Components/Discover";
 
