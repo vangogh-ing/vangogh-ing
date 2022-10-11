@@ -75,10 +75,6 @@ export default function SingleOrg() {
     webUrl,
   } = singleOrgInfo;
 
-  // notes: some basic sizing styling applied to image
-  // questions for wireframing: should the info be displayed alone, or with a title like "email: "?
-  // should information not available notice be displayed? seems useful for dev purposes
-  // but might not be needed for users
   return (
     <div>
       {error && !singleOrgInfo.id ? (
@@ -92,6 +88,7 @@ export default function SingleOrg() {
             <div className="single-org-info">
               <h1>{name}</h1>
               <p>{address}</p>
+              {/* NOTE: PLACEHOLDER STYLING ON IMAGE TAG, TO BE REMOVED */}
               <img
                 style={{
                   maxWidth: "500px",
