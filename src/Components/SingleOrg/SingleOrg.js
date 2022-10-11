@@ -13,7 +13,7 @@ export default function SingleOrg() {
   const [error, setError] = useState("");
   const [alreadyFollows, setAlreadyFollows] = useState(false);
 
-  const fetchSingleOrg = useCallback(async () => {
+  const fetchOrgUserInfo = useCallback(async () => {
     let { data: Organization, error } = await supabase
       .from("Organization")
       .select("*")
@@ -39,33 +39,28 @@ export default function SingleOrg() {
   }, [authUserId, id]);
 
   useEffect(() => {
-    fetchSingleOrg();
+    fetchOrgUserInfo();
     handleFollowStatus();
 
     return () => {
       setSingleOrgInfo({});
     };
-  }, [fetchSingleOrg, handleFollowStatus]);
+  }, [fetchOrgUserInfo, handleFollowStatus]);
 
   const handleFollowOrg = useCallback(async () => {
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("user_followed_orgs")
       .insert([{ userId: authUserId, orgId: id }]);
-    if (!error) {
-      setAlreadyFollows(true);
-    }
+    if (!error) setAlreadyFollows(true);
   }, [authUserId, id]);
 
   const handleUnfollowOrg = useCallback(async () => {
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("user_followed_orgs")
       .delete()
       .eq("userId", authUserId)
       .eq("orgId", id);
-
-    if (!error) {
-      setAlreadyFollows(false);
-    }
+    if (!error) setAlreadyFollows(false);
   }, [authUserId, id]);
 
   let {
@@ -107,7 +102,6 @@ export default function SingleOrg() {
                 src={imageUrl}
               />
               <h3>{description}</h3>
-              {/* {placeholder follow button} */}
               {authUserId ? (
                 !alreadyFollows ? (
                   <button onClick={handleFollowOrg}>Follow Organization</button>
