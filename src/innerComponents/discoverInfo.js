@@ -6,7 +6,8 @@ function DiscoverInfo({ event, onDelete }) {
     const { data, error } = await supabase
       .from("Events")
       .delete()
-      .eq("id", event.id);
+      .eq("id", event.id)
+      .select();
 
     if (error) {
       console.log(error);
@@ -15,7 +16,6 @@ function DiscoverInfo({ event, onDelete }) {
     if (data) {
       console.log(data);
       onDelete(event.id);
-      window.location.reload(false);
     }
   };
 

@@ -9,11 +9,11 @@ function Discover() {
   const [events, setEvents] = useState(null);
   const [session, setSession] = useState(null);
 
-  const handleDelete = (id) => {
+  function handleDelete(id) {
     setEvents((prevEvents) => {
       return prevEvents.filter((event) => event.id !== id);
     });
-  };
+  }
 
   useEffect(() => {
     const fetchEvents = async () => {
