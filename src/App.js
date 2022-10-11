@@ -8,10 +8,12 @@ import NewAccount from "./Components/Account/NewAccount";
 import Account from "./Components/Account/Account";
 import EditAccount from "./Components/Account/EditAccount";
 import Navbar from "./Components/Navbar";
-import SingleOrg from "./Components/SingleOrg";
+import SingleOrg from "./Components/SingleOrg/SingleOrg";
 import SingleEvent from "./Components/SingleEvent";
 import Discover from "./Components/Discover";
 import Plan from "./Components/Plan";
+import FollowedPage from "./Components/FollowedOrgs/FollowedPage";
+import SavedEventPage from "./Components/SavedEvents/SavedEventPage";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -55,6 +57,14 @@ export default function App() {
           <Route path="/plan" element={<Plan />} />
           <Route path="/events/:id" element={<SingleEvent />} />
           <Route path="/orgs/:id" element={<SingleOrg />} />
+          <Route
+            path="/followedorgs"
+            element={<FollowedPage session={session} />}
+          />
+          <Route
+            path="/savedevents"
+            element={<SavedEventPage session={session} />}
+          />
         </Routes>
       )}
     </div>
