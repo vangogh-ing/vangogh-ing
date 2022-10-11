@@ -7,10 +7,10 @@ import SingleOrgEvents from "./SingleOrgEvents";
 
 export default function SingleOrg() {
   const { id } = useParams();
+  const [authUserId, setAuthUserId] = useState();
 
   const [singleOrgInfo, setSingleOrgInfo] = useState({});
   const [error, setError] = useState("");
-  const [session, setSession] = useState("");
   const [alreadyFollows, setAlreadyFollows] = useState(false);
 
   const fetchSingleOrg = useCallback(async () => {
@@ -20,58 +20,53 @@ export default function SingleOrg() {
       .eq("id", id)
       .single();
     error ? setError(error.message) : setSingleOrgInfo(Organization);
+    let userSession = await supabase.auth.getSession();
+    if (userSession.data.session) {
+      setAuthUserId(userSession.data.session.user.id);
+    }
   }, [id]);
 
-  const handleSession = useCallback(async () => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-  }, []);
-
-  useEffect(() => {
-    fetchSingleOrg();
-    handleSession();
-
-    return () => {
-      setSingleOrgInfo({});
-    };
-  }, [fetchSingleOrg, handleSession]);
-
   const handleFollowStatus = useCallback(async () => {
-    if (session.user) {
-      let { data: user_followed_orgs, error } = await supabase
+    if (authUserId) {
+      let { data: user_followed_orgs } = await supabase
         .from("user_followed_orgs")
         .select("*")
-        .eq("userId", session.user.id)
+        .eq("userId", authUserId)
         .eq("orgId", id)
         .single();
       user_followed_orgs ? setAlreadyFollows(true) : setAlreadyFollows(false);
     }
-  }, [session, id]);
+  }, [authUserId, id]);
 
-  handleFollowStatus();
+  useEffect(() => {
+    fetchSingleOrg();
+    handleFollowStatus();
+
+    return () => {
+      setSingleOrgInfo({});
+    };
+  }, [fetchSingleOrg, handleFollowStatus]);
 
   const handleFollowOrg = useCallback(async () => {
     const { data, error } = await supabase
       .from("user_followed_orgs")
-      .insert([{ userId: session.user.id, orgId: id }]);
-    if (error) console.log(error);
-    handleFollowStatus();
-  }, [session, id, handleFollowStatus]);
+      .insert([{ userId: authUserId, orgId: id }]);
+    if (!error) {
+      setAlreadyFollows(true);
+    }
+  }, [authUserId, id]);
 
   const handleUnfollowOrg = useCallback(async () => {
     const { data, error } = await supabase
       .from("user_followed_orgs")
       .delete()
-      .eq("userId", session.user.id)
+      .eq("userId", authUserId)
       .eq("orgId", id);
 
-    if (error) console.log(error);
-    handleFollowStatus();
-  }, [session, id, handleFollowStatus]);
+    if (!error) {
+      setAlreadyFollows(false);
+    }
+  }, [authUserId, id]);
 
   let {
     name,
@@ -113,7 +108,7 @@ export default function SingleOrg() {
               />
               <h3>{description}</h3>
               {/* {placeholder follow button} */}
-              {session ? (
+              {authUserId ? (
                 !alreadyFollows ? (
                   <button onClick={handleFollowOrg}>Follow Organization</button>
                 ) : (
