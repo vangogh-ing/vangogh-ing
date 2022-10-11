@@ -6,11 +6,12 @@ import UpdateEvent from "../innerComponents/updateEvent";
 
 export default function SingleEvent() {
   const { id } = useParams();
+  const [authUserId, setAuthUserId] = useState();
 
   const [singleEventInfo, setSingleEventInfo] = useState({});
   const [relatedOrgName, setRelatedOrgName] = useState("");
   const [error, setError] = useState("");
-  const [session, setSession] = useState(null);
+  const [alreadyAdded, setAlreadyAdded] = useState(false);
 
   const fetchSingleEvent = useCallback(async () => {
     let { data: Events, error } = await supabase
@@ -29,19 +30,45 @@ export default function SingleEvent() {
 
       setRelatedOrgName(Organization.name);
     }
+
+    let userSession = await supabase.auth.getSession();
+    if (userSession.data.session) {
+      setAuthUserId(userSession.data.session.user.id);
+    }
   }, [id, singleEventInfo.OrgId]);
+
+  const handleAddedStatus = useCallback(async () => {
+    if (authUserId) {
+      let { data: user_added_events } = await supabase
+        .from("user_added_events")
+        .select("*")
+        .eq("userId", authUserId)
+        .eq("eventId", id)
+        .single();
+      user_added_events ? setAlreadyAdded(true) : setAlreadyAdded(false);
+    }
+  }, [authUserId, id]);
 
   useEffect(() => {
     fetchSingleEvent();
+    handleAddedStatus();
+  }, [fetchSingleEvent, handleAddedStatus]);
 
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
+  const handleAddEvent = useCallback(async () => {
+    const { error } = await supabase
+      .from("user_added_events")
+      .insert([{ userId: authUserId, eventId: id }]);
+    if (!error) setAlreadyAdded(true);
+  }, [authUserId, id]);
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-  }, [fetchSingleEvent]);
+  const handleRemoveEvent = useCallback(async () => {
+    const { error } = await supabase
+      .from("user_added_events")
+      .delete()
+      .eq("userId", authUserId)
+      .eq("eventId", id);
+    if (!error) setAlreadyAdded(false);
+  }, [authUserId, id]);
 
   let { title, description, date, time, location, imageUrl, OrgId } =
     singleEventInfo;
@@ -61,6 +88,7 @@ export default function SingleEvent() {
               <p>
                 Hosted by: <Link to={`/orgs/${OrgId}`}>{relatedOrgName}</Link>
               </p>
+              {/* NOTE: PLACEHOLDER STYLING ON IMAGE TAG, TO BE REMOVED */}
               <img
                 style={{
                   maxWidth: "400px",
@@ -75,10 +103,19 @@ export default function SingleEvent() {
               <h4>{time}</h4>
               <h4>{location}</h4>
             </div>
+<<<<<<< HEAD
             <UpdateEvent />
             {/* {placeholder add event button} */}
             {session ? (
               <button>Placeholder: Add Event to Profile</button>
+=======
+            {authUserId ? (
+              !alreadyAdded ? (
+                <button onClick={handleAddEvent}>Add Event</button>
+              ) : (
+                <button onClick={handleRemoveEvent}>Remove Event</button>
+              )
+>>>>>>> main
             ) : (
               <p>
                 <Link to={"/login"}>Log in</Link> or{" "}
