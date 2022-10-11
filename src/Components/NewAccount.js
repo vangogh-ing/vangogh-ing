@@ -69,6 +69,7 @@ const Account = ({ session }) => {
       ) : (
         <div>
           <h1>Welcome!</h1>
+          {/* NOTE: headers should be sequential */}
           <h3>Want to take a second to fill out your profile?</h3>
           <div>
             <label htmlFor="name">Name</label>
