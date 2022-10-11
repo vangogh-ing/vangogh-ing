@@ -12,6 +12,7 @@ import SingleOrg from "./Components/SingleOrg/SingleOrg";
 import SingleEvent from "./Components/SingleEvent";
 import Discover from "./Components/Discover";
 import FollowedPage from "./Components/FollowedOrgs/FollowedPage";
+import SavedEventPage from "./Components/SavedEvents/SavedEventPage";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -57,6 +58,10 @@ export default function App() {
           <Route
             path="/followedorgs"
             element={<FollowedPage session={session} />}
+          />
+          <Route
+            path="/savedevents"
+            element={<SavedEventPage session={session} />}
           />
         </Routes>
       )}

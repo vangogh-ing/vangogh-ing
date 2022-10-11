@@ -8,7 +8,7 @@ export default function FollowedPage(props) {
   const [loading, setLoading] = useState(true);
 
   const fetchFollowedOrgs = useCallback(async () => {
-    let { data: user_followed_orgs, error } = await supabase
+    let { data: user_followed_orgs } = await supabase
       .from("user_followed_orgs")
       .select(
         `orgId,
