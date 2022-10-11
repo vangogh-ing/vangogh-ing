@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
 function DiscoverInfo({ event }) {
+  const handleDelete = async () => {};
+
   return (
     <div>
       <Link to={`/events/${event.id}`}>
@@ -11,6 +13,7 @@ function DiscoverInfo({ event }) {
         <img src={event.imageUrl} alt="" />
       </Link>
       <p>{event.description}</p>
+      <button onClick={handleDelete}>Delete</button>
     </div>
   );
 }
