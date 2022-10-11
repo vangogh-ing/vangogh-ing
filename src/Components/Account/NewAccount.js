@@ -2,36 +2,54 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 
+import getProfile from "../../Utils/getProfile";
+
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
-    getProfile();
+    getProfile(session, setLoading, setName, setImageUrl);
   }, [session]);
 
-  const getProfile = async () => {
-    try {
-      setLoading(true);
-      const { user } = session;
+  const handleUploadAvatar = async (e) => {
+    let file;
 
-      let { data, error, status } = await supabase
-        .from("User")
-        .select(`name, email`)
-        .eq("id", user.id)
-        .single();
+    if (e.target.files) {
+      file = e.target.files[0];
+    }
 
-      if (error && status !== 406) {
-        throw error;
+    const { data, error } = await supabase.storage
+      .from("avatars")
+      .upload("public/" + file?.name, file, {
+        cacheControl: "3600",
+        upsert: false,
+      });
+
+    if (data) {
+      const { data } = supabase.storage
+        .from("avatars")
+        .getPublicUrl(`public/${file.name}`);
+
+      if (data.error) {
+        throw data.error;
+      } else {
+        const { user } = session;
+
+        const avatar = {
+          id: user.id,
+          imageUrl: data.publicUrl,
+        };
+
+        let { error } = await supabase.from("User").upsert(avatar);
+
+        if (error) {
+          throw error;
+        }
       }
-
-      if (data) {
-        setName(data.name);
-      }
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      setLoading(false);
+    } else if (error) {
+      console.log(error);
     }
   };
 
@@ -87,6 +105,31 @@ const Account = ({ session }) => {
             >
               Update profile
             </button>
+            <div>
+              <h2>profile picture</h2>
+              <div>
+                {imageUrl === "" ? (
+                  "no image uploaded"
+                ) : (
+                  <img
+                    src={imageUrl}
+                    alt=""
+                    width="150"
+                    height="150"
+                    object-fit="cover"
+                  />
+                  /* NOTE: inline styling to be moved to css */
+                )}
+              </div>
+              <label htmlFor="name">Upload an avatar</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  handleUploadAvatar(e);
+                }}
+              />
+            </div>
             <Link to="/account">I'll do it later.</Link>
           </div>
         </div>
