@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 //inner components
 import DiscoverInfo from "../innerComponents/discoverInfo";
 import CreateEvent from "../innerComponents/createEvent";
+import Navbar from "./Navbar";
 
 function Discover() {
   const [fetchError, setFetchError] = useState(null);
@@ -46,6 +47,7 @@ function Discover() {
       {fetchError && <p>{fetchError}</p>}
       {events && (
         <div>
+          <Navbar />
           {events.map((event) => (
             <div key={event.id}>
               <DiscoverInfo event={event} onDelete={handleDelete} />
