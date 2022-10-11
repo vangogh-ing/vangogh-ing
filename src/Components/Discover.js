@@ -3,11 +3,18 @@ import { useEffect, useState } from "react";
 //inner components
 import DiscoverInfo from "../innerComponents/discoverInfo";
 import CreateEvent from "../innerComponents/createEvent";
+import Navbar from "./Navbar";
 
 function Discover() {
   const [fetchError, setFetchError] = useState(null);
   const [events, setEvents] = useState(null);
   const [session, setSession] = useState(null);
+
+  function handleDelete(id) {
+    setEvents((prevEvents) => {
+      return prevEvents.filter((event) => event.id !== id);
+    });
+  }
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -40,8 +47,11 @@ function Discover() {
       {fetchError && <p>{fetchError}</p>}
       {events && (
         <div>
+          <Navbar />
           {events.map((event) => (
-            <DiscoverInfo key={event.id} event={event} />
+            <div key={event.id}>
+              <DiscoverInfo event={event} onDelete={handleDelete} />
+            </div>
           ))}
           <div>
             <CreateEvent />
