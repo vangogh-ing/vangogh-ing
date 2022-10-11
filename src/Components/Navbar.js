@@ -24,6 +24,9 @@ export default function Navbar({ session }) {
           >
             Sign Out
           </button>
+          <div>
+            <Link to="/plan">Plan</Link>
+          </div>
         </div>
       )}
     </div>

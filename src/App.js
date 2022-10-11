@@ -11,6 +11,7 @@ import Navbar from "./Components/Navbar";
 import SingleOrg from "./Components/SingleOrg";
 import SingleEvent from "./Components/SingleEvent";
 import Discover from "./Components/Discover";
+import Plan from "./Components/Plan";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -51,6 +52,7 @@ export default function App() {
             element={<EditAccount key={session.user.id} session={session} />}
           />
           <Route path="/discover" element={<Discover />} />
+          <Route path="/plan" element={<Plan />} />
           <Route path="/events/:id" element={<SingleEvent />} />
           <Route path="/orgs/:id" element={<SingleOrg />} />
         </Routes>
