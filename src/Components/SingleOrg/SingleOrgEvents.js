@@ -53,6 +53,7 @@ export default function SingleOrgEvents(props) {
               <h4>
                 <Link to={`/events/${event.id}`}>{event.title}</Link>
               </h4>
+              {/* NOTE: PLACEHOLDER STYLING ON IMAGE TAG, TO BE CHANGED */}
               <img
                 style={{
                   minWidth: "200px",

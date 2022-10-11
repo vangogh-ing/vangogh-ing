@@ -19,6 +19,7 @@ export default function SavedEventInfo(props) {
                   {entry.Events.title}
                 </Link>
               </h2>
+              {/* NOTE: PLACEHOLDER STYLING ON IMAGE TAG, TO BE REMOVED */}
               <img
                 style={{
                   minWidth: "200px",

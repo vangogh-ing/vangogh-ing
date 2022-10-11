@@ -87,6 +87,7 @@ export default function SingleEvent() {
               <p>
                 Hosted by: <Link to={`/orgs/${OrgId}`}>{relatedOrgName}</Link>
               </p>
+              {/* NOTE: PLACEHOLDER STYLING ON IMAGE TAG, TO BE REMOVED */}
               <img
                 style={{
                   maxWidth: "400px",
