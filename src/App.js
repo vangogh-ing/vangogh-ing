@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { supabase } from "./supabaseClient";
 
-import AuthLogin from "./Components/AuthLogin";
-import AuthSignup from "./Components/AuthSignup";
-import NewAccount from "./Components/NewAccount";
-import Account from "./Components/Account";
-import EditAccount from "./Components/EditAccount";
+import AuthLogin from "./Components/Auth/AuthLogin";
+import AuthSignup from "./Components/Auth/AuthSignup";
+import NewAccount from "./Components/Account/NewAccount";
+import Account from "./Components/Account/Account";
+import EditAccount from "./Components/Account/EditAccount";
 import Navbar from "./Components/Navbar";
 import SingleOrg from "./Components/SingleOrg/SingleOrg";
 import SingleEvent from "./Components/SingleEvent";
