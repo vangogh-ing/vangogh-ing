@@ -47,7 +47,6 @@ function Discover() {
       {fetchError && <p>{fetchError}</p>}
       {events && (
         <div>
-          <Navbar />
           {events.map((event) => (
             <div key={event.id}>
               <DiscoverInfo event={event} onDelete={handleDelete} />

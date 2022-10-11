@@ -21,12 +21,14 @@ const events = [
 
 function Calendar() {
   return (
-    <FullCalendar
-      plugins={[dayGridPlugin]}
-      initialView="dayGridMonth"
-      events={events}
-      eventClick
-    />
+    <div>
+      <FullCalendar
+        plugins={[dayGridPlugin]}
+        initialView="dayGridMonth"
+        events={events}
+        eventClick
+      />
+    </div>
   );
 }
 export default Calendar;
