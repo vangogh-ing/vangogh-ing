@@ -1,7 +1,23 @@
 import { Link } from "react-router-dom";
+import { supabase } from "../supabaseClient";
 
-function DiscoverInfo({ event }) {
-  const handleDelete = async () => {};
+function DiscoverInfo({ event, onDelete }) {
+  const handleDelete = async () => {
+    const { data, error } = await supabase
+      .from("Events")
+      .delete()
+      .eq("id", event.id);
+
+    if (error) {
+      console.log(error);
+    }
+
+    if (data) {
+      console.log(data);
+      onDelete(event.id);
+      window.location.reload(false);
+    }
+  };
 
   return (
     <div>

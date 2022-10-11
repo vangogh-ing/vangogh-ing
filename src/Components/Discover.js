@@ -9,6 +9,12 @@ function Discover() {
   const [events, setEvents] = useState(null);
   const [session, setSession] = useState(null);
 
+  const handleDelete = (id) => {
+    setEvents((prevEvents) => {
+      return prevEvents.filter((event) => event.id !== id);
+    });
+  };
+
   useEffect(() => {
     const fetchEvents = async () => {
       const { data, error } = await supabase.from("Events").select("*");
@@ -41,7 +47,11 @@ function Discover() {
       {events && (
         <div>
           {events.map((event) => (
-            <DiscoverInfo key={event.id} event={event} />
+            <DiscoverInfo
+              key={event.id}
+              event={event}
+              onDelete={handleDelete}
+            />
           ))}
           <div>
             <CreateEvent />
