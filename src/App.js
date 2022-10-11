@@ -11,6 +11,7 @@ import Navbar from "./Components/Navbar";
 import SingleOrg from "./Components/SingleOrg/SingleOrg";
 import SingleEvent from "./Components/SingleEvent";
 import Discover from "./Components/Discover";
+import FollowedPage from "./Components/FollowedOrgs/FollowedPage";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -53,6 +54,10 @@ export default function App() {
           <Route path="/discover" element={<Discover />} />
           <Route path="/events/:id" element={<SingleEvent />} />
           <Route path="/orgs/:id" element={<SingleOrg />} />
+          <Route
+            path="/followedorgs"
+            element={<FollowedPage session={session} />}
+          />
         </Routes>
       )}
     </div>

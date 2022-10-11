@@ -10,7 +10,6 @@ export default function SingleEvent() {
   const [singleEventInfo, setSingleEventInfo] = useState({});
   const [relatedOrgName, setRelatedOrgName] = useState("");
   const [error, setError] = useState("");
-  // const [session, setSession] = useState(null);
   const [alreadyAdded, setAlreadyAdded] = useState(false);
 
   const fetchSingleEvent = useCallback(async () => {
@@ -52,14 +51,6 @@ export default function SingleEvent() {
   useEffect(() => {
     fetchSingleEvent();
     handleAddedStatus();
-
-    // supabase.auth.getSession().then(({ data: { session } }) => {
-    //   setSession(session);
-    // });
-
-    // supabase.auth.onAuthStateChange((_event, session) => {
-    //   setSession(session);
-    // });
   }, [fetchSingleEvent, handleAddedStatus]);
 
   const handleAddEvent = useCallback(async () => {
