@@ -1,26 +1,26 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
-import { supabase } from "../supabaseClient";
+import { supabase } from "../../supabaseClient";
 
-export default function AuthLogin() {
+export default function AuthSignIn() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async (email, password) => {
+  const handleSignup = async (email, password) => {
     try {
       setLoading(true);
-      if (localStorage.length === 0) {
-        const { error } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
+
+      const { data } = await supabase.from("User").select().eq("email", email);
+
+      if (data.length === 0) {
+        const { error } = await supabase.auth.signUp({ email, password });
         if (error) throw error;
-        alert("Logged in");
-        window.location.href = "http://localhost:3000/account";
+        alert("Signed up");
+        //LOCAL WORKAROUND - FIX FOR PRODUCTION
+        window.location.href = "http://localhost:3000/welcome";
       } else {
-        alert("You're already logged in");
+        alert("Email already in use");
       }
     } catch (error) {
       alert(error.error_description || error.message);
@@ -35,7 +35,7 @@ export default function AuthLogin() {
         "Loading..."
       ) : (
         <div>
-          <h1>Log in</h1>
+          <h1>Make a new account</h1>
           <input
             id="email"
             type="email"
@@ -52,11 +52,7 @@ export default function AuthLogin() {
           />
         </div>
       )}
-      <button onClick={() => handleLogin(email, password)}>login</button>
-      <div>
-        <p>Don't have an account?</p>
-        <Link to="/signup">Sign up here</Link>
-      </div>
+      <button onClick={() => handleSignup(email, password)}>sign up</button>
     </div>
   );
 }
