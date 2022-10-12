@@ -54,7 +54,10 @@ export default function App() {
             path="/account/edit"
             element={<EditAccount key={session.user.id} session={session} />}
           />
-          <Route path="/discover" element={<Discover session={session} />} />
+          <Route
+            path="/discover"
+            element={<Discover key={session.user} session={session} />}
+          />
           <Route path="/plan" element={<Plan />} />
           <Route path="/events/:id" element={<SingleEvent />} />
           <Route path="/orgs/:id" element={<SingleOrg />} />

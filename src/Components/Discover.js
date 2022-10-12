@@ -3,18 +3,12 @@ import { useEffect, useState } from "react";
 //inner components
 import DiscoverInfo from "../innerComponents/discoverInfo";
 import CreateEvent from "../innerComponents/createEvent";
-import Navbar from "./Navbar";
 
 function Discover() {
   const [fetchError, setFetchError] = useState(null);
   const [events, setEvents] = useState(null);
   const [session, setSession] = useState(null);
   const [orderBy, setOrderBy] = useState("startDate");
-  const [user, setFetchUser] = useState();
-
-  // const userOrg = props;
-
-  // console.log(userOrg);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -33,25 +27,11 @@ function Discover() {
         setFetchError(null);
       }
     };
-
-    const fetchUser = async () => {
-      let { data, error } = await supabase.from("User").select("OrgId");
-
-      if (error) {
-        console.log(error);
-      }
-      if (data) {
-        setFetchUser(data);
-      }
-    };
-
-    fetchUser();
     fetchEvents();
-
-    console.log(user);
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
+      console.log("SESSION: ", session.user);
     });
 
     supabase.auth.onAuthStateChange((_event, session) => {
@@ -81,36 +61,26 @@ function Discover() {
           )}
           <h2>Placeholder: NOT LOGGED IN</h2>
         </div>
-      ) : session && user ? (
-        <div>
-          {fetchError && <p>{fetchError}</p>}
-          {events && (
-            <div>
-              {events.map((event) => (
-                <DiscoverInfo key={event.id} event={event} />
-              ))}
-              {/* {session && orgId !== null ? (
-                <div>
-                  <CreateEvent />
-                </div>
-              ) : (
-                ""
-              )} */}
-            </div>
-          )}
-          <h2>Placeholder: Logged in as Org</h2>
-        </div>
       ) : (
         <div>
           {fetchError && <p>{fetchError}</p>}
           {events && (
             <div>
               {events.map((event) => (
-                <DiscoverInfo key={event.id} event={event} />
+                <div>
+                  <DiscoverInfo
+                    session={session}
+                    key={event.id}
+                    event={event}
+                  />
+                </div>
               ))}
+              <div>
+                <CreateEvent />
+              </div>
             </div>
           )}
-          <h2>Placeholder: LOGGED IN</h2>
+          <h2>Placeholder: Logged in regular User</h2>
         </div>
       )}
     </div>

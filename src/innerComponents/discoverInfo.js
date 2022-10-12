@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 
-function DiscoverInfo({ event, onDelete }) {
+function DiscoverInfo({ event, onDelete, session }) {
   const handleDelete = async () => {
     const { data, error } = await supabase
       .from("Events")
@@ -16,9 +16,9 @@ function DiscoverInfo({ event, onDelete }) {
     if (data) {
       console.log(data);
       onDelete(event.id);
+      window.location.reload(false);
     }
   };
-
   return (
     <div>
       <Link to={`/events/${event.id}`}>
@@ -29,7 +29,7 @@ function DiscoverInfo({ event, onDelete }) {
         <img src={event.imageUrl} alt="" />
       </Link>
       <p>{event.description}</p>
-      <button onClick={handleDelete}>Delete</button>
+      {session ? <button onClick={handleDelete}>Delete</button> : ""}
     </div>
   );
 }
