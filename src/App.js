@@ -13,6 +13,7 @@ import SingleEvent from "./Components/SingleEvent";
 import Discover from "./Components/Discover";
 import FollowedPage from "./Components/FollowedOrgs/FollowedPage";
 import SavedEventPage from "./Components/SavedEvents/SavedEventPage";
+import Calendar from "./Components/Calendar/Calendar";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -62,6 +63,10 @@ export default function App() {
           <Route
             path="/savedevents"
             element={<SavedEventPage session={session} />}
+          />
+          <Route
+            path="/plan"
+            element={<Calendar key={session.user.id} session={session} />}
           />
         </Routes>
       )}

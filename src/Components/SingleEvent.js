@@ -103,19 +103,13 @@ export default function SingleEvent() {
               <h4>{time}</h4>
               <h4>{location}</h4>
             </div>
-<<<<<<< HEAD
             <UpdateEvent />
-            {/* {placeholder add event button} */}
-            {session ? (
-              <button>Placeholder: Add Event to Profile</button>
-=======
             {authUserId ? (
               !alreadyAdded ? (
                 <button onClick={handleAddEvent}>Add Event</button>
               ) : (
                 <button onClick={handleRemoveEvent}>Remove Event</button>
               )
->>>>>>> main
             ) : (
               <p>
                 <Link to={"/login"}>Log in</Link> or{" "}
