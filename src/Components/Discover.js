@@ -5,7 +5,7 @@ import DiscoverInfo from "../innerComponents/discoverInfo";
 import CreateEvent from "../innerComponents/createEvent";
 import Navbar from "./Navbar";
 
-function Discover(props) {
+function Discover() {
   const [fetchError, setFetchError] = useState(null);
   const [events, setEvents] = useState(null);
   const [session, setSession] = useState(null);
@@ -34,9 +34,21 @@ function Discover(props) {
       }
     };
 
-    const fetchUser = async () => {};
+    const fetchUser = async () => {
+      let { data, error } = await supabase.from("User").select("OrgId");
 
+      if (error) {
+        console.log(error);
+      }
+      if (data) {
+        setFetchUser(data);
+      }
+    };
+
+    fetchUser();
     fetchEvents();
+
+    console.log(user);
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -69,7 +81,7 @@ function Discover(props) {
           )}
           <h2>Placeholder: NOT LOGGED IN</h2>
         </div>
-      ) : (
+      ) : session && user ? (
         <div>
           {fetchError && <p>{fetchError}</p>}
           {events && (
@@ -86,9 +98,21 @@ function Discover(props) {
               )} */}
             </div>
           )}
+          <h2>Placeholder: Logged in as Org</h2>
+        </div>
+      ) : (
+        <div>
+          {fetchError && <p>{fetchError}</p>}
+          {events && (
+            <div>
+              {events.map((event) => (
+                <DiscoverInfo key={event.id} event={event} />
+              ))}
+            </div>
+          )}
+          <h2>Placeholder: LOGGED IN</h2>
         </div>
       )}
-      <h2>Placeholder: LOGGED IN</h2>
     </div>
   );
 }
