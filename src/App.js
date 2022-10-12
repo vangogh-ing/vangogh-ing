@@ -64,7 +64,10 @@ export default function App() {
             path="/savedevents"
             element={<SavedEventPage session={session} />}
           />
-          <Route path="/plan" element={<Calendar />} />
+          <Route
+            path="/plan"
+            element={<Calendar key={session.user.id} session={session} />}
+          />
         </Routes>
       )}
     </div>
