@@ -11,7 +11,7 @@ import Navbar from "./Components/Navbar";
 import SingleOrg from "./Components/SingleOrg/SingleOrg";
 import SingleEvent from "./Components/SingleEvent";
 import Discover from "./Components/Discover";
-import FollowedPage from "./Components/FollowedOrgs/FollowedPage";
+import ForYouPage from "./Components/ForYou/ForYouPage";
 import SavedEventPage from "./Components/SavedEvents/SavedEventPage";
 import Calendar from "./Components/Calendar/Calendar";
 
@@ -56,10 +56,7 @@ export default function App() {
           <Route path="/discover" element={<Discover />} />
           <Route path="/events/:id" element={<SingleEvent />} />
           <Route path="/orgs/:id" element={<SingleOrg />} />
-          <Route
-            path="/followedorgs"
-            element={<FollowedPage session={session} />}
-          />
+          <Route path="/foryou" element={<ForYouPage session={session} />} />
           <Route
             path="/savedevents"
             element={<SavedEventPage session={session} />}

@@ -1,8 +1,8 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { supabase } from "../../supabaseClient";
-import FollowedInfo from "./FollowedInfo";
+import ForYouInfo from "./ForYouInfo";
 
-export default function FollowedPage(props) {
+export default function ForYouPage(props) {
   const userId = props.session.user.id;
   const [followedOrgs, setFollowedOrgs] = useState();
   const [loading, setLoading] = useState(true);
@@ -38,7 +38,7 @@ export default function FollowedPage(props) {
   return (
     <div>
       {!loading && (
-        <FollowedInfo
+        <ForYouInfo
           followedOrgs={followedOrgs}
           userId={userId}
           handleUnfollow={handleUnfollow}
