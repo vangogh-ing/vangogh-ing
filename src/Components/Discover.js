@@ -9,10 +9,14 @@ function Discover() {
   const [fetchError, setFetchError] = useState(null);
   const [events, setEvents] = useState(null);
   const [session, setSession] = useState(null);
+  const [orderBy, setOrderBy] = useState("startDate");
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const { data, error } = await supabase.from("Events").select("*");
+      const { data, error } = await supabase
+        .from("Events")
+        .select("*")
+        .order(orderBy, { ascending: false });
 
       if (error) {
         setFetchError("Could not fetch events");
@@ -33,17 +37,23 @@ function Discover() {
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
-  }, []);
+  }, [orderBy]);
 
   return (
     <div>
       <h1> EVENTS </h1>
+      <div>
+        {/* Order events needs to be turned into toggle */}
+        <p>Order by: </p>
+        <button onClick={() => setOrderBy("startDate")}>Start Date</button>
+        <button onClick={() => setOrderBy("created_at")}>Created at</button>
+        {orderBy}
+      </div>
       {!session ? (
         <div>
           {fetchError && <p>{fetchError}</p>}
           {events && (
             <div>
-              <Navbar />
               {events.map((event) => (
                 <DiscoverInfo key={event.id} event={event} />
               ))}
@@ -56,13 +66,16 @@ function Discover() {
           {fetchError && <p>{fetchError}</p>}
           {events && (
             <div>
-              <Navbar />
               {events.map((event) => (
                 <DiscoverInfo key={event.id} event={event} />
               ))}
-              <div>
-                <CreateEvent />
-              </div>
+              {/* {session && orgId !== null ? (
+                <div>
+                  <CreateEvent />
+                </div>
+              ) : (
+                ""
+              )} */}
             </div>
           )}
         </div>
