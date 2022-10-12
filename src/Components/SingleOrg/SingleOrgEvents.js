@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useState } from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 
@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export default function SingleOrgEvents(props) {
-  const { id } = useParams();
+  // const { id } = useParams();
 
   const [relatedEventInfo, setRelatedEventInfo] = useState([]);
 
@@ -16,9 +16,9 @@ export default function SingleOrgEvents(props) {
     let { data: Events } = await supabase
       .from("Events")
       .select("*")
-      .eq("OrgId", id);
+      .eq("OrgId", props.orgId);
     setRelatedEventInfo(Events);
-  }, [id]);
+  }, [props.orgId]);
 
   useEffect(() => {
     fetchRelatedEventInfo();

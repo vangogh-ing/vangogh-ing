@@ -130,7 +130,7 @@ export default function SingleOrg() {
               <h4>Email: {email ? email : "not available"}</h4>
             </div>
             <div className="related-event-container">
-              <SingleOrgEvents orgName={name} />
+              <SingleOrgEvents orgName={name} orgId={id} />
             </div>
           </div>
         )
