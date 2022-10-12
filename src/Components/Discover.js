@@ -5,11 +5,16 @@ import DiscoverInfo from "../innerComponents/discoverInfo";
 import CreateEvent from "../innerComponents/createEvent";
 import Navbar from "./Navbar";
 
-function Discover() {
+function Discover(props) {
   const [fetchError, setFetchError] = useState(null);
   const [events, setEvents] = useState(null);
   const [session, setSession] = useState(null);
   const [orderBy, setOrderBy] = useState("startDate");
+  const [user, setFetchUser] = useState();
+
+  // const userOrg = props;
+
+  // console.log(userOrg);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -28,6 +33,9 @@ function Discover() {
         setFetchError(null);
       }
     };
+
+    const fetchUser = async () => {};
+
     fetchEvents();
 
     supabase.auth.getSession().then(({ data: { session } }) => {
