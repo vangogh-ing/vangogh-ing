@@ -54,18 +54,19 @@ function Discover() {
           {fetchError && <p>{fetchError}</p>}
           {events && (
             <div>
+              <h2>Placeholder: NOT LOGGED IN</h2>
               {events.map((event) => (
                 <DiscoverInfo key={event.id} event={event} />
               ))}
             </div>
           )}
-          <h2>Placeholder: NOT LOGGED IN</h2>
         </div>
       ) : (
         <div>
           {fetchError && <p>{fetchError}</p>}
           {events && (
             <div>
+              <h2>Placeholder: Logged in</h2>
               {events.map((event) => (
                 <div>
                   <DiscoverInfo
@@ -75,12 +76,8 @@ function Discover() {
                   />
                 </div>
               ))}
-              <div>
-                <CreateEvent />
-              </div>
             </div>
           )}
-          <h2>Placeholder: Logged in regular User</h2>
         </div>
       )}
     </div>
