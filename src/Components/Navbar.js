@@ -17,6 +17,7 @@ export default function Navbar({ session }) {
       ) : (
         <div>
           <Link to="/account">my account</Link>
+          <Link to="/discover"> | Discover</Link>
           <Link to="/followedorgs"> | followed organizations </Link>
           <Link to="/savedevents"> | saved events </Link>
           <button

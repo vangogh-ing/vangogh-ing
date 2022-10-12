@@ -10,12 +10,6 @@ function Discover() {
   const [events, setEvents] = useState(null);
   const [session, setSession] = useState(null);
 
-  function handleDelete(id) {
-    setEvents((prevEvents) => {
-      return prevEvents.filter((event) => event.id !== id);
-    });
-  }
-
   useEffect(() => {
     const fetchEvents = async () => {
       const { data, error } = await supabase.from("Events").select("*");
@@ -44,24 +38,36 @@ function Discover() {
   return (
     <div>
       <h1> EVENTS </h1>
-      {fetchError && <p>{fetchError}</p>}
-      {events && (
+      {!session ? (
         <div>
-          {events.map((event) => (
-            <div key={event.id}>
-              <DiscoverInfo event={event} onDelete={handleDelete} />
+          {fetchError && <p>{fetchError}</p>}
+          {events && (
+            <div>
+              <Navbar />
+              {events.map((event) => (
+                <DiscoverInfo key={event.id} event={event} />
+              ))}
             </div>
-          ))}
-          <div>
-            <CreateEvent />
-          </div>
-          {session ? (
-            <h2>Placeholder: LOGGED IN</h2>
-          ) : (
-            <h2>Placeholder: NOT LOGGED IN</h2>
+          )}
+          <h2>Placeholder: NOT LOGGED IN</h2>
+        </div>
+      ) : (
+        <div>
+          {fetchError && <p>{fetchError}</p>}
+          {events && (
+            <div>
+              <Navbar />
+              {events.map((event) => (
+                <DiscoverInfo key={event.id} event={event} />
+              ))}
+              <div>
+                <CreateEvent />
+              </div>
+            </div>
           )}
         </div>
       )}
+      <h2>Placeholder: LOGGED IN</h2>
     </div>
   );
 }
