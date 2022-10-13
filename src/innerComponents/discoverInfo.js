@@ -51,39 +51,38 @@ function DiscoverInfo({ event, onDelete, session }) {
     <div>
       {session && userOrgId !== null ? (
         //Logged in as an org
-        <div>
+        <div className="infoCard">
           <Link to={`/events/${event.id}`}>
-            <img src={event.imageUrl} alt="" />
-            <h3>{event.title}</h3>
+            <div className="imageCard">
+              <img className="image" src={event.imageUrl} alt="" />
+            </div>
+
+            <h3 className="eventTitle">{event.title}</h3>
             <div className="details">
               <p>
-                {event.startTime} - {event.endTime}
+                {event.startTime} - {event.endTime} | {event.startDate} /
+                {event.endDate} | {event.location}
               </p>
-              <p>
-                {event.startDate} / {event.endDate}
-              </p>
-              <p>{event.location}</p>
             </div>
           </Link>
-          <p>{event.description}</p>
+          <p className="description">{event.description}</p>
         </div>
       ) : (
         //logged in as regular user or not logged in at all
-        <div>
+        <div className="infoCard">
           <Link to={`/events/${event.id}`}>
-            <img src={event.imageUrl} alt="" />
-            <h3>{event.title}</h3>
+            <div className="imageCard">
+              <img className="image" src={event.imageUrl} alt="" />
+            </div>
+            <h3 className="eventTitle">{event.title}</h3>
             <div className="details">
               <p>
-                {event.startTime} - {event.endTime}
+                {event.startTime} - {event.endTime} | {event.startDate} /
+                {event.endDate} | {event.location}
               </p>
-              <p>
-                {event.startDate} / {event.endDate}
-              </p>
-              <p>{event.location}</p>
             </div>
           </Link>
-          <p>{event.description}</p>
+          <p className="description">{event.description}</p>
         </div>
       )}
     </div>

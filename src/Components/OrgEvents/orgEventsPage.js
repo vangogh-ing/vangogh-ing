@@ -48,16 +48,16 @@ function OrgEventsPage({ session }) {
   }, [userOrg]);
 
   return (
-    <div>
+    <div className="container">
       <h1>Org Events Page</h1>
       {fetchError && <p>{fetchError}</p>}
       {orgEvents && (
-        <div>
+        <div className="card-container">
           <CreateEvent />
           <h3>Org event map</h3>
           {orgEvents.map((orgEvent, idx) => {
             return (
-              <div key={idx}>
+              <div className="card" key={idx}>
                 <DiscoverInfo
                   key={orgEvent.id}
                   session={session}

@@ -30,7 +30,6 @@ function Discover() {
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
-      console.log("SESSION: ", session.user);
     });
 
     supabase.auth.onAuthStateChange((_event, session) => {
@@ -39,9 +38,9 @@ function Discover() {
   }, [orderBy]);
 
   return (
-    <div>
+    <div className="container">
       <h1> EVENTS </h1>
-      <div>
+      <div className="order-buttons">
         {/* Order events needs to be turned into toggle */}
         <p>Order by: </p>
         <button onClick={() => setOrderBy("startDate")}>Start Date</button>
@@ -50,26 +49,28 @@ function Discover() {
       </div>
       {!session ? (
         //not logged in view
-        <div>
+        <div className="card-container">
           {fetchError && <p>{fetchError}</p>}
           {events && (
             <div>
               <h2>Placeholder: NOT LOGGED IN</h2>
               {events.map((event) => (
-                <DiscoverInfo key={event.id} event={event} />
+                <div className="card">
+                  <DiscoverInfo key={event.id} event={event} />
+                </div>
               ))}
             </div>
           )}
         </div>
       ) : (
         //logged in as reg user or org user
-        <div>
+        <div className="card-container">
           {fetchError && <p>{fetchError}</p>}
           {events && (
             <div>
               <h2>Placeholder: Logged in</h2>
               {events.map((event) => (
-                <div>
+                <div className="card">
                   <DiscoverInfo
                     session={session}
                     key={event.id}
