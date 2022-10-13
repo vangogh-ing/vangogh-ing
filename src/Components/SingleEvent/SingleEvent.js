@@ -1,8 +1,9 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../../supabaseClient";
 import { Link } from "react-router-dom";
-import UpdateEvent from "../innerComponents/updateEvent";
+import UpdateEvent from "../../innerComponents/updateEvent";
+import SaveEventPopup from "./SaveEventPopup";
 
 export default function SingleEvent() {
   const { id } = useParams();
@@ -11,7 +12,8 @@ export default function SingleEvent() {
   const [singleEventInfo, setSingleEventInfo] = useState({});
   const [relatedOrgName, setRelatedOrgName] = useState("");
   const [error, setError] = useState("");
-  const [alreadyAdded, setAlreadyAdded] = useState(false);
+  const [alreadySaved, setAlreadySaved] = useState(false);
+  const [currentInterestLevel, setCurrentInterestLevel] = useState("");
 
   const fetchSingleEvent = useCallback(async () => {
     let { data: Events, error } = await supabase
@@ -37,7 +39,7 @@ export default function SingleEvent() {
     }
   }, [id, singleEventInfo.OrgId]);
 
-  const handleAddedStatus = useCallback(async () => {
+  const handleSavedStatus = useCallback(async () => {
     if (authUserId) {
       let { data: user_added_events } = await supabase
         .from("user_added_events")
@@ -45,21 +47,34 @@ export default function SingleEvent() {
         .eq("userId", authUserId)
         .eq("eventId", id)
         .single();
-      user_added_events ? setAlreadyAdded(true) : setAlreadyAdded(false);
+      if (user_added_events) {
+        setAlreadySaved(true);
+        setCurrentInterestLevel(user_added_events.interest_level);
+      } else {
+        setAlreadySaved(false);
+      }
     }
   }, [authUserId, id]);
 
   useEffect(() => {
     fetchSingleEvent();
-    handleAddedStatus();
-  }, [fetchSingleEvent, handleAddedStatus]);
+    handleSavedStatus();
+  }, [fetchSingleEvent, handleSavedStatus]);
 
-  const handleAddEvent = useCallback(async () => {
-    const { error } = await supabase
-      .from("user_added_events")
-      .insert([{ userId: authUserId, eventId: id }]);
-    if (!error) setAlreadyAdded(true);
-  }, [authUserId, id]);
+  const handleSaveEvent = useCallback(
+    async (interestLevel) => {
+      const { data, error } = await supabase
+        .from("user_added_events")
+        .upsert([
+          { userId: authUserId, eventId: id, interest_level: interestLevel },
+        ])
+        .single()
+        .select();
+      if (!error) setAlreadySaved(true);
+      setCurrentInterestLevel(data.interest_level);
+    },
+    [authUserId, id]
+  );
 
   const handleRemoveEvent = useCallback(async () => {
     const { error } = await supabase
@@ -67,7 +82,8 @@ export default function SingleEvent() {
       .delete()
       .eq("userId", authUserId)
       .eq("eventId", id);
-    if (!error) setAlreadyAdded(false);
+    if (!error) setAlreadySaved(false);
+    setCurrentInterestLevel("");
   }, [authUserId, id]);
 
   let { title, description, date, time, location, imageUrl, OrgId } =
@@ -105,10 +121,27 @@ export default function SingleEvent() {
             </div>
             <UpdateEvent />
             {authUserId ? (
-              !alreadyAdded ? (
-                <button onClick={handleAddEvent}>Add Event</button>
+              !alreadySaved ? (
+                <SaveEventPopup
+                  userId={authUserId}
+                  handleSaveEvent={handleSaveEvent}
+                  handleRemoveEvent={handleRemoveEvent}
+                  alreadySaved={false}
+                  currentInterestLevel={currentInterestLevel}
+                />
               ) : (
-                <button onClick={handleRemoveEvent}>Remove Event</button>
+                <div>
+                  <SaveEventPopup
+                    userId={authUserId}
+                    handleSaveEvent={handleSaveEvent}
+                    handleRemoveEvent={handleRemoveEvent}
+                    alreadySaved={true}
+                    currentInterestLevel={currentInterestLevel}
+                  />
+                  <button onClick={handleRemoveEvent}>
+                    Remove Event from Profile
+                  </button>
+                </div>
               )
             ) : (
               <p>

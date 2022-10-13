@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import SingleOrgEvents from "../SingleOrg/SingleOrgEvents";
 
-export default function FollowedInfo(props) {
+export default function ForYouInfo(props) {
   return (
     <div>
       {!props.followedOrgs.length ? (
@@ -33,6 +34,11 @@ export default function FollowedInfo(props) {
               <button onClick={() => props.handleUnfollow(entry.orgId)}>
                 Unfollow
               </button>
+              <SingleOrgEvents
+                orgInfo={entry.Organization}
+                orgId={entry.orgId}
+                orgName={entry.Organization.name}
+              />
             </div>
           ))}
         </div>
