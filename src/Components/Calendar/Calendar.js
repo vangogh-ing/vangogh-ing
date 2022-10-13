@@ -22,7 +22,8 @@ const Calendar = ({ session }) => {
         `eventId,
          Events (*)`
       )
-      .eq("userId", userId);
+      .eq("userId", userId)
+      .eq("interest_level", "interested");
 
     let eventData = user_added_events.map((event) => {
       return {
@@ -41,6 +42,25 @@ const Calendar = ({ session }) => {
   useEffect(() => {
     fetchSavedEvents();
   }, [fetchSavedEvents]);
+
+  const allButton = {
+    text: "all",
+    click: function () {
+      console.log("click");
+    },
+  };
+  const interestedButton = {
+    text: "interested",
+    click: function () {
+      console.log("click");
+    },
+  };
+  const attendingButton = {
+    text: "attending",
+    click: function () {
+      console.log("click");
+    },
+  };
 
   function renderEventContent(info) {
     setOpen(true);
@@ -76,6 +96,12 @@ const Calendar = ({ session }) => {
               plugins={[dayGridPlugin]}
               initialView="dayGridMonth"
               dayMaxEvents={true}
+              customButtons={{ allButton, interestedButton, attendingButton }}
+              headerToolbar={{
+                left: "title",
+                right:
+                  "allButton interestedButton attendingButton today prev next",
+              }}
               events={savedEvents}
               eventClick={renderEventContent}
               eventColor={"#bca32d"}
