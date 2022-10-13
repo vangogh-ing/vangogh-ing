@@ -32,7 +32,7 @@ export default function SavedEventInfo(props) {
               <p>{entry.Events.date}</p>
               {entry.Events.time && <p>{entry.Events.time}</p>}
               <button onClick={() => props.handleRemove(entry.eventId)}>
-                Remove
+                Remove from Calendar
               </button>
             </div>
           ))}
