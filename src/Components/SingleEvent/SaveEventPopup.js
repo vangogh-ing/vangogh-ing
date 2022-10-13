@@ -6,6 +6,19 @@ import UpdateEvent from "../../innerComponents/updateEvent";
 import Popup from "reactjs-popup";
 
 export default function SaveEvent(props) {
+  // const [currentInterestLevel, setCurrentInterestLevel] = useState("");
+
+  // const handleInterest = useCallback(
+  //   async () => {
+  //     setCurrentInterestLevel(props.currentInterestLevel)
+  //   },
+  //   [props.currentInterestLevel]
+  // );
+
+  // useEffect(() => {
+  //   handleInterest();
+  // }, [handleInterest]);
+
   return (
     <Popup
       trigger={
@@ -24,7 +37,10 @@ export default function SaveEvent(props) {
           </button>
           <div className="header"> Want to gogh to this event? </div>
           <div className="content">
-            {" "}
+            {props.currentInterestLevel && (
+              <span>You are currently: {props.currentInterestLevel}</span>
+            )}
+            <br />
             Indicate your level of interest.
             <br />
             See a calendar view of your saved events on the Plan page!

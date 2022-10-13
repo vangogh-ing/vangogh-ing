@@ -13,6 +13,7 @@ export default function SingleEvent() {
   const [relatedOrgName, setRelatedOrgName] = useState("");
   const [error, setError] = useState("");
   const [alreadySaved, setAlreadySaved] = useState(false);
+  const [currentInterestLevel, setCurrentInterestLevel] = useState("");
 
   const fetchSingleEvent = useCallback(async () => {
     let { data: Events, error } = await supabase
@@ -46,7 +47,13 @@ export default function SingleEvent() {
         .eq("userId", authUserId)
         .eq("eventId", id)
         .single();
-      user_added_events ? setAlreadySaved(true) : setAlreadySaved(false);
+      if (user_added_events) {
+        setAlreadySaved(true);
+        setCurrentInterestLevel(user_added_events.interest_level);
+      } else {
+        setAlreadySaved(false);
+      }
+      // user_added_events ? setAlreadySaved(true) : setAlreadySaved(false);
     }
   }, [authUserId, id]);
 
@@ -57,12 +64,15 @@ export default function SingleEvent() {
 
   const handleSaveEvent = useCallback(
     async (interestLevel) => {
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from("user_added_events")
         .upsert([
           { userId: authUserId, eventId: id, interest_level: interestLevel },
-        ]);
+        ])
+        .single()
+        .select();
       if (!error) setAlreadySaved(true);
+      setCurrentInterestLevel(data.interest_level);
     },
     [authUserId, id]
   );
@@ -74,6 +84,7 @@ export default function SingleEvent() {
       .eq("userId", authUserId)
       .eq("eventId", id);
     if (!error) setAlreadySaved(false);
+    setCurrentInterestLevel("");
   }, [authUserId, id]);
 
   let { title, description, date, time, location, imageUrl, OrgId } =
@@ -117,6 +128,7 @@ export default function SingleEvent() {
                   handleSaveEvent={handleSaveEvent}
                   handleRemoveEvent={handleRemoveEvent}
                   alreadySaved={false}
+                  currentInterestLevel={currentInterestLevel}
                 />
               ) : (
                 <div>
@@ -125,6 +137,7 @@ export default function SingleEvent() {
                     handleSaveEvent={handleSaveEvent}
                     handleRemoveEvent={handleRemoveEvent}
                     alreadySaved={true}
+                    currentInterestLevel={currentInterestLevel}
                   />
                   <button onClick={handleRemoveEvent}>
                     Remove Event from Profile
@@ -144,6 +157,3 @@ export default function SingleEvent() {
     </div>
   );
 }
-
-// if event is not already saved, show button that lets users save events
-//
