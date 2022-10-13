@@ -2,7 +2,6 @@ import { supabase } from "../supabaseClient";
 import { useEffect, useState } from "react";
 //inner components
 import DiscoverInfo from "../innerComponents/discoverInfo";
-import CreateEvent from "../innerComponents/createEvent";
 
 function Discover() {
   const [fetchError, setFetchError] = useState(null);
@@ -50,6 +49,7 @@ function Discover() {
         {orderBy}
       </div>
       {!session ? (
+        //not logged in view
         <div>
           {fetchError && <p>{fetchError}</p>}
           {events && (
@@ -62,6 +62,7 @@ function Discover() {
           )}
         </div>
       ) : (
+        //logged in as reg user or org user
         <div>
           {fetchError && <p>{fetchError}</p>}
           {events && (

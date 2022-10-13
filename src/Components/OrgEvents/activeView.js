@@ -1,35 +1,39 @@
-import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import UpdateEvent from "../../innerComponents/updateEvent";
 
-function ActiveView({ event, session }) {
-  // const [userOrg, setUserOrg] = useState(null);
+function ActiveView({ event, onDelete, session }) {
+  const handleDelete = async () => {
+    const { data, error } = await supabase
+      .from("Events")
+      .delete()
+      .eq("id", event.id)
+      .select();
 
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     const { data, error } = await supabase
-  //       .from("User")
-  //       .select("id, OrgId")
-  //       .eq("id", session.user.id);
+    if (error) {
+      console.log(error);
+    }
 
-  //     if (error) {
-  //       console.log(error);
-  //       setUserOrg(null);
-  //     }
-
-  //     if (data) {
-  //       let userOrg = data[0].OrgId;
-  //       setUserOrg(userOrg);
-  //       console.log("SESSIONUSER: ", userOrg);
-  //     }
-  //   };
-  //   fetchUser();
-  // }, []);
+    if (data) {
+      console.log(data);
+      onDelete(event.id);
+      window.location.reload(false);
+    }
+  };
 
   return (
     <div>
-      <h2>Active View</h2>
-      <h3>{event.title}</h3>
+      <Link to={`/events/${event.id}`}>
+        <h3>{event.title}</h3>
+        <p>
+          {event.time} | {event.date} | {event.location}
+        </p>
+        <img src={event.imageUrl} alt="" />
+      </Link>
       <p>{event.description}</p>
+      <button onClick={handleDelete}>Delete</button>
+      <UpdateEvent />
     </div>
   );
 }

@@ -47,11 +47,10 @@ function DiscoverInfo({ event, onDelete, session }) {
     findUser();
   }, []);
 
-  //need to query user id and match it to event.orgId
-
   return (
     <div>
       {session && userOrgId !== null ? (
+        //Logged in as an org
         <div>
           <Link to={`/events/${event.id}`}>
             <h3>{event.title}</h3>
@@ -61,9 +60,9 @@ function DiscoverInfo({ event, onDelete, session }) {
             <img src={event.imageUrl} alt="" />
           </Link>
           <p>{event.description}</p>
-          <button onClick={handleDelete}>Delete</button>
         </div>
       ) : (
+        //logged in as regular user or not logged in at all
         <div>
           <Link to={`/events/${event.id}`}>
             <h3>{event.title}</h3>

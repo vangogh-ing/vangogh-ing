@@ -1,11 +1,15 @@
 import { supabase } from "../../supabaseClient";
 import { useEffect, useState } from "react";
+
+//add on components
 import ActiveView from "./activeView";
+import CreateEvent from "../../innerComponents/createEvent";
 
 function OrgEventsPage({ session }) {
   const [fetchError, setFetchError] = useState(null);
   const [orgEvents, setOrgEvents] = useState(null);
   const [userOrg, setUserOrgId] = useState(null);
+
   const userOrgId = async () => {
     const { data } = await supabase
       .from("User")
@@ -18,13 +22,12 @@ function OrgEventsPage({ session }) {
       setUserOrgId(userOrg);
     }
   };
+
   const fetchOrgEvents = async () => {
     const { data, error } = await supabase
       .from("Events")
       .select("*")
       .eq("OrgId", userOrg);
-
-    console.log("USERORGID: ", userOrg);
 
     if (error) {
       console.log(error);
@@ -39,13 +42,10 @@ function OrgEventsPage({ session }) {
 
   useEffect(() => {
     userOrgId();
-
     if (userOrg) {
       fetchOrgEvents(userOrg);
     }
   }, [userOrg]);
-
-  console.log("ORGEVENTS: ", orgEvents);
 
   return (
     <div>
@@ -53,11 +53,16 @@ function OrgEventsPage({ session }) {
       {fetchError && <p>{fetchError}</p>}
       {orgEvents && (
         <div>
+          <CreateEvent />
           <h3>Org event map</h3>
-          {orgEvents.map((orgEvent) => {
+          {orgEvents.map((orgEvent, idx) => {
             return (
-              <div>
-                <p>{orgEvent.title}</p>
+              <div key={idx}>
+                <ActiveView
+                  key={orgEvent.id}
+                  session={session}
+                  event={orgEvent}
+                />
               </div>
             );
           })}

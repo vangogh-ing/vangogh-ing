@@ -119,7 +119,6 @@ export default function SingleEvent() {
               <h4>{time}</h4>
               <h4>{location}</h4>
             </div>
-            <UpdateEvent />
             {authUserId ? (
               !alreadySaved ? (
                 <SaveEventPopup
