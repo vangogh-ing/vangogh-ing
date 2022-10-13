@@ -59,7 +59,7 @@ export default function SingleEvent() {
     async (interestLevel) => {
       const { error } = await supabase
         .from("user_added_events")
-        .insert([
+        .upsert([
           { userId: authUserId, eventId: id, interest_level: interestLevel },
         ]);
       if (!error) setAlreadySaved(true);
