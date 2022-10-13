@@ -23,7 +23,9 @@ export default function SaveEvent(props) {
     <Popup
       trigger={
         <button className="button">
-          {props.alreadySaved ? "Edit Interest Level" : "Save Event"}
+          {props.alreadySaved
+            ? `Edit Interest Level (${props.currentInterestLevel})`
+            : "Save Event"}
         </button>
       }
       modal
