@@ -53,11 +53,17 @@ function DiscoverInfo({ event, onDelete, session }) {
         //Logged in as an org
         <div>
           <Link to={`/events/${event.id}`}>
-            <h3>{event.title}</h3>
-            <p>
-              {event.time} | {event.date} | {event.location}
-            </p>
             <img src={event.imageUrl} alt="" />
+            <h3>{event.title}</h3>
+            <div className="details">
+              <p>
+                {event.startTime} - {event.endTime}
+              </p>
+              <p>
+                {event.startDate} / {event.endDate}
+              </p>
+              <p>{event.location}</p>
+            </div>
           </Link>
           <p>{event.description}</p>
         </div>
@@ -65,11 +71,17 @@ function DiscoverInfo({ event, onDelete, session }) {
         //logged in as regular user or not logged in at all
         <div>
           <Link to={`/events/${event.id}`}>
-            <h3>{event.title}</h3>
-            <p>
-              {event.time} | {event.date} | {event.location}
-            </p>
             <img src={event.imageUrl} alt="" />
+            <h3>{event.title}</h3>
+            <div className="details">
+              <p>
+                {event.startTime} - {event.endTime}
+              </p>
+              <p>
+                {event.startDate} / {event.endDate}
+              </p>
+              <p>{event.location}</p>
+            </div>
           </Link>
           <p>{event.description}</p>
         </div>

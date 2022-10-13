@@ -2,7 +2,7 @@ import { supabase } from "../../supabaseClient";
 import { useEffect, useState } from "react";
 
 //add on components
-import ActiveView from "./activeView";
+import DiscoverInfo from "../../innerComponents/discoverInfo";
 import CreateEvent from "../../innerComponents/createEvent";
 
 function OrgEventsPage({ session }) {
@@ -58,7 +58,7 @@ function OrgEventsPage({ session }) {
           {orgEvents.map((orgEvent, idx) => {
             return (
               <div key={idx}>
-                <ActiveView
+                <DiscoverInfo
                   key={orgEvent.id}
                   session={session}
                   event={orgEvent}
