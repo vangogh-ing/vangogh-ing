@@ -2,11 +2,18 @@ import React, { useEffect, useCallback, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import Popup from "reactjs-popup";
 
 const Calendar = ({ session }) => {
   const userId = session.user.id;
   const [loading, setLoading] = useState(true);
   const [savedEvents, setSavedEvents] = useState();
+  const [open, setOpen] = useState(false);
+  const closePopup = () => setOpen(false);
+  const [popupTitle, setPopupTitle] = useState("");
+  const [popupStart, setPopupStart] = useState("");
+  const [popupEnd, setPopupEnd] = useState("");
+  const [popupDesc, setPopupDesc] = useState("");
 
   const fetchSavedEvents = useCallback(async () => {
     let { data: user_added_events } = await supabase
@@ -36,8 +43,7 @@ const Calendar = ({ session }) => {
   }, [fetchSavedEvents]);
 
   function renderEventContent(info) {
-    const popup = document.getElementById("popup");
-
+    setOpen(true);
     const eventTitle = info.event.title;
 
     const options = {
@@ -53,10 +59,10 @@ const Calendar = ({ session }) => {
 
     const eventDescription = info.event.extendedProps.description;
 
-    popup.innerHTML = `<h1>${eventTitle}</h1>
-    <h2>${startDate} - ${endDate}<h2>
-    <h3>${eventDescription}</h3>
-    `;
+    setPopupTitle(eventTitle);
+    setPopupStart(startDate);
+    setPopupEnd(endDate);
+    setPopupDesc(eventDescription);
   }
 
   return (
@@ -72,7 +78,14 @@ const Calendar = ({ session }) => {
             events={savedEvents}
             eventClick={renderEventContent}
           />
-          <div id="popup"></div>
+          <Popup open={open} closeOnDocumentClick onClose={closePopup}>
+            <button onClick={closePopup}>&times;</button>
+            <h1>{popupTitle}</h1>
+            <h2>
+              {popupStart} - {popupEnd}
+            </h2>
+            <h3>{popupDesc}</h3>
+          </Popup>
         </div>
       )}
     </div>
