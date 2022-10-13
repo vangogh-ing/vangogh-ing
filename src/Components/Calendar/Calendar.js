@@ -77,6 +77,7 @@ const Calendar = ({ session }) => {
             dayMaxEvents={true}
             events={savedEvents}
             eventClick={renderEventContent}
+            eventColor={"#bca32d"}
           />
           <Popup open={open} closeOnDocumentClick onClose={closePopup}>
             <div className="popup">

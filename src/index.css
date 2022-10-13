@@ -5,3 +5,29 @@
 .slick-next:before {
   color: black !important;
 }
+.popup-content {
+  display: flex;
+  justify-content: center;
+}
+.popup {
+  background-color: #fffef9;
+  color: black;
+  width: 75%;
+  border-style: solid;
+  border-color: #bca32d;
+  box-shadow: 10px 10px #4c5e7d;
+  padding: 1rem;
+}
+.popup_header {
+  display: flex;
+  justify-content: space-between;
+}
+.popup_header > button {
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  border-radius: 2px;
+  background-color: #bca32d;
+  color: #fffef9;
+}
