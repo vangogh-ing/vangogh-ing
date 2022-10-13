@@ -9,7 +9,7 @@ import Account from "./Components/Account/Account";
 import EditAccount from "./Components/Account/EditAccount";
 import Navbar from "./Components/Navbar";
 import SingleOrg from "./Components/SingleOrg/SingleOrg";
-import SingleEvent from "./Components/SingleEvent";
+import SingleEvent from "./Components/SingleEvent/SingleEvent";
 import Discover from "./Components/Discover";
 import ForYouPage from "./Components/ForYou/ForYouPage";
 import SavedEventPage from "./Components/SavedEvents/SavedEventPage";
