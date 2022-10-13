@@ -22,6 +22,31 @@ export default function SaveEvent(props) {
           <button className="close" onClick={close}>
             &times;
           </button>
+          <div className="header"> Want to gogh to this event? </div>
+          <div className="content">
+            {" "}
+            Indicate your level of interest.
+            <br />
+            See a calendar view of your saved events on the Plan page!
+          </div>
+          <div className="actions">
+            <button
+              onClick={() => {
+                props.handleSaveEvent("interested");
+                close();
+              }}
+            >
+              Interested
+            </button>
+            <button
+              onClick={() => {
+                props.handleSaveEvent("attending");
+                close();
+              }}
+            >
+              Attending
+            </button>
+          </div>
         </div>
       )}
     </Popup>
