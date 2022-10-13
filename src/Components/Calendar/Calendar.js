@@ -71,14 +71,17 @@ const Calendar = ({ session }) => {
         "Loading..."
       ) : (
         <div>
-          <FullCalendar
-            plugins={[dayGridPlugin]}
-            initialView="dayGridMonth"
-            dayMaxEvents={true}
-            events={savedEvents}
-            eventClick={renderEventContent}
-            eventColor={"#bca32d"}
-          />
+          <div id="full_calendar">
+            <FullCalendar
+              plugins={[dayGridPlugin]}
+              initialView="dayGridMonth"
+              dayMaxEvents={true}
+              events={savedEvents}
+              eventClick={renderEventContent}
+              eventColor={"#bca32d"}
+              handleWindowResize="true"
+            />
+          </div>
           <Popup open={open} closeOnDocumentClick onClose={closePopup}>
             <div className="popup">
               <div className="popup_header">
