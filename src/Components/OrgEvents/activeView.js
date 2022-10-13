@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 
-function ActiveView({ session }) {
+function ActiveView({ event, session }) {
   // const [userOrg, setUserOrg] = useState(null);
 
   // useEffect(() => {
@@ -28,6 +28,8 @@ function ActiveView({ session }) {
   return (
     <div>
       <h2>Active View</h2>
+      <h3>{event.title}</h3>
+      <p>{event.description}</p>
     </div>
   );
 }
