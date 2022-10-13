@@ -55,12 +55,17 @@ export default function SingleEvent() {
     handleSavedStatus();
   }, [fetchSingleEvent, handleSavedStatus]);
 
-  const handleSaveEvent = useCallback(async () => {
-    const { error } = await supabase
-      .from("user_added_events")
-      .insert([{ userId: authUserId, eventId: id }]);
-    if (!error) setAlreadySaved(true);
-  }, [authUserId, id]);
+  const handleSaveEvent = useCallback(
+    async (interestLevel) => {
+      const { error } = await supabase
+        .from("user_added_events")
+        .insert([
+          { userId: authUserId, eventId: id, interest_level: interestLevel },
+        ]);
+      if (!error) setAlreadySaved(true);
+    },
+    [authUserId, id]
+  );
 
   const handleRemoveEvent = useCallback(async () => {
     const { error } = await supabase
@@ -110,12 +115,21 @@ export default function SingleEvent() {
                 <SaveEventPopup
                   userId={authUserId}
                   handleSaveEvent={handleSaveEvent}
+                  handleRemoveEvent={handleRemoveEvent}
+                  alreadySaved={false}
                 />
               ) : (
-                // <button onClick={handleSaveEvent}>Save Event</button>
-                <button onClick={handleRemoveEvent}>
-                  Remove Event from Profile
-                </button>
+                <div>
+                  <SaveEventPopup
+                    userId={authUserId}
+                    handleSaveEvent={handleSaveEvent}
+                    handleRemoveEvent={handleRemoveEvent}
+                    alreadySaved={true}
+                  />
+                  <button onClick={handleRemoveEvent}>
+                    Remove Event from Profile
+                  </button>
+                </div>
               )
             ) : (
               <p>
@@ -130,3 +144,6 @@ export default function SingleEvent() {
     </div>
   );
 }
+
+// if event is not already saved, show button that lets users save events
+//
