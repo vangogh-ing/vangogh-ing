@@ -53,7 +53,6 @@ export default function SingleEvent() {
       } else {
         setAlreadySaved(false);
       }
-      // user_added_events ? setAlreadySaved(true) : setAlreadySaved(false);
     }
   }, [authUserId, id]);
 

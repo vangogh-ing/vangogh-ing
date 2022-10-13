@@ -1,24 +1,7 @@
-import React, { useEffect, useCallback, useState } from "react";
-import { useParams } from "react-router-dom";
-import { supabase } from "../../supabaseClient";
-import { Link } from "react-router-dom";
-import UpdateEvent from "../../innerComponents/updateEvent";
+import React from "react";
 import Popup from "reactjs-popup";
 
-export default function SaveEvent(props) {
-  // const [currentInterestLevel, setCurrentInterestLevel] = useState("");
-
-  // const handleInterest = useCallback(
-  //   async () => {
-  //     setCurrentInterestLevel(props.currentInterestLevel)
-  //   },
-  //   [props.currentInterestLevel]
-  // );
-
-  // useEffect(() => {
-  //   handleInterest();
-  // }, [handleInterest]);
-
+export default function SaveEventPopup(props) {
   return (
     <Popup
       trigger={
