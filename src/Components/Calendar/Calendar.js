@@ -7,25 +7,54 @@ import Popup from "reactjs-popup";
 const Calendar = ({ session }) => {
   const userId = session.user.id;
   const [loading, setLoading] = useState(true);
+
+  const [isInterested, setIsInterested] = useState(false);
+  const [isAttending, setIsAttending] = useState(false);
   const [savedEvents, setSavedEvents] = useState();
+
   const [open, setOpen] = useState(false);
   const closePopup = () => setOpen(false);
+
   const [popupTitle, setPopupTitle] = useState("");
   const [popupStart, setPopupStart] = useState("");
   const [popupEnd, setPopupEnd] = useState("");
   const [popupDesc, setPopupDesc] = useState("");
 
   const fetchSavedEvents = useCallback(async () => {
-    let { data: user_added_events } = await supabase
-      .from("user_added_events")
-      .select(
-        `eventId,
-         Events (*)`
-      )
-      .eq("userId", userId)
-      .eq("interest_level", "interested");
+    let userEvents;
 
-    let eventData = user_added_events.map((event) => {
+    if (isInterested) {
+      let { data } = await supabase
+        .from("user_added_events")
+        .select(
+          `eventId,
+          Events (*)`
+        )
+        .eq("userId", userId)
+        .eq("interest_level", "interested");
+      userEvents = data;
+    } else if (isAttending) {
+      let { data } = await supabase
+        .from("user_added_events")
+        .select(
+          `eventId,
+          Events (*)`
+        )
+        .eq("userId", userId)
+        .eq("interest_level", "attending");
+      userEvents = data;
+    } else {
+      let { data } = await supabase
+        .from("user_added_events")
+        .select(
+          `eventId,
+          Events (*)`
+        )
+        .eq("userId", userId);
+      userEvents = data;
+    }
+
+    let eventData = userEvents.map((event) => {
       return {
         id: event.eventId,
         title: event.Events.title,
@@ -35,9 +64,12 @@ const Calendar = ({ session }) => {
       };
     });
 
-    setSavedEvents(eventData);
+    setSavedEvents({
+      events: [...eventData],
+      color: isInterested ? "#6E8774" : isAttending ? "#677DA2" : "#837F27",
+    });
     setLoading(false);
-  }, [userId]);
+  }, [userId, isInterested, isAttending]);
 
   useEffect(() => {
     fetchSavedEvents();
@@ -45,25 +77,33 @@ const Calendar = ({ session }) => {
 
   const allButton = {
     text: "all",
-    click: function () {
-      console.log("click");
+    click: () => {
+      setIsInterested(false);
+      setIsAttending(false);
+      console.log("all - interested: false", isInterested);
     },
   };
   const interestedButton = {
     text: "interested",
-    click: function () {
-      console.log("click");
+    click: () => {
+      setIsInterested(true);
+      setIsAttending(false);
+      console.log("interested - interested: true", isInterested);
     },
   };
   const attendingButton = {
     text: "attending",
     click: function () {
-      console.log("click");
+      setIsAttending(true);
+      setIsInterested(false);
     },
   };
 
   function renderEventContent(info) {
     setOpen(true);
+
+    console.log(info);
+
     const eventTitle = info.event.title;
 
     const options = {
@@ -104,7 +144,6 @@ const Calendar = ({ session }) => {
               }}
               events={savedEvents}
               eventClick={renderEventContent}
-              eventColor={"#bca32d"}
               handleWindowResize="true"
             />
           </div>
