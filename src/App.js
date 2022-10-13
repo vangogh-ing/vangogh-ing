@@ -15,6 +15,7 @@ import Plan from "./Components/Plan";
 import ForYouPage from "./Components/ForYou/ForYouPage";
 import SavedEventPage from "./Components/SavedEvents/SavedEventPage";
 import Calendar from "./Components/Calendar/Calendar";
+import OrgEventsPage from "./Components/OrgEvents/orgEventsPage";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -65,6 +66,10 @@ export default function App() {
           <Route
             path="/savedevents"
             element={<SavedEventPage session={session} />}
+          />
+          <Route
+            path="/myevents"
+            element={<OrgEventsPage key={session.user.id} session={session} />}
           />
           <Route
             path="/plan"
