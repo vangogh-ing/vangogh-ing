@@ -79,12 +79,16 @@ const Calendar = ({ session }) => {
             eventClick={renderEventContent}
           />
           <Popup open={open} closeOnDocumentClick onClose={closePopup}>
-            <button onClick={closePopup}>&times;</button>
-            <h1>{popupTitle}</h1>
-            <h2>
-              {popupStart} - {popupEnd}
-            </h2>
-            <h3>{popupDesc}</h3>
+            <div className="popup">
+              <div className="popup_header">
+                <h1>{popupTitle}</h1>
+                <button onClick={closePopup}>x</button>
+              </div>
+              <h2>
+                {popupStart} - {popupEnd}
+              </h2>
+              <h3>{popupDesc}</h3>
+            </div>
           </Popup>
         </div>
       )}
