@@ -38,12 +38,12 @@ export default function SaveEvent(props) {
           <div className="header"> Want to gogh to this event? </div>
           <div className="content">
             {props.currentInterestLevel && (
-              <span>You are currently: {props.currentInterestLevel}</span>
+              <span>
+                You are currently: {props.currentInterestLevel}
+                <br />
+              </span>
             )}
-            <br />
-            Indicate your level of interest.
-            <br />
-            See a calendar view of your saved events on the Plan page!
+            {props.alreadySaved ? "Edit" : "Indicate"} your preference.
           </div>
           <div className="actions">
             <button
@@ -62,6 +62,10 @@ export default function SaveEvent(props) {
             >
               Attending
             </button>
+            <div className="content">
+              <br />
+              See a calendar view of your saved events on the Plan page!
+            </div>
           </div>
         </div>
       )}
