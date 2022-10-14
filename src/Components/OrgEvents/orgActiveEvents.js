@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 //add on components
 import DiscoverInfo from "../../innerEventInfo/discoverInfo";
 import CreateEvent from "./createEvent";
+import UpdateEvent from "./updateEvent";
 
 function OrgActiveEvents({ session }) {
   const todaysdate = Date.now();
@@ -91,6 +92,7 @@ function OrgActiveEvents({ session }) {
                   <button onClick={() => handleDelete(activeEvent.id)}>
                     Delete
                   </button>
+                  <UpdateEvent />
                 </div>
               );
             })}
