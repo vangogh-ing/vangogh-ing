@@ -30,19 +30,33 @@
 * {
   font-family: "Gothic A1", sans-serif;
 }
-#login_container {
+.auth_container {
   display: flex;
+  height: 90vh;
   justify-content: center;
+  align-items: center;
 }
-#login {
+.auth {
   width: 75%;
   background-color: #fffef9;
   padding: 1.5rem;
   border: solid;
-  border-color: #bca32d;
-  box-shadow: 0.7rem 0.7rem #4c5e7d;
+  border-color: #666d24;
+  box-shadow: 0.7rem 0.7rem #bca32d, 1.4rem 1.4rem #4c5e7d;
+  transition: transform ease 0.5s, box-shadow ease 0.5s;
   margin: 1rem;
-  margin-top: 5rem;
+}
+.auth:hover {
+  transform: translateY(-1rem);
+  transition: transform ease 0.5s, box-shadow ease 0.5s;
+  box-shadow: 0.9rem 0.9rem #bca32d, 1.6rem 1.6rem #4c5e7d;
+}
+.auth > h1 {
+  display: flex;
+  align-items: center;
+}
+.auth_icon {
+  width: 3rem;
 }
 .slick-prev:before,
 .slick-next:before {

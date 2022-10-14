@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 
 export default function AuthSignIn() {
@@ -34,25 +34,37 @@ export default function AuthSignIn() {
       {loading ? (
         "Loading..."
       ) : (
-        <div>
-          <h1>Make a new account</h1>
-          <input
-            id="email"
-            type="email"
-            placeholder="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            id="password"
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+        <div className="auth_container">
+          <div className="auth">
+            <h1>
+              <img src="/wheat.png" alt="" className="auth_icon" />
+              &nbsp; Make a new account &nbsp;
+              <img src="/wheat.png" alt="" className="auth_icon" />
+            </h1>
+            <input
+              id="email"
+              type="email"
+              placeholder="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              id="password"
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button onClick={() => handleSignup(email, password)}>
+              sign up
+            </button>
+            <div>
+              <p>Already have an account?</p>
+              <Link to="/login">Log in here</Link>
+            </div>
+          </div>
         </div>
       )}
-      <button onClick={() => handleSignup(email, password)}>sign up</button>
     </div>
   );
 }

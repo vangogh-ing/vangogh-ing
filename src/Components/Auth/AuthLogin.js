@@ -34,9 +34,13 @@ export default function AuthLogin() {
       {loading ? (
         "Loading..."
       ) : (
-        <div id="login_container">
-          <div id="login">
-            <h1>Log in</h1>
+        <div className="auth_container">
+          <div className="auth">
+            <h1>
+              <img src="/wheat.png" alt="" className="auth_icon" />
+              &nbsp; Log in &nbsp;
+              <img src="/wheat.png" alt="" className="auth_icon" />
+            </h1>
             <input
               id="email"
               type="email"
