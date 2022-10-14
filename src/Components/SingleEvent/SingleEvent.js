@@ -86,8 +86,20 @@ export default function SingleEvent() {
     setCurrentInterestLevel("");
   }, [authUserId, id]);
 
-  let { title, description, date, time, location, imageUrl, OrgId } =
-    singleEventInfo;
+  let {
+    title,
+    description,
+    // startDate,
+    endDate,
+    startTime,
+    endTime,
+    location,
+    imageUrl,
+    OrgId,
+  } = singleEventInfo;
+
+  let startDate = singleEventInfo.startDate.split("-");
+  startDate = startDate[1] + "/" + startDate[2] + "/" + startDate[0];
 
   return (
     <div>
@@ -115,8 +127,12 @@ export default function SingleEvent() {
                 src={imageUrl}
               />
               <p>{description}</p>
-              <h4>{date}</h4>
-              <h4>{time}</h4>
+              <h4>
+                {startDate}-{endDate}
+              </h4>
+              <h4>
+                {startTime.slice(0, -3)}-{endTime.slice(0, -3)}
+              </h4>
               <h4>{location}</h4>
             </div>
             <UpdateEvent />
