@@ -131,7 +131,6 @@ const Calendar = ({ session }) => {
             <FullCalendar
               plugins={[dayGridPlugin]}
               initialView="dayGridMonth"
-              /* dayMaxEvents={true} */
               customButtons={{ allButton, interestedButton, attendingButton }}
               headerToolbar={{
                 left: "title",

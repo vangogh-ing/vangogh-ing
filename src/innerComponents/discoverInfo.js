@@ -23,7 +23,7 @@ function DiscoverInfo({ event, session }) {
       }
     };
     findUser();
-  }, []);
+  }, [session.user.id]);
 
   return (
     <div>
