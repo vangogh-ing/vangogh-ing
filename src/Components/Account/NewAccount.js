@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 
 import getProfile from "../../Utils/getProfile";
@@ -8,6 +8,8 @@ const Account = ({ session }) => {
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getProfile(session, setLoading, setName, setImageUrl);
@@ -76,8 +78,7 @@ const Account = ({ session }) => {
       alert(error.message);
     } finally {
       setLoading(false);
-      //LOCAL WORKAROUND - FIX FOR PRODUCTION
-      window.location.href = "http://localhost:3000/account";
+      navigate("/discover");
     }
   };
 
