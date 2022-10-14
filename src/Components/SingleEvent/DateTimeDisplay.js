@@ -10,7 +10,7 @@ export function DateDisplay(props) {
   }, []);
 
   return (
-    <>
+    <div>
       {props.start === props.end ? (
         handleDate(props.start)
       ) : (
@@ -18,7 +18,7 @@ export function DateDisplay(props) {
           {handleDate(props.start)} — {handleDate(props.end)}
         </span>
       )}
-    </>
+    </div>
   );
 }
 
