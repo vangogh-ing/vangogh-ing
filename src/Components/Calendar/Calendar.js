@@ -80,7 +80,6 @@ const Calendar = ({ session }) => {
     click: () => {
       setIsInterested(false);
       setIsAttending(false);
-      console.log("all - interested: false", isInterested);
     },
   };
   const interestedButton = {
@@ -88,7 +87,6 @@ const Calendar = ({ session }) => {
     click: () => {
       setIsInterested(true);
       setIsAttending(false);
-      console.log("interested - interested: true", isInterested);
     },
   };
   const attendingButton = {
@@ -101,8 +99,6 @@ const Calendar = ({ session }) => {
 
   function renderEventContent(info) {
     setOpen(true);
-
-    console.log(info);
 
     const eventTitle = info.event.title;
 
@@ -135,7 +131,7 @@ const Calendar = ({ session }) => {
             <FullCalendar
               plugins={[dayGridPlugin]}
               initialView="dayGridMonth"
-              dayMaxEvents={true}
+              /* dayMaxEvents={true} */
               customButtons={{ allButton, interestedButton, attendingButton }}
               headerToolbar={{
                 left: "title",
@@ -147,7 +143,12 @@ const Calendar = ({ session }) => {
               handleWindowResize="true"
             />
           </div>
-          <Popup open={open} closeOnDocumentClick onClose={closePopup}>
+          <Popup
+            open={open}
+            closeOnDocumentClick
+            onClose={closePopup}
+            className="popup"
+          >
             <div className="popup">
               <div className="popup_header">
                 <h1>{popupTitle}</h1>

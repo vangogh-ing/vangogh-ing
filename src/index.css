@@ -2,6 +2,9 @@
   display: flex;
   justify-content: center;
 }
+.popup-overlay {
+  background: rgba(14, 28, 55, 0.5);
+}
 .popup {
   background-color: #fffef9;
   color: black;
