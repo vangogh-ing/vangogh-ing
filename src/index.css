@@ -29,6 +29,7 @@
 }
 * {
   font-family: "Gothic A1", sans-serif;
+  background-color: #fffef9;
 }
 .auth_container {
   display: flex;
@@ -54,6 +55,10 @@
 .auth > h1 {
   display: flex;
   align-items: center;
+}
+.auth > input {
+  border: solid 0.1rem #bca32d;
+  border-radius: 0.5rem;
 }
 .auth_icon {
   width: 3rem;
