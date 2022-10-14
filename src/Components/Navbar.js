@@ -35,6 +35,7 @@ export default function Navbar({ session }) {
         //not logged in navbar
         <div>
           <Link to="/login">login</Link>
+          <Link to="/discover"> | Discover</Link>
         </div>
       ) : userOrg !== null ? (
         //org user navbar
@@ -43,6 +44,8 @@ export default function Navbar({ session }) {
           <Link to="/discover"> | Discover</Link>
           <Link to="/activeevents"> | Active Events</Link>
           <Link to="/pastevents"> | Past Events</Link>
+          <Link to="/foryou"> | for you </Link>
+          <Link to="/savedevents"> | saved events </Link>
           <Link to="/plan"> | plan </Link>
           <button
             type="button"

@@ -1,7 +1,7 @@
 import { supabase } from "../supabaseClient";
 import { useEffect, useState } from "react";
 //inner components
-import DiscoverInfo from "../innerComponents/discoverInfo";
+import DiscoverInfo from "../innerEventInfo/discoverInfo";
 
 function Discover() {
   const [fetchError, setFetchError] = useState(null);
@@ -54,8 +54,8 @@ function Discover() {
           {events && (
             <div>
               <h2>Placeholder: NOT LOGGED IN</h2>
-              {events.map((event) => (
-                <div className="card">
+              {events.map((event, idx) => (
+                <div key={idx} className="card">
                   <DiscoverInfo key={event.id} event={event} />
                 </div>
               ))}
@@ -69,8 +69,8 @@ function Discover() {
           {events && (
             <div>
               <h2>Placeholder: Logged in</h2>
-              {events.map((event) => (
-                <div className="card">
+              {events.map((event, idx) => (
+                <div key={idx} className="card">
                   <DiscoverInfo
                     session={session}
                     key={event.id}
