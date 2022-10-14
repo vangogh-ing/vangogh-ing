@@ -30,6 +30,20 @@
 * {
   font-family: "Gothic A1", sans-serif;
 }
+#login_container {
+  display: flex;
+  justify-content: center;
+}
+#login {
+  width: 75%;
+  background-color: #fffef9;
+  padding: 1.5rem;
+  border: solid;
+  border-color: #bca32d;
+  box-shadow: 0.7rem 0.7rem #4c5e7d;
+  margin: 1rem;
+  margin-top: 5rem;
+}
 .slick-prev:before,
 .slick-next:before {
   color: black !important;

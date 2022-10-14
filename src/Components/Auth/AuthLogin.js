@@ -34,29 +34,31 @@ export default function AuthLogin() {
       {loading ? (
         "Loading..."
       ) : (
-        <div>
-          <h1>Log in</h1>
-          <input
-            id="email"
-            type="email"
-            placeholder="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            id="password"
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+        <div id="login_container">
+          <div id="login">
+            <h1>Log in</h1>
+            <input
+              id="email"
+              type="email"
+              placeholder="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              id="password"
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button onClick={() => handleLogin(email, password)}>login</button>
+            <div>
+              <p>Don't have an account?</p>
+              <Link to="/signup">Sign up here</Link>
+            </div>
+          </div>
         </div>
       )}
-      <button onClick={() => handleLogin(email, password)}>login</button>
-      <div>
-        <p>Don't have an account?</p>
-        <Link to="/signup">Sign up here</Link>
-      </div>
     </div>
   );
 }
