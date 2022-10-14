@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { DateDisplay, TimeDisplay } from "../SingleEvent/DateTimeDisplay";
 
 export default function SavedEventInfo(props) {
   return (
@@ -29,8 +30,16 @@ export default function SavedEventInfo(props) {
                 alt="Event Img"
                 src={entry.Events.imageUrl}
               />
-              <p>{entry.Events.date}</p>
-              {entry.Events.time && <p>{entry.Events.time}</p>}
+              <DateDisplay
+                start={entry.Events.startDate}
+                end={entry.Events.endDate}
+              />
+              <TimeDisplay
+                startDate={entry.Events.startDate}
+                startTime={entry.Events.startTime}
+                endDate={entry.Events.endDate}
+                endTime={entry.Events.endTime}
+              />
               <button onClick={() => props.handleRemove(entry.eventId)}>
                 Remove from Calendar
               </button>
