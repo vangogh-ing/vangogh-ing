@@ -11,7 +11,7 @@ function DiscoverInfo({ event, session }) {
         .select("id, OrgId")
         .eq("id", session.user.id);
 
-      //need edge case if user is not logged in -> they have no user id
+      //NOTE: need edge case if user is not logged in -> they have no user id
 
       if (error) {
         console.log(error);
