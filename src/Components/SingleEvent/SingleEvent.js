@@ -172,8 +172,8 @@ export default function SingleEvent() {
                 {handleDateDisplay(startDate)} - {handleDateDisplay(endDate)}
               </h4>
               <h4>
-                {console.log(handleTimeDisplay(startDate, startTime))}
-                {startTime.slice(0, -3)}-{endTime.slice(0, -3)}
+                {handleTimeDisplay(startDate, startTime)}-
+                {handleTimeDisplay(endDate, endTime)}
               </h4>
               <h4>{location}</h4>
             </div>
