@@ -40,7 +40,8 @@ export default function Navbar({ session }) {
         <div>
           <Link to="/account">my account</Link>
           <Link to="/discover"> | Discover</Link>
-          <Link to="/myevents"> | MyEvents</Link>
+          <Link to="/activeevents"> | Active Events</Link>
+          <Link to="/pastevents"> | Past Events</Link>
           <Link to="/plan"> | plan </Link>
           <button
             type="button"
