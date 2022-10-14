@@ -6,10 +6,9 @@ import { supabase } from "../../supabaseClient";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { DateDisplay } from "../SingleEvent/DateTimeDisplay";
 
 export default function SingleOrgEvents(props) {
-  // const { id } = useParams();
-
   const [relatedEventInfo, setRelatedEventInfo] = useState([]);
 
   const fetchRelatedEventInfo = useCallback(async () => {
@@ -65,7 +64,7 @@ export default function SingleOrgEvents(props) {
                 alt="Event Img"
                 src={event.imageUrl}
               />
-              <h5>{event.date}</h5>
+              <DateDisplay start={event.startDate} end={event.endDate} />
             </div>
           ))}
         </Slider>
