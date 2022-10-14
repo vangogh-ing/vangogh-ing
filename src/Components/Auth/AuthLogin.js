@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 
 export default function AuthLogin() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleLogin = async (email, password) => {
     try {
@@ -17,9 +18,7 @@ export default function AuthLogin() {
           password,
         });
         if (error) throw error;
-        alert("Logged in");
-        //LOCAL WORKAROUND - FIX FOR PRODUCTION
-        window.location.href = "http://localhost:3000/account";
+        navigate("/discover");
       } else {
         alert("You're already logged in");
       }

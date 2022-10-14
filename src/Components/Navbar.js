@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 
 export default function Navbar({ session }) {
+  const navigate = useNavigate();
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
-    //LOCAL WORKAROUND - FIX FOR PRODUCTION
-    window.location.href = "http://localhost:3000/login";
+    navigate("/login");
   };
 
   return (
