@@ -11,6 +11,7 @@ function OrgEventsPage({ session }) {
   const [fetchError, setFetchError] = useState(null);
   const [orgEvents, setOrgEvents] = useState(null);
   const [userOrg, setUserOrgId] = useState(null);
+  // const [activeEvent, setActiveEvent] = useState(null);
 
   const userOrgId = async () => {
     const { data } = await supabase
@@ -37,15 +38,15 @@ function OrgEventsPage({ session }) {
     }
     if (data) {
       setOrgEvents(data);
-      let activeEvents = data.filter((event) => {
-        const eventDate = new Date(event.endDate).getTime();
+      // let activeEvents = data.filter((event) => {
+      //   const eventDate = new Date(event.endDate).getTime();
 
-        if (eventDate > todaysdate) {
-          return eventDate;
-        }
-      });
-
-      console.log("ACTIVEEVENTS: ", activeEvents);
+      //   if (eventDate > todaysdate) {
+      //     return eventDate;
+      //   }
+      // });
+      // setActiveEvent(activeEvents);
+      // console.log("ACTIVEEVENTS: ", activeEvents);
       setFetchError(null);
     }
   };
@@ -64,8 +65,9 @@ function OrgEventsPage({ session }) {
       {orgEvents && (
         <div className="card-container">
           <CreateEvent />
+          {/* <button onClick={setActiveEvent}>Active Events</button> */}
           <h3>Org event map</h3>
-          {orgEvents.map((orgEvent, idx) => {
+          {/* {orgEvents.map((orgEvent, idx) => {
             return (
               <div className="card" key={idx}>
                 <DiscoverInfo
@@ -75,7 +77,26 @@ function OrgEventsPage({ session }) {
                 />
               </div>
             );
-          })}
+          })} */}
+
+          {orgEvents
+            .filter((orgEvent) => {
+              const eventDate = new Date(orgEvent.endDate).getTime();
+              if (eventDate > todaysdate) {
+                return orgEvent;
+              }
+            })
+            .map((activeEvent, idx) => {
+              return (
+                <div className="card" key={idx}>
+                  <DiscoverInfo
+                    key={activeEvent.id}
+                    session={session}
+                    event={activeEvent}
+                  />
+                </div>
+              );
+            })}
         </div>
       )}
     </div>
