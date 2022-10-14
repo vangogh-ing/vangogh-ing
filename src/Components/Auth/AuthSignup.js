@@ -1,11 +1,13 @@
 import { useState } from "react";
-
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 
 export default function AuthSignIn() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSignup = async (email, password) => {
     try {
@@ -16,9 +18,7 @@ export default function AuthSignIn() {
       if (data.length === 0) {
         const { error } = await supabase.auth.signUp({ email, password });
         if (error) throw error;
-        alert("Signed up");
-        //LOCAL WORKAROUND - FIX FOR PRODUCTION
-        window.location.href = "http://localhost:3000/welcome";
+        navigate("/welcome");
       } else {
         alert("Email already in use");
       }
@@ -34,25 +34,37 @@ export default function AuthSignIn() {
       {loading ? (
         "Loading..."
       ) : (
-        <div>
-          <h1>Make a new account</h1>
-          <input
-            id="email"
-            type="email"
-            placeholder="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            id="password"
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+        <div className="auth_container">
+          <div className="auth">
+            <h1>
+              <img src="/wheat.png" alt="" className="auth_icon" />
+              &nbsp; Make a new account &nbsp;
+              <img src="/wheat.png" alt="" className="auth_icon" />
+            </h1>
+            <input
+              id="email"
+              type="email"
+              placeholder="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              id="password"
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button onClick={() => handleSignup(email, password)}>
+              sign up
+            </button>
+            <div>
+              <p>Already have an account?</p>
+              <Link to="/login">Log in here</Link>
+            </div>
+          </div>
         </div>
       )}
-      <button onClick={() => handleSignup(email, password)}>sign up</button>
     </div>
   );
 }

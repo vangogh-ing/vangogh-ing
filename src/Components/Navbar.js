@@ -1,14 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 import { useEffect, useState } from "react";
 
 export default function Navbar({ session }) {
   const [userOrg, setUserOrgId] = useState(null);
 
+  const navigate = useNavigate();
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
-    //LOCAL WORKAROUND - FIX FOR PRODUCTION
-    window.location.href = "http://localhost:3000/login";
+    navigate("/login");
   };
 
   const userOrgId = async () => {
