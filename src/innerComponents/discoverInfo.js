@@ -2,30 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 
-//component
-import CreateEvent from "./createEvent";
-
-function DiscoverInfo({ event, onDelete, session }) {
+function DiscoverInfo({ event, session }) {
   const [userOrgId, setUserOrgId] = useState(null);
-
-  const handleDelete = async () => {
-    const { data, error } = await supabase
-      .from("Events")
-      .delete()
-      .eq("id", event.id)
-      .select();
-
-    if (error) {
-      console.log(error);
-    }
-
-    if (data) {
-      console.log(data);
-      onDelete(event.id);
-      window.location.reload(false);
-    }
-  };
-
   useEffect(() => {
     const findUser = async () => {
       const { data, error } = await supabase

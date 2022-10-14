@@ -55,19 +55,6 @@ function OrgActiveEvents({ session }) {
       {orgEvents && (
         <div className="card-container">
           <CreateEvent />
-          <h3>Org event map</h3>
-          {/* {orgEvents.map((orgEvent, idx) => {
-            return (
-              <div className="card" key={idx}>
-                <DiscoverInfo
-                  key={orgEvent.id}
-                  session={session}
-                  event={orgEvent}
-                />
-              </div>
-            );
-          })} */}
-
           {orgEvents
             .filter((orgEvent) => {
               const eventDate = new Date(orgEvent.endDate).getTime();

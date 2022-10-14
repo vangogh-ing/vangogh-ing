@@ -53,7 +53,6 @@ function OrgPastEvents({ session }) {
       {fetchError && <p>{fetchError}</p>}
       {orgEvents && (
         <div className="card-container">
-          <h3>Org event map</h3>
           {orgEvents
             .filter((orgEvent) => {
               const eventDate = new Date(orgEvent.endDate).getTime();
