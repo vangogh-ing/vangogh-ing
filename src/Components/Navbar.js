@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Navbar({ session }) {
   const [userOrg, setUserOrgId] = useState(null);
