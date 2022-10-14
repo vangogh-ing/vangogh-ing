@@ -2,7 +2,6 @@ import React, { useEffect, useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 import { Link } from "react-router-dom";
-import UpdateEvent from "../../innerComponents/updateEvent";
 import SaveEventPopup from "./SaveEventPopup";
 import { DateDisplay, TimeDisplay } from "./DateTimeDisplay";
 

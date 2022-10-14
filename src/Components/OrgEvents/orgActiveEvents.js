@@ -2,8 +2,8 @@ import { supabase } from "../../supabaseClient";
 import { useEffect, useState } from "react";
 
 //add on components
-import DiscoverInfo from "../../innerComponents/discoverInfo";
-import CreateEvent from "../../innerComponents/createEvent";
+import DiscoverInfo from "../../innerEventInfo/discoverInfo";
+import CreateEvent from "./createEvent";
 
 function OrgActiveEvents({ session }) {
   const todaysdate = Date.now();

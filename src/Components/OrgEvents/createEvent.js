@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../../supabaseClient";
 
 function CreateEvent({ user }) {
   const [title, setTitle] = useState("");
@@ -11,7 +11,6 @@ function CreateEvent({ user }) {
   const [formError, setFormError] = useState(null);
 
   const OrgId = user;
-  console.log("ORGID: ", user);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
