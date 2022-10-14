@@ -12,6 +12,24 @@ function OrgActiveEvents({ session }) {
   const [orgEvents, setOrgEvents] = useState(null);
   const [userOrg, setUserOrgId] = useState(null);
 
+  const handleDelete = async (orgId) => {
+    const { data, error } = await supabase
+      .from("Events")
+      .delete()
+      .eq("id", orgId)
+      .select();
+
+    if (error) {
+      console.log(error);
+    }
+
+    if (data) {
+      setOrgEvents((prevEvents) => {
+        return prevEvents.filter((event) => event.id !== orgId);
+      });
+    }
+  };
+
   const userOrgId = async () => {
     const { data } = await supabase
       .from("User")
@@ -70,6 +88,9 @@ function OrgActiveEvents({ session }) {
                     session={session}
                     event={activeEvent}
                   />
+                  <button onClick={() => handleDelete(activeEvent.id)}>
+                    Delete
+                  </button>
                 </div>
               );
             })}
