@@ -12,6 +12,7 @@ function OrgActiveEvents({ session }) {
   const [fetchError, setFetchError] = useState(null);
   const [orgEvents, setOrgEvents] = useState(null);
   const [userOrg, setUserOrgId] = useState(null);
+  const [orderBy] = useState("created_at");
 
   const handleDelete = async (orgId) => {
     const { data, error } = await supabase
@@ -47,7 +48,8 @@ function OrgActiveEvents({ session }) {
     const { data, error } = await supabase
       .from("Events")
       .select("*")
-      .eq("OrgId", userOrg);
+      .eq("OrgId", userOrg)
+      .order(orderBy, { ascending: false });
 
     if (error) {
       console.log(error);

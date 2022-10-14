@@ -1,15 +1,9 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 import React from "react";
 import Popup from "reactjs-popup";
 
 function UpdateEvent({ orgEvent }) {
-  // const { id } = useParams();
-  const navigate = useNavigate();
-
-  //console.log("EVENTID: ", id);
-
   const [title, setTitle] = useState(orgEvent.title);
   const [description, setDescription] = useState(orgEvent.description);
   const [startDate, setStartDate] = useState(orgEvent.startDate);
@@ -60,7 +54,6 @@ function UpdateEvent({ orgEvent }) {
       }
 
       if (data) {
-        console.log("DATA: ", data);
         setTitle(data.title);
         setDescription(data.description);
         setStartDate(data.startDate);
@@ -73,7 +66,7 @@ function UpdateEvent({ orgEvent }) {
     };
 
     fetchEvent();
-  }, [orgEvent.id, navigate]);
+  }, [orgEvent.id]);
 
   return (
     <Popup trigger={<button>Update Event</button>} modal nested>
