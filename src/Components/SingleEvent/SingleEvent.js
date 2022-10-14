@@ -164,7 +164,7 @@ export default function SingleEvent() {
                 profile!
               </p>
             )}
-            <ReviewForm singleEventInfo={singleEventInfo} />
+            <ReviewForm singleEventInfo={singleEventInfo} userId={authUserId} eventId={id}/>
           </div>
         )
       )}

@@ -1,9 +1,29 @@
 import React, { useState, useCallback } from "react";
-import { Rating } from "@mui/material";
+import { Rating, TextField } from "@mui/material";
 import Popup from "reactjs-popup";
 
 export function ReviewForm(props) {
   const [rating, setRating] = useState(null);
+  const [reviewContent, setReviewContent] = useState(null);
+  const dummy = "hellotestnow";
+
+  //    _handleTextFieldChange: function(e) {
+  //     this.setState({
+  //       textFieldValue: e.target.value
+  //   });
+  // },
+
+  // render: function() {
+  //   return (
+  //       <div>
+  //           <TextField value={this.state.textFieldValue} onChange={this._handleTextFieldChange} />
+  //       </div>
+  //   )
+  // }
+
+  const handleReviewChange = useCallback(async (evt) => {
+    setReviewContent(evt.target.value);
+  }, []);
 
   return (
     <div>
@@ -13,16 +33,14 @@ export function ReviewForm(props) {
         }
         modal
         nested
-        className="save-event-modal"
+        className="popup"
         // singleEventInfo={props.singleEventInfo}
       >
         {(close) => (
-          <div className="save-event-modal">
-            <button className="close" onClick={close}>
-              &times;
-            </button>
-            <div className="header">
+          <div className="popup">
+            <div className="popup_header">
               What did you think of: {props.singleEventInfo.title}?
+              <button onClick={() => close()}>x</button>
             </div>
             <div className="content"></div>
             <div className="actions">
@@ -34,8 +52,16 @@ export function ReviewForm(props) {
                   setRating(newValue);
                 }}
               />
+              <div>
+                <TextField
+                  fullWidth
+                  multiline
+                  id="review-content"
+                  label="Your Review"
+                  onChange={handleReviewChange}
+                />
+              </div>
             </div>
-            {console.log(rating)}
           </div>
         )}
       </Popup>
