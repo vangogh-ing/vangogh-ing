@@ -32,6 +32,14 @@ export default function SingleOrgEvents(props) {
     slidesToScroll: 1,
   };
 
+  const handleDateDisplay = useCallback((date) => {
+    if (date) {
+      let resultDate = date.split("-");
+      resultDate = resultDate[1] + "•" + resultDate[2] + "•" + resultDate[0];
+      return resultDate;
+    }
+  }, []);
+
   return (
     <div>
       {relatedEventInfo.length ? (
@@ -65,7 +73,15 @@ export default function SingleOrgEvents(props) {
                 alt="Event Img"
                 src={event.imageUrl}
               />
-              <h5>{event.date}</h5>
+              {event.startDate === event.endDate && (
+                <h5>{handleDateDisplay(event.startDate)}</h5>
+              )}
+              {event.startDate !== event.endDate && (
+                <h5>
+                  {handleDateDisplay(event.startDate)} ——{" "}
+                  {handleDateDisplay(event.endDate)}
+                </h5>
+              )}
             </div>
           ))}
         </Slider>
