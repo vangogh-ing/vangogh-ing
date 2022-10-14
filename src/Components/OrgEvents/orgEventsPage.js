@@ -6,6 +6,8 @@ import DiscoverInfo from "../../innerComponents/discoverInfo";
 import CreateEvent from "../../innerComponents/createEvent";
 
 function OrgEventsPage({ session }) {
+  const todaysdate = Date.now();
+
   const [fetchError, setFetchError] = useState(null);
   const [orgEvents, setOrgEvents] = useState(null);
   const [userOrg, setUserOrgId] = useState(null);
@@ -18,7 +20,6 @@ function OrgEventsPage({ session }) {
 
     if (data) {
       let userOrg = data[0].OrgId;
-      console.log("SESSIONUSER: ", userOrg);
       setUserOrgId(userOrg);
     }
   };
@@ -36,6 +37,15 @@ function OrgEventsPage({ session }) {
     }
     if (data) {
       setOrgEvents(data);
+      let activeEvents = data.filter((event) => {
+        const eventDate = new Date(event.endDate).getTime();
+
+        if (eventDate > todaysdate) {
+          return eventDate;
+        }
+      });
+
+      console.log("ACTIVEEVENTS: ", activeEvents);
       setFetchError(null);
     }
   };
