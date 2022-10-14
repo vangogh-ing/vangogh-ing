@@ -29,6 +29,8 @@
 }
 * {
   font-family: "Gothic A1", sans-serif;
+}
+body {
   background-color: #fffef9;
 }
 .auth_container {
