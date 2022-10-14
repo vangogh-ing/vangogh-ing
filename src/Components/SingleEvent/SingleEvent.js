@@ -110,6 +110,25 @@ export default function SingleEvent() {
     }
   }, []);
 
+  const handleTimeDisplay = useCallback(
+    (startingOrEndingDate, startingOrEndingTime) => {
+      // const formattedDateTime = `${startingOrEndingDate}T${startingOrEndingTime}`;
+      const formattedDateTime = new Date(
+        `${startingOrEndingDate}T${startingOrEndingTime}`
+      );
+      const options = {
+        hour: "numeric",
+        minute: "numeric",
+      };
+      const resultTime = new Intl.DateTimeFormat("en-US", options).format(
+        formattedDateTime
+      );
+      return resultTime;
+      // return formattedDateTime;
+    },
+    []
+  );
+
   // const handleDateDisplay = useCallback(async (date) => {
   //   if (date) {
   //     let resultDate = date.split("-");
@@ -150,9 +169,10 @@ export default function SingleEvent() {
               />
               <p>{description}</p>
               <h4>
-                {handleDateDisplay(startDate)}-{handleDateDisplay(endDate)}
+                {handleDateDisplay(startDate)} - {handleDateDisplay(endDate)}
               </h4>
               <h4>
+                {console.log(handleTimeDisplay(startDate, startTime))}
                 {startTime.slice(0, -3)}-{endTime.slice(0, -3)}
               </h4>
               <h4>{location}</h4>
