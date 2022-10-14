@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { supabase } from "./supabaseClient";
 
 import AuthLogin from "./Components/Auth/AuthLogin";
@@ -35,6 +35,7 @@ export default function App() {
       <Navbar session={session || null} />
       {!session ? (
         <Routes>
+          <Route path="/" element={<Navigate to="/discover" replace />} />
           <Route path="/login" element={<AuthLogin />} />
           <Route path="/signup" element={<AuthSignup />} />
           <Route path="/events/:id" element={<SingleEvent />} />
