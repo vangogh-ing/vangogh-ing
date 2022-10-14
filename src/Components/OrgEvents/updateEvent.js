@@ -8,8 +8,10 @@ function UpdateEvent() {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [location, setLocation] = useState("");
   const [imageUrl, setImage] = useState("");
   const [formError, setFormError] = useState(null);
@@ -19,7 +21,16 @@ function UpdateEvent() {
 
     const { data, error } = await supabase
       .from("Events")
-      .update({ title, description, date, time, location, imageUrl })
+      .update({
+        title,
+        description,
+        startDate,
+        endDate,
+        startTime,
+        endTime,
+        location,
+        imageUrl,
+      })
       .eq("id", id)
       .select();
 
@@ -48,8 +59,10 @@ function UpdateEvent() {
       if (data) {
         setTitle(data.title);
         setDescription(data.description);
-        setDate(data.date);
-        setTime(data.time);
+        setStartDate(data.startDate);
+        setEndDate(data.endDate);
+        setStartTime(data.startTime);
+        setEndTime(data.endTime);
         setLocation(data.location);
         setImage(data.image);
       }
@@ -77,19 +90,35 @@ function UpdateEvent() {
           required
         />
 
-        <label htmlFor="date">Date: </label>
+        <label htmlFor="startDate">Start Date: </label>
         <input
-          type="text"
-          value={date}
-          onChange={(event) => setDate(event.target.value)}
+          type="date"
+          value={startDate}
+          onChange={(event) => setStartDate(event.target.value)}
           required
         />
 
-        <label htmlFor="time">Time: </label>
+        <label htmlFor="endDate">End Date: </label>
         <input
-          type="text"
-          value={time}
-          onChange={(event) => setTime(event.target.value)}
+          type="date"
+          value={endDate}
+          onChange={(event) => setEndDate(event.target.value)}
+          required
+        />
+
+        <label htmlFor="startTime">Start Time: </label>
+        <input
+          type="time"
+          value={startTime}
+          onChange={(event) => setStartTime(event.target.value)}
+          required
+        />
+
+        <label htmlFor="endtime">End Time: </label>
+        <input
+          type="time"
+          value={endTime}
+          onChange={(event) => setEndTime(event.target.value)}
           required
         />
 
