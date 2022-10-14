@@ -54,8 +54,8 @@ function Discover() {
           {events && (
             <div>
               <h2>Placeholder: NOT LOGGED IN</h2>
-              {events.map((event) => (
-                <div className="card">
+              {events.map((event, idx) => (
+                <div key={idx} className="card">
                   <DiscoverInfo key={event.id} event={event} />
                 </div>
               ))}
@@ -69,8 +69,8 @@ function Discover() {
           {events && (
             <div>
               <h2>Placeholder: Logged in</h2>
-              {events.map((event) => (
-                <div className="card">
+              {events.map((event, idx) => (
+                <div key={idx} className="card">
                   <DiscoverInfo
                     session={session}
                     key={event.id}

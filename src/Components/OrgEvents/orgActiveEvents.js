@@ -72,7 +72,7 @@ function OrgActiveEvents({ session }) {
       {fetchError && <p>{fetchError}</p>}
       {orgEvents && (
         <div className="card-container">
-          <CreateEvent />
+          <CreateEvent user={userOrg} />
           {orgEvents
             .filter((orgEvent) => {
               const eventDate = new Date(orgEvent.endDate).getTime();

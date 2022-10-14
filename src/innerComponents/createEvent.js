@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { supabase } from "../supabaseClient";
 
-function CreateEvent() {
+function CreateEvent({ user }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
@@ -10,12 +10,15 @@ function CreateEvent() {
   const [imageUrl, setImage] = useState("");
   const [formError, setFormError] = useState(null);
 
+  const OrgId = user;
+  console.log("ORGID: ", user);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const { data, error } = await supabase
       .from("Events")
-      .insert([{ title, description, date, time, location, imageUrl }])
+      .insert([{ title, description, date, time, location, imageUrl, OrgId }])
       .select();
 
     if (error) {
@@ -25,7 +28,6 @@ function CreateEvent() {
     if (data) {
       console.log(data);
       setFormError(null);
-      window.location.reload(false);
     }
   };
 
