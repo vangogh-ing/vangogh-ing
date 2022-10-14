@@ -4,6 +4,7 @@ import { supabase } from "../../supabaseClient";
 import { Link } from "react-router-dom";
 import UpdateEvent from "../../innerComponents/updateEvent";
 import SaveEventPopup from "./SaveEventPopup";
+import DateDisplay from "./DateDisplay";
 
 export default function SingleEvent() {
   const { id } = useParams();
@@ -98,14 +99,6 @@ export default function SingleEvent() {
     OrgId,
   } = singleEventInfo;
 
-  const handleDateDisplay = useCallback((date) => {
-    if (date) {
-      let resultDate = date.split("-");
-      resultDate = resultDate[1] + "•" + resultDate[2] + "•" + resultDate[0];
-      return resultDate;
-    }
-  }, []);
-
   const handleTimeDisplay = useCallback(
     (startingOrEndingDate, startingOrEndingTime) => {
       const formattedDateTime = new Date(
@@ -149,10 +142,9 @@ export default function SingleEvent() {
                 src={imageUrl}
               />
               <p>{description}</p>
+              <DateDisplay start={startDate} end={endDate} />
               <h4>
-                {handleDateDisplay(startDate)} - {handleDateDisplay(endDate)}
-              </h4>
-              <h4>
+                {}
                 {handleTimeDisplay(startDate, startTime)} -{" "}
                 {handleTimeDisplay(endDate, endTime)}
               </h4>
