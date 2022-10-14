@@ -14,6 +14,7 @@ export default function SingleEvent() {
   const [error, setError] = useState("");
   const [alreadySaved, setAlreadySaved] = useState(false);
   const [currentInterestLevel, setCurrentInterestLevel] = useState("");
+  // const [startDate, setStartDate] = useState("");
 
   const fetchSingleEvent = useCallback(async () => {
     let { data: Events, error } = await supabase
@@ -31,6 +32,9 @@ export default function SingleEvent() {
         .single();
 
       setRelatedOrgName(Organization.name);
+      // if (singleEventInfo.startDate)
+      //   setStartDate(handleDateDisplay(singleEventInfo.startDate));
+      // setStartDate(handleDateDisplay(singleEventInfo.startDate));
     }
 
     let userSession = await supabase.auth.getSession();
@@ -89,7 +93,7 @@ export default function SingleEvent() {
   let {
     title,
     description,
-    // startDate,
+    startDate,
     endDate,
     startTime,
     endTime,
@@ -98,8 +102,26 @@ export default function SingleEvent() {
     OrgId,
   } = singleEventInfo;
 
-  let startDate = singleEventInfo.startDate.split("-");
-  startDate = startDate[1] + "/" + startDate[2] + "/" + startDate[0];
+  const handleDateDisplay = useCallback((date) => {
+    if (date) {
+      let resultDate = date.split("-");
+      resultDate = resultDate[1] + "/" + resultDate[2] + "/" + resultDate[0];
+      return resultDate;
+    }
+  }, []);
+
+  // const handleDateDisplay = useCallback(async (date) => {
+  //   if (date) {
+  //     let resultDate = date.split("-");
+  //     resultDate = resultDate[1] + "/" + resultDate[2] + "/" + resultDate[0];
+  //     return resultDate;
+  //   }
+  // }, []);
+
+  // let startDate = singleEventInfo.startDate.split("-");
+  // startDate = startDate[1] + "/" + startDate[2] + "/" + startDate[0];
+  // let endDate = singleEventInfo.endDate.split("-");
+  // endDate = endDate[1] + "/" + endDate[2] + "/" + endDate[0];
 
   return (
     <div>
@@ -128,7 +150,7 @@ export default function SingleEvent() {
               />
               <p>{description}</p>
               <h4>
-                {startDate}-{endDate}
+                {handleDateDisplay(startDate)}-{handleDateDisplay(endDate)}
               </h4>
               <h4>
                 {startTime.slice(0, -3)}-{endTime.slice(0, -3)}
