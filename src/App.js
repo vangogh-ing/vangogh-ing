@@ -14,6 +14,8 @@ import Discover from "./Components/Discover";
 import ForYouPage from "./Components/ForYou/ForYouPage";
 import SavedEventPage from "./Components/SavedEvents/SavedEventPage";
 import Calendar from "./Components/Calendar/Calendar";
+import OrgActiveEvents from "./Components/OrgEvents/orgActiveEvents";
+import OrgPastEvents from "./Components/OrgEvents/orgPastEvents";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -53,13 +55,26 @@ export default function App() {
             path="/account/edit"
             element={<EditAccount key={session.user.id} session={session} />}
           />
-          <Route path="/discover" element={<Discover />} />
+          <Route
+            path="/discover"
+            element={<Discover key={session.user} session={session} />}
+          />
           <Route path="/events/:id" element={<SingleEvent />} />
           <Route path="/orgs/:id" element={<SingleOrg />} />
           <Route path="/foryou" element={<ForYouPage session={session} />} />
           <Route
             path="/savedevents"
             element={<SavedEventPage session={session} />}
+          />
+          <Route
+            path="/activeevents"
+            element={
+              <OrgActiveEvents key={session.user.id} session={session} />
+            }
+          />
+          <Route
+            path="/pastevents"
+            element={<OrgPastEvents key={session.user.id} session={session} />}
           />
           <Route
             path="/plan"
