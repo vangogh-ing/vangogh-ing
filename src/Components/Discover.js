@@ -2,23 +2,19 @@ import { supabase } from "../supabaseClient";
 import { useEffect, useState } from "react";
 //inner components
 import DiscoverInfo from "../innerComponents/discoverInfo";
-import CreateEvent from "../innerComponents/createEvent";
-import Navbar from "./Navbar";
 
 function Discover() {
   const [fetchError, setFetchError] = useState(null);
   const [events, setEvents] = useState(null);
   const [session, setSession] = useState(null);
-
-  function handleDelete(id) {
-    setEvents((prevEvents) => {
-      return prevEvents.filter((event) => event.id !== id);
-    });
-  }
+  const [orderBy, setOrderBy] = useState("startDate");
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const { data, error } = await supabase.from("Events").select("*");
+      const { data, error } = await supabase
+        .from("Events")
+        .select("*")
+        .order(orderBy, { ascending: false });
 
       if (error) {
         setFetchError("Could not fetch events");
@@ -39,27 +35,50 @@ function Discover() {
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
-  }, []);
+  }, [orderBy]);
 
   return (
-    <div>
+    <div className="container">
       <h1> EVENTS </h1>
-      {fetchError && <p>{fetchError}</p>}
-      {events && (
-        <div>
-          <Navbar />
-          {events.map((event) => (
-            <div key={event.id}>
-              <DiscoverInfo event={event} onDelete={handleDelete} />
+      <div className="order-buttons">
+        {/* Order events needs to be turned into toggle */}
+        <p>Order by: </p>
+        <button onClick={() => setOrderBy("startDate")}>Start Date</button>
+        <button onClick={() => setOrderBy("created_at")}>Created at</button>
+        {orderBy}
+      </div>
+      {!session ? (
+        //not logged in view
+        <div className="card-container">
+          {fetchError && <p>{fetchError}</p>}
+          {events && (
+            <div>
+              <h2>Placeholder: NOT LOGGED IN</h2>
+              {events.map((event) => (
+                <div className="card">
+                  <DiscoverInfo key={event.id} event={event} />
+                </div>
+              ))}
             </div>
-          ))}
-          <div>
-            <CreateEvent />
-          </div>
-          {session ? (
-            <h2>Placeholder: LOGGED IN</h2>
-          ) : (
-            <h2>Placeholder: NOT LOGGED IN</h2>
+          )}
+        </div>
+      ) : (
+        //logged in as reg user or org user
+        <div className="card-container">
+          {fetchError && <p>{fetchError}</p>}
+          {events && (
+            <div>
+              <h2>Placeholder: Logged in</h2>
+              {events.map((event) => (
+                <div className="card">
+                  <DiscoverInfo
+                    session={session}
+                    key={event.id}
+                    event={event}
+                  />
+                </div>
+              ))}
+            </div>
           )}
         </div>
       )}

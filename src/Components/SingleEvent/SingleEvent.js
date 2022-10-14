@@ -134,7 +134,6 @@ export default function SingleEvent() {
               />
               <h4>{location}</h4>
             </div>
-            <UpdateEvent />
             {authUserId ? (
               !alreadySaved ? (
                 <SaveEventPopup
