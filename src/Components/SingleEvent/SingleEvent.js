@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import UpdateEvent from "../../innerComponents/updateEvent";
 import SaveEventPopup from "./SaveEventPopup";
 import { DateDisplay, TimeDisplay } from "./DateTimeDisplay";
+import { ReviewForm } from "./ReviewForm";
 
 export default function SingleEvent() {
   const { id } = useParams();
@@ -164,6 +165,7 @@ export default function SingleEvent() {
                 profile!
               </p>
             )}
+            <ReviewForm singleEventInfo={singleEventInfo} />
           </div>
         )
       )}
