@@ -1,38 +1,56 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { supabase } from "../../supabaseClient";
-// import { Rating, TextField, Button } from "@mui/material";
-// import PostAddIcon from "@mui/icons-material/PostAdd";
-// import DeleteIcon from "@mui/icons-material/Delete";
-// import Popup from "reactjs-popup";
+import { CircularProgress, Rating, Avatar } from "@mui/material";
 
-export function ReviewForm(props) {
-  const [rating, setRating] = useState(0);
-  // const [rating, setRating] = useState(0);
-  // const [reviewContent, setReviewContent] = useState(null);
-  // const [reviewError, setReviewError] = useState(false);
-  // const [reviewExists, setReviewExists] = useState(false);
+export default function ReviewsDisplay(props) {
+  const [allReviews, setAllReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchAllReviews = useCallback(async () => {
-    if (props.userId) {
-      let { data: Review } = await supabase
-        .from("Review")
-        .select("*")
-        .eq("userId", props.userId)
-        .eq("eventId", props.eventId)
-        .single();
-      if (Review) {
-        setReviewExists(true);
-        setRating(Review.rating);
-        setReviewContent(Review.content);
-      } else {
-        setReviewExists(false);
-      }
-    }
-  }, [props.eventId, props.userId]);
+    let { data: Review } = await supabase
+      .from("Review")
+      .select(
+        `*,
+      User ("*")`
+      )
+      .eq("eventId", props.eventId);
+    setAllReviews(Review);
+    setLoading(false);
+  }, [props.eventId]);
 
   useEffect(() => {
     fetchAllReviews();
   }, [fetchAllReviews]);
 
-  return <div></div>;
+  return (
+    <div>
+      {loading ? (
+        <CircularProgress color="success" />
+      ) : !allReviews.length ? (
+        <div>No reviews... yet!</div>
+      ) : (
+        <div>
+          <section>
+            Reviews:
+            {allReviews
+              .filter((review) => review.content)
+              .map((review) => (
+                <div key={review.id}>
+                  <Avatar alt={review.User.name} src={review.User.imageUrl} />
+                  {review.User.name}:
+                  <Rating
+                    name="read-only"
+                    value={review.rating}
+                    size="small"
+                    precision={0.5}
+                    readOnly
+                  />
+                  <span>{review.content}</span>
+                </div>
+              ))}
+          </section>
+        </div>
+      )}
+    </div>
+  );
 }

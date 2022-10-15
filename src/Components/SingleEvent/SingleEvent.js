@@ -4,7 +4,8 @@ import { supabase } from "../../supabaseClient";
 import { Link } from "react-router-dom";
 import SaveEventPopup from "./SaveEventPopup";
 import { DateDisplay, TimeDisplay } from "./DateTimeDisplay";
-import { ReviewForm } from "./ReviewForm";
+import ReviewForm from "./ReviewForm";
+import ReviewsDisplay from "./ReviewsDisplay";
 
 export default function SingleEvent() {
   const { id } = useParams();
@@ -164,7 +165,12 @@ export default function SingleEvent() {
                 profile!
               </p>
             )}
-            <ReviewForm singleEventInfo={singleEventInfo} userId={authUserId} eventId={id}/>
+            <ReviewForm
+              singleEventInfo={singleEventInfo}
+              userId={authUserId}
+              eventId={id}
+            />
+            <ReviewsDisplay userId={authUserId} eventId={id} />
           </div>
         )
       )}

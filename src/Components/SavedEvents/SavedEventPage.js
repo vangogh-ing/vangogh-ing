@@ -8,7 +8,7 @@ export default function FollowedPage(props) {
   const [loading, setLoading] = useState(true);
 
   const fetchSavedEvents = useCallback(async () => {
-    let { data: user_added_events } = await supabase
+    let { data: user_added_events, error } = await supabase
       .from("user_added_events")
       .select(
         `eventId,

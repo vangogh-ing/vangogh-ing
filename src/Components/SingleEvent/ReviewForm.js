@@ -5,7 +5,7 @@ import PostAddIcon from "@mui/icons-material/PostAdd";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Popup from "reactjs-popup";
 
-export function ReviewForm(props) {
+export default function ReviewForm(props) {
   const [rating, setRating] = useState(0);
   const [reviewContent, setReviewContent] = useState(null);
   const [reviewError, setReviewError] = useState(false);
