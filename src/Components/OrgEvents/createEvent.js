@@ -1,21 +1,37 @@
 import { useState } from "react";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../../supabaseClient";
 
-function CreateEvent() {
+function CreateEvent({ user }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [location, setLocation] = useState("");
   const [imageUrl, setImage] = useState("");
   const [formError, setFormError] = useState(null);
+
+  const OrgId = user;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const { data, error } = await supabase
       .from("Events")
-      .insert([{ title, description, date, time, location, imageUrl }])
+      .insert([
+        {
+          title,
+          description,
+          startDate,
+          endDate,
+          startTime,
+          endTime,
+          location,
+          imageUrl,
+          OrgId,
+        },
+      ])
       .select();
 
     if (error) {
@@ -25,7 +41,6 @@ function CreateEvent() {
     if (data) {
       console.log(data);
       setFormError(null);
-      window.location.reload(false);
     }
   };
 
@@ -48,19 +63,35 @@ function CreateEvent() {
           required
         />
 
-        <label htmlFor="date">Date: </label>
+        <label htmlFor="startDate">Start Date: </label>
         <input
-          type="text"
-          value={date}
-          onChange={(event) => setDate(event.target.value)}
+          type="date"
+          value={startDate}
+          onChange={(event) => setStartDate(event.target.value)}
           required
         />
 
-        <label htmlFor="time">Time: </label>
+        <label htmlFor="endDate">End Date: </label>
         <input
-          type="text"
-          value={time}
-          onChange={(event) => setTime(event.target.value)}
+          type="date"
+          value={endDate}
+          onChange={(event) => setEndDate(event.target.value)}
+          required
+        />
+
+        <label htmlFor="startTime">Start Time: </label>
+        <input
+          type="time"
+          value={startTime}
+          onChange={(event) => setStartTime(event.target.value)}
+          required
+        />
+
+        <label htmlFor="endTime">End Time: </label>
+        <input
+          type="time"
+          value={endTime}
+          onChange={(event) => setEndTime(event.target.value)}
           required
         />
 
