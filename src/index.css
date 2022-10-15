@@ -39,6 +39,16 @@
   background-color: #ac8c26;
   transition: ease 0.5s;
 }
+.underlineOliveLink {
+  font-weight: 500;
+  color: #666d24;
+  transition: ease 0.3s;
+}
+.underlineOliveLinkHover {
+  color: #666d24;
+  font-weight: 800;
+  transition: ease 0.3s;
+}
 * {
   font-family: "Gothic A1", sans-serif;
 }
@@ -70,6 +80,9 @@ body {
   display: flex;
   align-items: center;
 }
+.auth_icon {
+  width: 3rem;
+}
 .auth > input {
   border: solid 0.1rem #bca32d;
   border-radius: 0.5rem;
@@ -87,8 +100,18 @@ body {
   background-color: #ac8c26;
   transition: ease 0.5s;
 }
-.auth_icon {
-  width: 3rem;
+.auth_redirect > p {
+  margin-top: 2rem;
+}
+.auth_redirect > a {
+  font-weight: 500;
+  color: #666d24;
+  transition: ease 0.3s;
+}
+.auth_redirect > a:hover {
+  color: #666d24;
+  font-weight: 800;
+  transition: ease 0.3s;
 }
 .slick-prev:before,
 .slick-next:before {

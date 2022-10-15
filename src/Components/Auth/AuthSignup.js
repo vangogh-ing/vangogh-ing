@@ -58,7 +58,7 @@ export default function AuthSignIn() {
             <button onClick={() => handleSignup(email, password)}>
               sign up
             </button>
-            <div>
+            <div className="auth_redirect">
               <p>Already have an account?</p>
               <Link to="/login">Log in here</Link>
             </div>

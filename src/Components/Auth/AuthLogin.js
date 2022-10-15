@@ -56,7 +56,7 @@ export default function AuthLogin() {
               onChange={(e) => setPassword(e.target.value)}
             />
             <button onClick={() => handleLogin(email, password)}>login</button>
-            <div>
+            <div className="auth_redirect">
               <p>Don't have an account?</p>
               <Link to="/signup">Sign up here</Link>
             </div>
