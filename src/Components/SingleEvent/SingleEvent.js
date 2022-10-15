@@ -18,21 +18,23 @@ export default function SingleEvent() {
   const [loading, setLoading] = useState(true);
 
   const fetchSingleEvent = useCallback(async () => {
-    let { data: Events, error } = await supabase
+    let { data: Events } = await supabase
       .from("Events")
       .select("*")
-      .eq("id", id)
-      .single();
-    error ? setError(error.message) : setSingleEventInfo(Events);
+      .eq("id", id);
 
-    if (singleEventInfo.OrgId) {
+    // !Events.length
+    //   ? setError("Event Not Found")
+    //   : setSingleEventInfo(Events[0]);
+
+    if (Events[0]) {
+      setSingleEventInfo(Events[0]);
       let { data: Organization } = await supabase
         .from("Organization")
         .select("name")
-        .eq("id", singleEventInfo.OrgId)
-        .single();
+        .eq("id", Events[0].OrgId);
 
-      setRelatedOrgName(Organization.name);
+      setRelatedOrgName(Organization[0].name);
     }
 
     let userSession = await supabase.auth.getSession();
@@ -40,7 +42,7 @@ export default function SingleEvent() {
       setAuthUserId(userSession.data.session.user.id);
     }
     setLoading(false);
-  }, [id, singleEventInfo.OrgId]);
+  }, [id]);
 
   const handleSavedStatus = useCallback(async () => {
     if (authUserId) {
@@ -48,11 +50,11 @@ export default function SingleEvent() {
         .from("user_added_events")
         .select("*")
         .eq("userId", authUserId)
-        .eq("eventId", id)
-        .single();
-      if (user_added_events) {
+        .eq("eventId", id);
+
+      if (user_added_events[0]) {
         setAlreadySaved(true);
-        setCurrentInterestLevel(user_added_events.interest_level);
+        setCurrentInterestLevel(user_added_events[0].interest_level);
       } else {
         setAlreadySaved(false);
       }
@@ -89,18 +91,6 @@ export default function SingleEvent() {
     setCurrentInterestLevel("");
   }, [authUserId, id]);
 
-  let {
-    title,
-    description,
-    startDate,
-    endDate,
-    startTime,
-    endTime,
-    location,
-    imageUrl,
-    OrgId,
-  } = singleEventInfo;
-
   return (
     <div>
       {loading ? (
@@ -110,7 +100,7 @@ export default function SingleEvent() {
           }}
           color="success"
         />
-      ) : error && !singleEventInfo.id ? (
+      ) : !singleEventInfo.id ? (
         <div>
           <h1>Event Not Found!</h1>
         </div>
@@ -118,9 +108,12 @@ export default function SingleEvent() {
         singleEventInfo.id && (
           <div>
             <div className="single-event-info">
-              <h1>{title}</h1>
+              <h1>{singleEventInfo.title}</h1>
               <p>
-                Hosted by: <Link to={`/orgs/${OrgId}`}>{relatedOrgName}</Link>
+                Hosted by:{" "}
+                <Link to={`/orgs/${singleEventInfo.OrgId}`}>
+                  {relatedOrgName}
+                </Link>
               </p>
               {/* NOTE: PLACEHOLDER STYLING ON IMAGE TAG, TO BE REMOVED */}
               <img
@@ -130,17 +123,20 @@ export default function SingleEvent() {
                   objectFit: "contain",
                 }}
                 alt="Organization Img"
-                src={imageUrl}
+                src={singleEventInfo.imageUrl}
               />
-              <p>{description}</p>
-              <DateDisplay start={startDate} end={endDate} />
+              <p>{singleEventInfo.description}</p>
+              <DateDisplay
+                start={singleEventInfo.startDate}
+                end={singleEventInfo.endDate}
+              />
               <TimeDisplay
-                startDate={startDate}
-                endDate={endDate}
-                startTime={startTime}
-                endTime={endTime}
+                startDate={singleEventInfo.startDate}
+                endDate={singleEventInfo.endDate}
+                startTime={singleEventInfo.startTime}
+                endTime={singleEventInfo.endTime}
               />
-              <h4>{location}</h4>
+              <h4>{singleEventInfo.location}</h4>
             </div>
             {authUserId ? (
               !alreadySaved ? (

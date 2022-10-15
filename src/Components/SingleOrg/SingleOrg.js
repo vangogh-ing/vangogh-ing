@@ -17,9 +17,8 @@ export default function SingleOrg() {
     let { data: Organization, error } = await supabase
       .from("Organization")
       .select("*")
-      .eq("id", id)
-      .single();
-    error ? setError(error.message) : setSingleOrgInfo(Organization);
+      .eq("id", id);
+    error ? setError(error.message) : setSingleOrgInfo(Organization[0]);
     let userSession = await supabase.auth.getSession();
     if (userSession.data.session) {
       setAuthUserId(userSession.data.session.user.id);
@@ -32,9 +31,10 @@ export default function SingleOrg() {
         .from("user_followed_orgs")
         .select("*")
         .eq("userId", authUserId)
-        .eq("orgId", id)
-        .single();
-      user_followed_orgs ? setAlreadyFollows(true) : setAlreadyFollows(false);
+        .eq("orgId", id);
+      user_followed_orgs.length
+        ? setAlreadyFollows(true)
+        : setAlreadyFollows(false);
     }
   }, [authUserId, id]);
 
@@ -75,6 +75,7 @@ export default function SingleOrg() {
     webUrl,
   } = singleOrgInfo;
 
+  // return <div>test</div>;
   return (
     <div>
       {error && !singleOrgInfo.id ? (

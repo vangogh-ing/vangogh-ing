@@ -30,13 +30,15 @@ export default function ReviewDisplay(props) {
       .eq("eventId", props.eventId);
     setAllReviews(Review);
     setLoading(false);
-    setRatingAverage(
-      (
-        Review.map((review) => review.rating).reduce(
-          (prev, curr) => prev + curr
-        ) / Review.length
-      ).toFixed(1)
-    );
+    if (Review.length) {
+      setRatingAverage(
+        (
+          Review.map((review) => review.rating).reduce(
+            (prev, curr) => prev + curr
+          ) / Review.length
+        ).toFixed(1)
+      );
+    }
   }, [props.eventId]);
 
   const fetchReview = useCallback(async () => {
@@ -45,12 +47,12 @@ export default function ReviewDisplay(props) {
         .from("Review")
         .select("*")
         .eq("userId", props.userId)
-        .eq("eventId", props.eventId)
-        .single();
-      if (Review) {
+        .eq("eventId", props.eventId);
+
+      if (Review[0]) {
         setReviewExists(true);
-        setRating(Review.rating);
-        setReviewContent(Review.content);
+        setRating(Review[0].rating);
+        setReviewContent(Review[0].content);
       } else {
         setReviewExists(false);
       }
