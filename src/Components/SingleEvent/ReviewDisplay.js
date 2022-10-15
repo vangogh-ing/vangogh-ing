@@ -221,7 +221,27 @@ export default function ReviewDisplay(props) {
         ) : !allReviews.length ? (
           <div>No reviews... yet!</div>
         ) : (
-          <div></div>
+          <div>
+            <section>
+              Reviews:
+              {allReviews
+                .filter((review) => review.content)
+                .map((review) => (
+                  <div key={review.id}>
+                    <Avatar alt={review.User.name} src={review.User.imageUrl} />
+                    {review.User.name}:
+                    <Rating
+                      name="read-only"
+                      value={review.rating}
+                      size="small"
+                      precision={0.5}
+                      readOnly
+                    />
+                    <span>{review.content}</span>
+                  </div>
+                ))}
+            </section>
+          </div>
         )}
       </div>
     </div>
