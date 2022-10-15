@@ -1,15 +1,43 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { supabase } from "../../supabaseClient";
-import { Rating, TextField, Button } from "@mui/material";
+import {
+  Rating,
+  TextField,
+  Button,
+  CircularProgress,
+  Avatar,
+} from "@mui/material";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Popup from "reactjs-popup";
 
-export default function ReviewForm(props) {
+export default function ReviewDisplay(props) {
   const [rating, setRating] = useState(0);
   const [reviewContent, setReviewContent] = useState(null);
   const [reviewError, setReviewError] = useState(false);
   const [reviewExists, setReviewExists] = useState(false);
+  const [allReviews, setAllReviews] = useState([]);
+  const [ratingAverage, setRatingAverage] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const fetchAllReviews = useCallback(async () => {
+    let { data: Review } = await supabase
+      .from("Review")
+      .select(
+        `*,
+      User ("*")`
+      )
+      .eq("eventId", props.eventId);
+    setAllReviews(Review);
+    setLoading(false);
+    setRatingAverage(
+      (
+        Review.map((review) => review.rating).reduce(
+          (prev, curr) => prev + curr
+        ) / Review.length
+      ).toFixed(1)
+    );
+  }, [props.eventId]);
 
   const fetchReview = useCallback(async () => {
     if (props.userId) {
@@ -31,7 +59,8 @@ export default function ReviewForm(props) {
 
   useEffect(() => {
     fetchReview();
-  }, [fetchReview]);
+    fetchAllReviews();
+  }, [fetchReview, fetchAllReviews]);
 
   const handleReviewStateChange = useCallback(async (evt) => {
     setReviewContent(evt.target.value);
@@ -48,14 +77,24 @@ export default function ReviewForm(props) {
             content: reviewContent,
           },
         ]);
-        await setReviewError(false);
-        fetchReview();
-        closeFunc();
+        if (!error) {
+          await setReviewError(false);
+          fetchReview();
+          fetchAllReviews();
+          closeFunc();
+        }
       } else {
         await setReviewError(true);
       }
     },
-    [props.eventId, props.userId, rating, reviewContent, fetchReview]
+    [
+      props.eventId,
+      props.userId,
+      rating,
+      reviewContent,
+      fetchReview,
+      fetchAllReviews,
+    ]
   );
 
   const handleDeleteReview = useCallback(
@@ -71,15 +110,33 @@ export default function ReviewForm(props) {
           setReviewExists(false);
           setReviewContent(null);
           setRating(null);
+          fetchAllReviews();
           closeFunc();
         }
       }
     },
-    [props.eventId, props.userId]
+    [props.eventId, props.userId, fetchAllReviews]
   );
 
   return (
     <div>
+      <section>
+        {loading ? (
+          <CircularProgress color="success" />
+        ) : (
+          <div>
+            User rating:
+            <Rating
+              name="average"
+              value={+ratingAverage}
+              size="large"
+              precision={0.1}
+              readOnly
+            />
+            {` (${ratingAverage})`}
+          </div>
+        )}
+      </section>
       <Popup
         trigger={
           <button className="button">
@@ -158,6 +215,15 @@ export default function ReviewForm(props) {
           </div>
         )}
       </Popup>
+      <div>
+        {loading ? (
+          <CircularProgress color="success" />
+        ) : !allReviews.length ? (
+          <div>No reviews... yet!</div>
+        ) : (
+          <div></div>
+        )}
+      </div>
     </div>
   );
 }

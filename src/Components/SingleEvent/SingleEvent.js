@@ -4,30 +4,18 @@ import { supabase } from "../../supabaseClient";
 import { Link } from "react-router-dom";
 import SaveEventPopup from "./SaveEventPopup";
 import { DateDisplay, TimeDisplay } from "./DateTimeDisplay";
-import ReviewForm from "./ReviewForm";
-import ReviewsDisplay from "./ReviewsDisplay";
+import ReviewDisplay from "./ReviewDisplay";
+import { LinearProgress } from "@mui/material";
 
 export default function SingleEvent() {
   const { id } = useParams();
   const [authUserId, setAuthUserId] = useState();
-  const [allReviews, setAllReviews] = useState([]);
-
   const [singleEventInfo, setSingleEventInfo] = useState({});
   const [relatedOrgName, setRelatedOrgName] = useState("");
   const [error, setError] = useState("");
   const [alreadySaved, setAlreadySaved] = useState(false);
   const [currentInterestLevel, setCurrentInterestLevel] = useState("");
-
-  const fetchAllReviews = useCallback(async () => {
-    let { data: Review } = await supabase
-      .from("Review")
-      .select(
-        `*,
-      User ("*")`
-      )
-      .eq("eventId", id);
-    setAllReviews(Review);
-  }, [id]);
+  const [loading, setLoading] = useState(true);
 
   const fetchSingleEvent = useCallback(async () => {
     let { data: Events, error } = await supabase
@@ -51,6 +39,7 @@ export default function SingleEvent() {
     if (userSession.data.session) {
       setAuthUserId(userSession.data.session.user.id);
     }
+    setLoading(false);
   }, [id, singleEventInfo.OrgId]);
 
   const handleSavedStatus = useCallback(async () => {
@@ -114,10 +103,16 @@ export default function SingleEvent() {
 
   return (
     <div>
-      {error && !singleEventInfo.id ? (
+      {loading ? (
+        <LinearProgress
+          sx={{
+            height: 10,
+          }}
+          color="success"
+        />
+      ) : error && !singleEventInfo.id ? (
         <div>
-          <h1>Event Id Not Found!</h1>
-          <h3>Error: {error}</h3>
+          <h1>Event Not Found!</h1>
         </div>
       ) : (
         singleEventInfo.id && (
@@ -177,16 +172,10 @@ export default function SingleEvent() {
                 profile!
               </p>
             )}
-            <ReviewForm
+            <ReviewDisplay
               singleEventInfo={singleEventInfo}
               userId={authUserId}
               eventId={id}
-            />
-            <ReviewsDisplay
-              userId={authUserId}
-              eventId={id}
-              fetchAllReviews={fetchAllReviews}
-              allReviews={allReviews}
             />
           </div>
         )
