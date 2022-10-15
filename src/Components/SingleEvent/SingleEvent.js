@@ -10,12 +10,24 @@ import ReviewsDisplay from "./ReviewsDisplay";
 export default function SingleEvent() {
   const { id } = useParams();
   const [authUserId, setAuthUserId] = useState();
+  const [allReviews, setAllReviews] = useState([]);
 
   const [singleEventInfo, setSingleEventInfo] = useState({});
   const [relatedOrgName, setRelatedOrgName] = useState("");
   const [error, setError] = useState("");
   const [alreadySaved, setAlreadySaved] = useState(false);
   const [currentInterestLevel, setCurrentInterestLevel] = useState("");
+
+  const fetchAllReviews = useCallback(async () => {
+    let { data: Review } = await supabase
+      .from("Review")
+      .select(
+        `*,
+      User ("*")`
+      )
+      .eq("eventId", id);
+    setAllReviews(Review);
+  }, [id]);
 
   const fetchSingleEvent = useCallback(async () => {
     let { data: Events, error } = await supabase
@@ -170,7 +182,12 @@ export default function SingleEvent() {
               userId={authUserId}
               eventId={id}
             />
-            <ReviewsDisplay userId={authUserId} eventId={id} />
+            <ReviewsDisplay
+              userId={authUserId}
+              eventId={id}
+              fetchAllReviews={fetchAllReviews}
+              allReviews={allReviews}
+            />
           </div>
         )
       )}

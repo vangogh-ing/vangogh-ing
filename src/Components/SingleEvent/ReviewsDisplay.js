@@ -1,38 +1,33 @@
+//
 import React, { useState, useCallback, useEffect } from "react";
 import { supabase } from "../../supabaseClient";
 import { CircularProgress, Rating, Avatar } from "@mui/material";
+// import { refresh } from "less";
 
 export default function ReviewsDisplay(props) {
-  const [allReviews, setAllReviews] = useState([]);
+  // const [allReviews, setAllReviews] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchAllReviews = useCallback(async () => {
-    let { data: Review } = await supabase
-      .from("Review")
-      .select(
-        `*,
-      User ("*")`
-      )
-      .eq("eventId", props.eventId);
-    setAllReviews(Review);
+  const refreshReviews = useCallback(async () => {
+    await props.fetchAllReviews();
     setLoading(false);
-  }, [props.eventId]);
+  }, [props]);
 
   useEffect(() => {
-    fetchAllReviews();
-  }, [fetchAllReviews]);
+    refreshReviews();
+  }, [refreshReviews]);
 
   return (
     <div>
       {loading ? (
         <CircularProgress color="success" />
-      ) : !allReviews.length ? (
+      ) : !props.allReviews.length ? (
         <div>No reviews... yet!</div>
       ) : (
         <div>
           <section>
             Reviews:
-            {allReviews
+            {props.allReviews
               .filter((review) => review.content)
               .map((review) => (
                 <div key={review.id}>
