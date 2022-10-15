@@ -27,6 +27,18 @@
   background-color: #bca32d;
   color: #fffef9;
 }
+.smallYellowButton {
+  background-color: #bca32d;
+  color: #fffef9;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  transition: ease 0.5s;
+}
+.smallYellowButtonHover {
+  background-color: #ac8c26;
+  transition: ease 0.5s;
+}
 * {
   font-family: "Gothic A1", sans-serif;
 }
@@ -61,6 +73,19 @@ body {
 .auth > input {
   border: solid 0.1rem #bca32d;
   border-radius: 0.5rem;
+  margin: 0.2rem;
+}
+.auth > button {
+  background-color: #bca32d;
+  color: #fffef9;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  transition: ease 0.5s;
+}
+.auth > button:hover {
+  background-color: #ac8c26;
+  transition: ease 0.5s;
 }
 .auth_icon {
   width: 3rem;
