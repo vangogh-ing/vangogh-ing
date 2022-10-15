@@ -100,39 +100,73 @@ export default function SingleEvent() {
           <h1>Event Not Found!</h1>
         </div>
       ) : (
-        <div>
-          <div className="single-event-info">
-            <h1>{singleEventInfo.title}</h1>
-            <p>
-              Hosted by:{" "}
-              <Link to={`/orgs/${singleEventInfo.OrgId}`}>
-                {relatedOrgName}
-              </Link>
-            </p>
+        <div className="single-event-page">
+          <div className="single-event-container">
+            <header className="single-event-header">
+              <div className="single-event-name-org">
+                <h1>{singleEventInfo.title}</h1>
+                <h2>
+                  Hosted by:{" "}
+                  <Link to={`/orgs/${singleEventInfo.OrgId}`}>
+                    {relatedOrgName}
+                  </Link>
+                </h2>
+              </div>
+              <div className="save-event-buttons">
+                {authUserId ? (
+                  !alreadySaved ? (
+                    <SaveEventPopup
+                      userId={authUserId}
+                      handleSaveEvent={handleSaveEvent}
+                      handleRemoveEvent={handleRemoveEvent}
+                      alreadySaved={false}
+                      currentInterestLevel={currentInterestLevel}
+                    />
+                  ) : (
+                    <div>
+                      <SaveEventPopup
+                        userId={authUserId}
+                        handleSaveEvent={handleSaveEvent}
+                        handleRemoveEvent={handleRemoveEvent}
+                        alreadySaved={true}
+                        currentInterestLevel={currentInterestLevel}
+                      />
+                      <button onClick={handleRemoveEvent}>
+                        Remove Event from Profile
+                      </button>
+                    </div>
+                  )
+                ) : (
+                  <p>
+                    <Link to={"/login"}>Log in</Link> or{" "}
+                    <Link to={"/signup"}>sign up</Link> to add events to your
+                    profile!
+                  </p>
+                )}
+              </div>
+            </header>
             {/* NOTE: PLACEHOLDER STYLING ON IMAGE TAG, TO BE REMOVED */}
-            <img
-              style={{
-                maxWidth: "400px",
-                maxHeight: "400px",
-                objectFit: "contain",
-              }}
-              alt="Organization Img"
-              src={singleEventInfo.imageUrl}
-            />
-            <p>{singleEventInfo.description}</p>
-            <DateDisplay
-              start={singleEventInfo.startDate}
-              end={singleEventInfo.endDate}
-            />
-            <TimeDisplay
-              startDate={singleEventInfo.startDate}
-              endDate={singleEventInfo.endDate}
-              startTime={singleEventInfo.startTime}
-              endTime={singleEventInfo.endTime}
-            />
-            <h4>{singleEventInfo.location}</h4>
+            <div className="single-event-info">
+              <img alt="Organization Img" src={singleEventInfo.imageUrl} />
+              <div className="single-event-details">
+                <div className="single-event-date-location">
+                  <DateDisplay
+                    start={singleEventInfo.startDate}
+                    end={singleEventInfo.endDate}
+                  />
+                  <TimeDisplay
+                    startDate={singleEventInfo.startDate}
+                    endDate={singleEventInfo.endDate}
+                    startTime={singleEventInfo.startTime}
+                    endTime={singleEventInfo.endTime}
+                  />
+                  <p>{singleEventInfo.location}</p>
+                </div>
+                <p>{singleEventInfo.description}</p>
+              </div>
+            </div>
           </div>
-          {authUserId ? (
+          {/* {authUserId ? (
             !alreadySaved ? (
               <SaveEventPopup
                 userId={authUserId}
@@ -160,7 +194,7 @@ export default function SingleEvent() {
               <Link to={"/login"}>Log in</Link> or{" "}
               <Link to={"/signup"}>sign up</Link> to add events to your profile!
             </p>
-          )}
+          )} */}
           <ReviewDisplay
             singleEventInfo={singleEventInfo}
             userId={authUserId}

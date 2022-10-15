@@ -157,3 +157,66 @@ body {
   border-radius: 2px;
   object-fit: cover;
 }
+.single-event-page {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  border-style: solid;
+  align-items: center;
+  margin-top: 2rem;
+}
+.single-event-container {
+  width: 70vw;
+}
+.single-event-header {
+  display: flex;
+  min-height: 5rem;
+  max-height: max-content;
+  align-items: flex-start;
+}
+.single-event-name-org {
+  min-width: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.single-event-name-org > * {
+  align-self: baseline;
+  margin: 0rem;
+}
+.single-event-name-org > h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+.single-event-name-org a {
+  color: #666d24;
+  font-weight: 800;
+}
+.single-event-info {
+  display: flex;
+  margin-bottom: 2rem;
+  min-height: 26rem;
+}
+.single-event-info > img {
+  box-shadow: 1rem 1rem 0rem -0.5rem #4c5e7d;
+  max-width: 28rem;
+  max-height: 28rem;
+  object-fit: contain;
+}
+.single-event-details {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 1rem 1rem 0rem 1.5rem;
+  justify-content: space-between;
+}
+.single-event-date-location > * {
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+/* .save-event-buttons {
+  border-style: solid;
+  justify-self: flex-end;
+} */
