@@ -24,45 +24,52 @@ function DiscoverInfo({ event, session }) {
         setUserOrgId(orgId);
       }
     };
-    findUser();
-  }, []);
+    //findUser();
+
+    if (session) {
+      findUser();
+    }
+  }, [session]);
 
   return (
     <div>
       {session && userOrgId !== null ? (
         //Logged in as an org
-        <div className="infoCard">
+        <div className="card">
           <Link to={`/events/${event.id}`}>
             <div className="imageCard">
               <img className="image" src={event.imageUrl} alt="" />
             </div>
-
-            <h3 className="eventTitle">{event.title}</h3>
-            <div className="details">
-              <p>
-                {event.startTime} - {event.endTime} | {event.startDate} /
-                {event.endDate} | {event.location}
-              </p>
+            <div className="infoCard">
+              <h3 className="eventTitle">{event.title}</h3>
+              <div className="details">
+                <p>
+                  {event.startTime} - {event.endTime} | {event.startDate} /
+                  {event.endDate} | {event.location}
+                </p>
+              </div>
+              <p className="description">{event.description}</p>
             </div>
           </Link>
-          <p className="description">{event.description}</p>
         </div>
       ) : (
         //logged in as regular user or not logged in at all
-        <div className="infoCard">
+        <div className="card">
           <Link to={`/events/${event.id}`}>
             <div className="imageCard">
               <img className="image" src={event.imageUrl} alt="" />
             </div>
-            <h3 className="eventTitle">{event.title}</h3>
-            <div className="details">
-              <p>
-                {event.startTime} - {event.endTime} | {event.startDate} /
-                {event.endDate} | {event.location}
-              </p>
+            <div className="infoCard">
+              <h3 className="eventTitle">{event.title}</h3>
+              <div className="details">
+                <p>
+                  {event.startTime} - {event.endTime} | {event.startDate} /
+                  {event.endDate} | {event.location}
+                </p>
+              </div>
+              <p className="description">{event.description}</p>
             </div>
           </Link>
-          <p className="description">{event.description}</p>
         </div>
       )}
     </div>

@@ -39,23 +39,32 @@ function Discover() {
 
   return (
     <div className="container">
-      <h1> EVENTS </h1>
-      <div className="order-buttons">
-        {/* Order events needs to be turned into toggle */}
-        <p>Order by: </p>
-        <button onClick={() => setOrderBy("startDate")}>Start Date</button>
-        <button onClick={() => setOrderBy("created_at")}>Created at</button>
-        {orderBy}
-      </div>
       {!session ? (
         //not logged in view
         <div className="card-container">
           {fetchError && <p>{fetchError}</p>}
+          <h1> DISCOVER </h1>
+          <div className="order-buttons">
+            <p> Order by: </p>
+            <button
+              className="orderButton"
+              onClick={() => setOrderBy("startDate")}
+            >
+              Start Date
+            </button>
+            <button
+              className="orderButton"
+              onClick={() => setOrderBy("created_at")}
+            >
+              Newest
+            </button>
+            {orderBy}
+          </div>
           {events && (
             <div>
               <h2>Placeholder: NOT LOGGED IN</h2>
               {events.map((event, idx) => (
-                <div key={idx} className="card">
+                <div className="cardContainer" key={idx}>
                   <DiscoverInfo key={event.id} event={event} />
                 </div>
               ))}
@@ -66,16 +75,34 @@ function Discover() {
         //logged in as reg user or org user
         <div className="card-container">
           {fetchError && <p>{fetchError}</p>}
+          <h1> DISCOVER </h1>
+          <div className="order-buttons">
+            <p className="orderTitle"> Order by: </p>
+            <button
+              className="orderButton"
+              onClick={() => setOrderBy("startDate")}
+            >
+              Start Date
+            </button>
+            <button
+              className="orderButton"
+              onClick={() => setOrderBy("created_at")}
+            >
+              Newest
+            </button>
+            {orderBy}
+          </div>
           {events && (
             <div>
               <h2>Placeholder: Logged in</h2>
               {events.map((event, idx) => (
-                <div key={idx} className="card">
+                <div className="cardContainer" key={idx}>
                   <DiscoverInfo
                     session={session}
                     key={event.id}
                     event={event}
                   />
+                  <br />
                 </div>
               ))}
             </div>
