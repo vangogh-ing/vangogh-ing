@@ -83,7 +83,7 @@ export default function SingleOrg() {
         </div>
       ) : (
         <div className="single-page">
-          <div className="single-container">
+          <div className="single-org-container">
             <header className="single-header">
               <div className="single-header-left">
                 <h1>{singleOrgInfo.name}</h1>
@@ -110,8 +110,11 @@ export default function SingleOrg() {
               </div>
             </header>
             <div className="single-info">
-              {/* NOTE: PLACEHOLDER STYLING ON IMAGE TAG, TO BE REMOVED */}
-              <img alt="Organization Img" src={singleOrgInfo.imageUrl} />
+              <img
+                className="single-org-img"
+                alt="Organization Img"
+                src={singleOrgInfo.imageUrl}
+              />
               <div className="single-details">
                 <div className="single-details-top">
                   <p>{singleOrgInfo.description}</p>
