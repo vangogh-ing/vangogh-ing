@@ -83,56 +83,58 @@ const Account = ({ session }) => {
   };
 
   return (
-    <div aria-live="polite">
+    <div>
       {loading ? (
         "Saving..."
       ) : (
-        <div>
+        <div className="editAccount_container">
           <h1>Welcome!</h1>
-          <h2>Want to take a second to fill out your profile?</h2>
-          <div>
-            <label htmlFor="name">Name</label>
-            <input
-              id="name"
-              type="text"
-              value={name || ""}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div>
-            <button
-              className="button primary block"
-              disabled={loading}
-              onClick={updateProfile}
-            >
-              Update profile
-            </button>
-            <div>
-              <h2>profile picture</h2>
-              <div>
-                {imageUrl === "" ? (
-                  "no image uploaded"
-                ) : (
-                  <img
-                    src={imageUrl}
-                    alt=""
-                    width="150"
-                    height="150"
-                    object-fit="cover"
-                  />
-                  /* NOTE: inline styling to be moved to css */
-                )}
+          <div className="editAccount">
+            <h2>Want to take a second to fill out your profile?</h2>
+            <h3>
+              <Link to="/discover">I'll do it later.</Link>
+            </h3>
+            <div className="editAccount_info">
+              <div className="editAccount_avatar">
+                <div className="editAccount_img">
+                  {imageUrl === "" ? (
+                    "no image uploaded"
+                  ) : (
+                    <img src={imageUrl} alt="" />
+                  )}
+                </div>
+                <label htmlFor="name">Upload an avatar</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    handleUploadAvatar(e);
+                  }}
+                />
               </div>
-              <label htmlFor="name">Upload an avatar</label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  handleUploadAvatar(e);
-                }}
-              />
+              <div className="editAccount_profile">
+                <div className="editAccount_bio">
+                  <div>
+                    <span>Name: </span>
+                    <input
+                      id="name"
+                      type="text"
+                      value={name || ""}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <span>Email: </span>
+                    {session.user.email}
+                  </div>
+                </div>
+                <div>
+                  <button disabled={loading} onClick={updateProfile}>
+                    Update profile
+                  </button>
+                </div>
+              </div>
             </div>
-            <Link to="/account">I'll do it later.</Link>
           </div>
         </div>
       )}

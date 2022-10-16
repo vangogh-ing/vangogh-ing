@@ -1,15 +1,98 @@
 .editAccount_container {
-  .yG_Borders;
   display: flex;
   flex-direction: column;
-  margin: 3rem;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+}
+
+.editAccount {
+  .yG_Borders;
+  width: 75%;
   padding: 1rem;
 }
 
-.editAccount_container > a {
+.editAccount_container > h1 {
+  text-align: center;
+  letter-spacing: 0.3rem;
+  text-shadow: 0.1rem 0.1rem @metallicGold;
+}
+
+.editAccount > h2,
+.editAccount > h3 {
+  text-align: center;
+}
+
+.editAccount > h2 > a {
+  .underlineOliveLink;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.editAccount > h2 > a:hover {
+  .underlineOliveLinkHover;
+  text-align: center;
+}
+
+.editAccount > h3 > a {
   .underlineOliveLink;
 }
 
-.editAccount_container > a:hover {
+.editAccount > h3 > a:hover {
   .underlineOliveLinkHover;
+}
+
+.editAccount_info {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.editAccount_avatar {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+.editAccount_img > img {
+  border: dashed 0.5rem #666d24;
+  height: 9rem;
+  width: 9rem;
+  object-fit: cover;
+}
+
+.editAccount_avatar > label {
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+.editAccount_avatar > input::file-selector-button {
+  .smallYellowButton;
+}
+
+.editAccount_profile {
+  margin: 1rem;
+}
+
+.editAccount_bio {
+  margin-bottom: 1rem;
+}
+
+.editAccount_bio > div > span {
+  font-weight: 800;
+  letter-spacing: 0.3rem;
+  text-shadow: 0.07rem 0.07rem @metallicGold;
+}
+
+.editAccount_bio > div > input {
+  border: solid 0.1rem @metallicGold;
+  border-radius: 0.5rem;
+}
+
+.editAccount_profile > div > button {
+  .smallYellowButton;
+}
+
+.editAccount_profile > div > button:hover {
+  .smallYellowButtonHover;
 }

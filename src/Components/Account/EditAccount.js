@@ -86,41 +86,52 @@ const Account = ({ session }) => {
       ) : (
         <div className="editAccount_container">
           <h1>Update Your Account</h1>
-          <Link to="/account">Return to account</Link>
-          <div>
-            <div className="account_img">
-              {imageUrl === "" ? (
-                "no image uploaded"
-              ) : (
-                <img src={imageUrl} alt="" />
-              )}
+          <div className="editAccount">
+            <h2>
+              <Link to="/account">Return to profile</Link>
+            </h2>
+            <div className="editAccount_info">
+              <div className="editAccount_avatar">
+                <div className="editAccount_img">
+                  {imageUrl === "" ? (
+                    "no image uploaded"
+                  ) : (
+                    <img src={imageUrl} alt="" />
+                  )}
+                </div>
+                <label htmlFor="name">Upload an avatar</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    handleUploadAvatar(e);
+                  }}
+                />
+              </div>
+              <form className="editAccount_profile">
+                <div className="editAccount_bio">
+                  <div>
+                    <span>Name: </span>
+                    <input
+                      id="name"
+                      type="text"
+                      value={name || ""}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <span>Email: </span>
+                    {session.user.email}
+                  </div>
+                </div>
+                <div>
+                  <button disabled={loading} onClick={updateProfile}>
+                    Update profile
+                  </button>
+                </div>
+              </form>
             </div>
-            <label htmlFor="name">Upload an avatar</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                handleUploadAvatar(e);
-              }}
-            />
           </div>
-          <form onSubmit={updateProfile} className="form-widget">
-            <div>Email: {session.user.email}</div>
-            <div>
-              <label htmlFor="name">Name</label>
-              <input
-                id="name"
-                type="text"
-                value={name || ""}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div>
-              <button className="button primary block" disabled={loading}>
-                Update profile
-              </button>
-            </div>
-          </form>
         </div>
       )}
     </div>

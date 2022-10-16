@@ -182,22 +182,104 @@ body {
   margin-top: 2rem;
 }
 .editAccount_container {
-  border: solid 0.5rem #bca32d;
-  outline: solid 0.5rem #666d24;
   display: flex;
   flex-direction: column;
-  margin: 3rem;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+}
+.editAccount {
+  border: solid 0.5rem #bca32d;
+  outline: solid 0.5rem #666d24;
+  width: 75%;
   padding: 1rem;
 }
-.editAccount_container > a {
+.editAccount_container > h1 {
+  text-align: center;
+  letter-spacing: 0.3rem;
+  text-shadow: 0.1rem 0.1rem #bca32d;
+}
+.editAccount > h2,
+.editAccount > h3 {
+  text-align: center;
+}
+.editAccount > h2 > a {
+  font-weight: 500;
+  color: #666d24;
+  transition: ease 0.3s;
+  text-align: center;
+  font-size: 1.2rem;
+}
+.editAccount > h2 > a:hover {
+  color: #666d24;
+  font-weight: 800;
+  transition: ease 0.3s;
+  text-align: center;
+}
+.editAccount > h3 > a {
   font-weight: 500;
   color: #666d24;
   transition: ease 0.3s;
 }
-.editAccount_container > a:hover {
+.editAccount > h3 > a:hover {
   color: #666d24;
   font-weight: 800;
   transition: ease 0.3s;
+}
+.editAccount_info {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.editAccount_avatar {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+.editAccount_img > img {
+  border: dashed 0.5rem #666d24;
+  height: 9rem;
+  width: 9rem;
+  object-fit: cover;
+}
+.editAccount_avatar > label {
+  margin-top: 1rem;
+  font-style: italic;
+}
+.editAccount_avatar > input::file-selector-button {
+  background-color: #bca32d;
+  color: #fffef9;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  transition: ease 0.5s;
+}
+.editAccount_profile {
+  margin: 1rem;
+}
+.editAccount_bio {
+  margin-bottom: 1rem;
+}
+.editAccount_bio > div > span {
+  font-weight: 800;
+  letter-spacing: 0.3rem;
+  text-shadow: 0.07rem 0.07rem #bca32d;
+}
+.editAccount_bio > div > input {
+  border: solid 0.1rem #bca32d;
+  border-radius: 0.5rem;
+}
+.editAccount_profile > div > button {
+  background-color: #bca32d;
+  color: #fffef9;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  transition: ease 0.5s;
+}
+.editAccount_profile > div > button:hover {
+  background-color: #ac8c26;
+  transition: ease 0.5s;
 }
 .slick-prev:before,
 .slick-next:before {
