@@ -84,10 +84,26 @@ const Account = ({ session }) => {
       {loading ? (
         "Saving..."
       ) : (
-        <div>
+        <div className="editAccount_container">
           <h1>Update Your Account</h1>
           <Link to="/account">Return to account</Link>
-          <h2>account information:</h2>
+          <div>
+            <div className="account_img">
+              {imageUrl === "" ? (
+                "no image uploaded"
+              ) : (
+                <img src={imageUrl} alt="" />
+              )}
+            </div>
+            <label htmlFor="name">Upload an avatar</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                handleUploadAvatar(e);
+              }}
+            />
+          </div>
           <form onSubmit={updateProfile} className="form-widget">
             <div>Email: {session.user.email}</div>
             <div>
@@ -105,31 +121,6 @@ const Account = ({ session }) => {
               </button>
             </div>
           </form>
-          <div>
-            <h2>profile picture</h2>
-            <div>
-              {imageUrl === "" ? (
-                "no image uploaded"
-              ) : (
-                <img
-                  src={imageUrl}
-                  alt=""
-                  width="150"
-                  height="150"
-                  object-fit="cover"
-                />
-                /* NOTE: inline styling to be moved to css */
-              )}
-            </div>
-            <label htmlFor="name">Upload an avatar</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                handleUploadAvatar(e);
-              }}
-            />
-          </div>
         </div>
       )}
     </div>

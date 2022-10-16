@@ -11,7 +11,7 @@
   width: 75%;
   border-style: solid;
   border-color: #bca32d;
-  box-shadow: 10px 10px #4c5e7d;
+  box-shadow: 0.7rem 0.7rem #4c5e7d;
   padding: 1rem;
 }
 .popup_header {
@@ -49,6 +49,21 @@
   font-weight: 800;
   transition: ease 0.3s;
 }
+.yG_Borders {
+  border: solid 0.5rem #bca32d;
+  outline: solid 0.5rem #666d24;
+}
+.yB_BoxShadow {
+  box-shadow: 0.7rem 0.7rem #bca32d, 1.4rem 1.4rem #4c5e7d;
+}
+.yB_BoxShadow_Transition {
+  box-shadow: 0.7rem 0.7rem #bca32d, 1.4rem 1.4rem #4c5e7d;
+  transition: transform ease 0.5s, box-shadow ease 0.5s;
+}
+.yB_BoxShadow_Hover {
+  box-shadow: 0.9rem 0.9rem #bca32d, 1.6rem 1.6rem #4c5e7d;
+  transition: transform ease 0.5s, box-shadow ease 0.5s;
+}
 * {
   font-family: "Gothic A1", sans-serif;
 }
@@ -62,19 +77,19 @@ body {
   align-items: center;
 }
 .auth {
+  box-shadow: 0.7rem 0.7rem #bca32d, 1.4rem 1.4rem #4c5e7d;
+  transition: transform ease 0.5s, box-shadow ease 0.5s;
   width: 75%;
   background-color: #fffef9;
   padding: 1.5rem;
   border: solid;
   border-color: #666d24;
-  box-shadow: 0.7rem 0.7rem #bca32d, 1.4rem 1.4rem #4c5e7d;
-  transition: transform ease 0.5s, box-shadow ease 0.5s;
   margin: 1rem;
 }
 .auth:hover {
   transform: translateY(-1rem);
-  transition: transform ease 0.5s, box-shadow ease 0.5s;
   box-shadow: 0.9rem 0.9rem #bca32d, 1.6rem 1.6rem #4c5e7d;
+  transition: transform ease 0.5s, box-shadow ease 0.5s;
 }
 .auth > h1 {
   display: flex;
@@ -118,10 +133,10 @@ body {
   transition: ease 0.3s;
 }
 .account_container {
-  display: flex;
-  justify-content: space-between;
   border: solid 0.5rem #bca32d;
   outline: solid 0.5rem #666d24;
+  display: flex;
+  justify-content: space-between;
   margin: 3rem;
   padding: 1rem;
 }
@@ -165,6 +180,24 @@ body {
 .account_links > p {
   font-style: italic;
   margin-top: 2rem;
+}
+.editAccount_container {
+  border: solid 0.5rem #bca32d;
+  outline: solid 0.5rem #666d24;
+  display: flex;
+  flex-direction: column;
+  margin: 3rem;
+  padding: 1rem;
+}
+.editAccount_container > a {
+  font-weight: 500;
+  color: #666d24;
+  transition: ease 0.3s;
+}
+.editAccount_container > a:hover {
+  color: #666d24;
+  font-weight: 800;
+  transition: ease 0.3s;
 }
 .slick-prev:before,
 .slick-next:before {
