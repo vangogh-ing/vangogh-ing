@@ -157,66 +157,72 @@ body {
   border-radius: 2px;
   object-fit: cover;
 }
-.single-event-page {
+.single-page {
+  width: 100vw;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
-  border-style: solid;
   align-items: center;
   margin-top: 2rem;
 }
-.single-event-container {
-  width: 70vw;
+.single-page a {
+  color: #666d24;
+  font-weight: 800;
 }
-.single-event-header {
+.single-container {
+  width: 75vw;
+  border-bottom: 0.6rem solid #bca32d;
+  border-right: 0.6rem solid #bca32d;
+  box-shadow: 1rem 1rem 0rem -0.6rem #4c5e7d;
+}
+.single-header {
   display: flex;
-  min-height: 5rem;
-  max-height: max-content;
-  align-items: flex-start;
+  justify-content: space-between;
 }
-.single-event-name-org {
-  min-width: 75%;
+.single-buttons {
+  max-width: 25%;
+  margin-right: 1rem;
+}
+.single-header-left {
+  width: 75%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 2rem;
 }
-.single-event-name-org > * {
-  align-self: baseline;
+.single-header-left > * {
   margin: 0rem;
 }
-.single-event-name-org > h2 {
+.single-header-left > h2 {
   font-size: 1rem;
   font-weight: 600;
   margin-top: 0.5rem;
 }
-.single-event-name-org a {
-  color: #666d24;
-  font-weight: 800;
-}
-.single-event-info {
+.single-info {
   display: flex;
+  flex-wrap: nowrap;
+  margin-top: 1rem;
   margin-bottom: 2rem;
-  min-height: 26rem;
 }
-.single-event-info > img {
+.single-info > img {
   box-shadow: 1rem 1rem 0rem -0.5rem #4c5e7d;
-  max-width: 28rem;
-  max-height: 28rem;
-  object-fit: contain;
+  width: 29rem;
+  height: 29rem;
+  object-fit: cover;
 }
-.single-event-details {
+.single-details {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
   margin: 1rem 1rem 0rem 1.5rem;
   justify-content: space-between;
 }
-.single-event-date-location > * {
+.single-details-top > * {
   margin-bottom: 1rem;
   font-weight: 600;
 }
-/* .save-event-buttons {
-  border-style: solid;
-  justify-self: flex-end;
-} */
+@media only screen and (min-width: 0px) and (max-width: 1000px) {
+  .single-container {
+    width: 90vw;
+  }
+  .single-info {
+    flex-wrap: wrap;
+  }
+}

@@ -82,61 +82,82 @@ export default function SingleOrg() {
           <h1>Organization Not Found!</h1>
         </div>
       ) : (
-        <div>
-          <div className="single-org-info">
-            <h1>{singleOrgInfo.name}</h1>
-            <p>{singleOrgInfo.address}</p>
-            {/* NOTE: PLACEHOLDER STYLING ON IMAGE TAG, TO BE REMOVED */}
-            <img
-              style={{
-                maxWidth: "500px",
-                maxHeight: "500px",
-                objectFit: "contain",
-              }}
-              alt="Organization Img"
-              src={singleOrgInfo.imageUrl}
-            />
-            <h3>{singleOrgInfo.description}</h3>
-            {authUserId ? (
-              !alreadyFollows ? (
-                <button onClick={handleFollowOrg}>Follow Organization</button>
-              ) : (
-                <button onClick={handleUnfollowOrg}>
-                  Unfollow Organization
-                </button>
-              )
-            ) : (
-              <p>
-                <Link to={"/login"}>Log in</Link> or{" "}
-                <Link to={"/signup"}>sign up</Link> to follow organizations like{" "}
-                {singleOrgInfo.name}!
-              </p>
-            )}
-            <h4>
-              Rating:{" "}
-              {singleOrgInfo.rating ? singleOrgInfo.rating : "not available"}
-            </h4>
-            <h4>
-              Website:{" "}
-              {singleOrgInfo.webUrl ? (
-                <a href={singleOrgInfo.webUrl} rel="noreferrer" target="_blank">
-                  {singleOrgInfo.webUrl}
-                </a>
-              ) : (
-                "not available"
-              )}
-            </h4>
-            <h4>
-              Hours:{" "}
-              {singleOrgInfo.hours ? singleOrgInfo.hours : "not available"}
-            </h4>
-            <h4>
-              Tel: {singleOrgInfo.phone ? singleOrgInfo.phone : "not available"}{" "}
-            </h4>
-            <h4>
-              Email:{" "}
-              {singleOrgInfo.email ? singleOrgInfo.email : "not available"}
-            </h4>
+        <div className="single-page">
+          <div className="single-container">
+            <header className="single-header">
+              <div className="single-header-left">
+                <h1>{singleOrgInfo.name}</h1>
+                <p>{singleOrgInfo.address}</p>
+              </div>
+              <div className="single-buttons">
+                {authUserId ? (
+                  !alreadyFollows ? (
+                    <button onClick={handleFollowOrg}>
+                      Follow Organization
+                    </button>
+                  ) : (
+                    <button onClick={handleUnfollowOrg}>
+                      Unfollow Organization
+                    </button>
+                  )
+                ) : (
+                  <p>
+                    <Link to={"/login"}>Log in</Link> or{" "}
+                    <Link to={"/signup"}>sign up</Link> to follow organizations
+                    like {singleOrgInfo.name}!
+                  </p>
+                )}
+              </div>
+            </header>
+            <div className="single-info">
+              {/* NOTE: PLACEHOLDER STYLING ON IMAGE TAG, TO BE REMOVED */}
+              <img alt="Organization Img" src={singleOrgInfo.imageUrl} />
+              <div className="single-details">
+                <div className="single-details-top">
+                  <p>{singleOrgInfo.description}</p>
+                  {/* <p>
+                    Rating:{" "}
+                    {singleOrgInfo.rating
+                      ? singleOrgInfo.rating
+                      : "not available"}
+                  </p> */}
+                  <p>
+                    Website:{" "}
+                    {singleOrgInfo.webUrl ? (
+                      <a
+                        href={singleOrgInfo.webUrl}
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        {singleOrgInfo.webUrl}
+                      </a>
+                    ) : (
+                      "not available"
+                    )}
+                  </p>
+                </div>
+                <div className="single-details-bottom">
+                  <p>
+                    Hours:{" "}
+                    {singleOrgInfo.hours
+                      ? singleOrgInfo.hours
+                      : "not available"}
+                  </p>
+                  <p>
+                    Tel:{" "}
+                    {singleOrgInfo.phone
+                      ? singleOrgInfo.phone
+                      : "not available"}{" "}
+                  </p>
+                  <p>
+                    Email:{" "}
+                    {singleOrgInfo.email
+                      ? singleOrgInfo.email
+                      : "not available"}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="related-event-container">
             <SingleOrgEvents orgName={singleOrgInfo.name} orgId={id} />

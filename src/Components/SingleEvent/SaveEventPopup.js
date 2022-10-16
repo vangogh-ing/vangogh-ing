@@ -1,8 +1,6 @@
 import React from "react";
 import Popup from "reactjs-popup";
 import { Button } from "@mui/material";
-import PostAddIcon from "@mui/icons-material/PostAdd";
-import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 
@@ -16,25 +14,18 @@ export default function SaveEventPopup(props) {
             className="contained-button"
             size="small"
             endIcon={<EditIcon />}
-            color="success"
           >
-            {`${props.currentInterestLevel}`}
-            {/* {props.alreadySaved
-            ? `${props.currentInterestLevel} (edit)`
-            : "Save Event"} */}
+            {props.currentInterestLevel}
           </Button>
         ) : (
           <Button
             variant="contained"
             className="contained-button"
-            size="small"
+            size="medium"
             endIcon={<BookmarkBorderIcon />}
             color="success"
           >
             Save
-            {/* {props.alreadySaved
-              ? `${props.currentInterestLevel} (edit)`
-              : "Save Event"} */}
           </Button>
         )
       }
