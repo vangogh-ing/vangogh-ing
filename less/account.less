@@ -1,0 +1,53 @@
+.account_container {
+  display: flex;
+  justify-content: space-between;
+  border: solid 0.5rem @metallicGold;
+  outline: solid 0.5rem @oliveGreen;
+  margin: 3rem;
+  padding: 1rem;
+}
+
+.account_info {
+  display: flex;
+  width: 100%;
+}
+
+.account_img > img {
+  border: dashed 0.5rem #666d24;
+  height: 9rem;
+  width: 9rem;
+  object-fit: cover;
+  padding: 1rem;
+  margin: 1.5rem;
+}
+
+.account_text {
+  width: 50%;
+  margin: 2rem;
+}
+
+.account_text > p > span {
+  font-weight: 800;
+  letter-spacing: 0.3rem;
+  text-shadow: 0.07rem 0.07rem @metallicGold;
+  margin-right: 0.5rem;
+}
+
+.account_links {
+  width: 50%;
+  text-align: end;
+  margin: 1rem;
+}
+
+.account_links > a {
+  .underlineOliveLink;
+}
+
+.account_links > a:hover {
+  .underlineOliveLinkHover;
+}
+
+.account_links > p {
+  font-style: italic;
+  margin-top: 2rem;
+}

@@ -117,6 +117,55 @@ body {
   font-weight: 800;
   transition: ease 0.3s;
 }
+.account_container {
+  display: flex;
+  justify-content: space-between;
+  border: solid 0.5rem #bca32d;
+  outline: solid 0.5rem #666d24;
+  margin: 3rem;
+  padding: 1rem;
+}
+.account_info {
+  display: flex;
+  width: 100%;
+}
+.account_img > img {
+  border: dashed 0.5rem #666d24;
+  height: 9rem;
+  width: 9rem;
+  object-fit: cover;
+  padding: 1rem;
+  margin: 1.5rem;
+}
+.account_text {
+  width: 50%;
+  margin: 2rem;
+}
+.account_text > p > span {
+  font-weight: 800;
+  letter-spacing: 0.3rem;
+  text-shadow: 0.07rem 0.07rem #bca32d;
+  margin-right: 0.5rem;
+}
+.account_links {
+  width: 50%;
+  text-align: end;
+  margin: 1rem;
+}
+.account_links > a {
+  font-weight: 500;
+  color: #666d24;
+  transition: ease 0.3s;
+}
+.account_links > a:hover {
+  color: #666d24;
+  font-weight: 800;
+  transition: ease 0.3s;
+}
+.account_links > p {
+  font-style: italic;
+  margin-top: 2rem;
+}
 .slick-prev:before,
 .slick-next:before {
   color: black !important;
