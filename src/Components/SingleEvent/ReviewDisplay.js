@@ -134,11 +134,11 @@ export default function ReviewDisplay(props) {
         }
         modal
         nested
-        className="popup"
+        className="interactive-popup"
       >
         {(close) => (
-          <div className="popup">
-            <div className="popup_header">
+          <div className="interactive-popup">
+            <div className="interactive-popup_header">
               What did you think of: {props.singleEventInfo.title}?
               <button
                 onClick={() => {
@@ -149,8 +149,7 @@ export default function ReviewDisplay(props) {
                 x
               </button>
             </div>
-            <div className="content"></div>
-            <div className="actions">
+            <div className="interactive-popup_actions">
               <Rating
                 name="simple-controlled"
                 value={rating}
@@ -170,31 +169,33 @@ export default function ReviewDisplay(props) {
                   onChange={handleReviewStateChange}
                 />
               </div>
-              <Button
-                variant="contained"
-                className="contained-button"
-                size="small"
-                endIcon={<PostAddIcon />}
-                onClick={async () => {
-                  await handleAddReview(close);
-                }}
-              >
-                Submit
-              </Button>
-              {reviewExists && (
+              <div className="interactive-popup-buttons">
                 <Button
                   variant="contained"
                   className="contained-button"
                   size="small"
-                  endIcon={<DeleteIcon />}
-                  color="error"
+                  endIcon={<PostAddIcon />}
                   onClick={async () => {
-                    await handleDeleteReview(close);
+                    await handleAddReview(close);
                   }}
                 >
-                  Delete
+                  Submit
                 </Button>
-              )}
+                {reviewExists && (
+                  <Button
+                    variant="contained"
+                    className="contained-button"
+                    size="small"
+                    endIcon={<DeleteIcon />}
+                    color="error"
+                    onClick={async () => {
+                      await handleDeleteReview(close);
+                    }}
+                  >
+                    Delete
+                  </Button>
+                )}
+              </div>
               {reviewError && (
                 <p>Rate event before submitting review. Min: 1 star.</p>
               )}
