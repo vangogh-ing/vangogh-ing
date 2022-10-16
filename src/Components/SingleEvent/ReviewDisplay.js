@@ -28,8 +28,20 @@ export default function ReviewDisplay(props) {
       User ("*")`
       )
       .eq("eventId", props.eventId);
+
     setAllReviews(Review);
+
+    let userReview = Review.filter((review) => review.userId === props.userId);
+    if (userReview.length) {
+      setReviewExists(true);
+      setRating(userReview[0].rating);
+      setReviewContent(userReview[0].content);
+    } else {
+      setReviewExists(false);
+    }
+
     setLoading(false);
+
     if (Review.length) {
       setRatingAverage(
         (
@@ -39,30 +51,11 @@ export default function ReviewDisplay(props) {
         ).toFixed(1)
       );
     }
-  }, [props.eventId]);
-
-  const fetchReview = useCallback(async () => {
-    if (props.userId) {
-      let { data: Review } = await supabase
-        .from("Review")
-        .select("*")
-        .eq("userId", props.userId)
-        .eq("eventId", props.eventId);
-
-      if (Review[0]) {
-        setReviewExists(true);
-        setRating(Review[0].rating);
-        setReviewContent(Review[0].content);
-      } else {
-        setReviewExists(false);
-      }
-    }
   }, [props.eventId, props.userId]);
 
   useEffect(() => {
-    fetchReview();
     fetchAllReviews();
-  }, [fetchReview, fetchAllReviews]);
+  }, [fetchAllReviews]);
 
   const handleReviewStateChange = useCallback(async (evt) => {
     setReviewContent(evt.target.value);
@@ -81,7 +74,6 @@ export default function ReviewDisplay(props) {
         ]);
         if (!error) {
           await setReviewError(false);
-          fetchReview();
           fetchAllReviews();
           closeFunc();
         }
@@ -89,14 +81,7 @@ export default function ReviewDisplay(props) {
         await setReviewError(true);
       }
     },
-    [
-      props.eventId,
-      props.userId,
-      rating,
-      reviewContent,
-      fetchReview,
-      fetchAllReviews,
-    ]
+    [props.eventId, props.userId, rating, reviewContent, fetchAllReviews]
   );
 
   const handleDeleteReview = useCallback(

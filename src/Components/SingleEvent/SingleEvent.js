@@ -20,17 +20,15 @@ export default function SingleEvent() {
   const fetchSingleEvent = useCallback(async () => {
     let { data: Events } = await supabase
       .from("Events")
-      .select("*")
+      .select(
+        `*,
+         Organization (name)`
+      )
       .eq("id", id);
 
     if (Events[0]) {
       setSingleEventInfo(Events[0]);
-      let { data: Organization } = await supabase
-        .from("Organization")
-        .select("name")
-        .eq("id", Events[0].OrgId);
-
-      setRelatedOrgName(Organization[0].name);
+      setRelatedOrgName(Events[0].Organization.name);
     }
 
     let userSession = await supabase.auth.getSession();
