@@ -166,7 +166,7 @@ body {
   margin: 1.5rem;
 }
 .account_text {
-  width: 50%;
+  width: 70%;
   margin: 2rem;
 }
 .account_text > p > span {
@@ -175,8 +175,21 @@ body {
   text-shadow: 0.07rem 0.07rem #bca32d;
   margin-right: 0.5rem;
 }
+.account_org {
+  margin-top: 2.5rem;
+}
+.account_org > a {
+  font-weight: 500;
+  color: #666d24;
+  transition: ease 0.3s;
+}
+.account_org > a:hover {
+  color: #666d24;
+  font-weight: 800;
+  transition: ease 0.3s;
+}
 .account_links {
-  width: 50%;
+  width: 30%;
   text-align: end;
   margin: 1rem;
 }
