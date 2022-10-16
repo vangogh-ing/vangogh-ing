@@ -18,6 +18,7 @@ const Account = ({ session }) => {
         "Loading..."
       ) : (
         <div className="account_container">
+          <h1>Your Profile</h1>
           <div className="account_info">
             <div className="account_img">
               <img src={imageUrl} alt="" />

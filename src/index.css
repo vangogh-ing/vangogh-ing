@@ -64,6 +64,11 @@
   box-shadow: 0.9rem 0.9rem #bca32d, 1.6rem 1.6rem #4c5e7d;
   transition: transform ease 0.5s, box-shadow ease 0.5s;
 }
+.yG_TextShadow_Heading {
+  text-align: center;
+  letter-spacing: 0.3rem;
+  text-shadow: 0.1rem 0.1rem #bca32d;
+}
 * {
   font-family: "Gothic A1", sans-serif;
 }
@@ -133,14 +138,19 @@ body {
   transition: ease 0.3s;
 }
 .account_container {
-  border: solid 0.5rem #bca32d;
-  outline: solid 0.5rem #666d24;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   margin: 3rem;
   padding: 1rem;
 }
+.account_container > h1 {
+  text-align: center;
+  letter-spacing: 0.3rem;
+  text-shadow: 0.1rem 0.1rem #bca32d;
+}
 .account_info {
+  border: solid 0.5rem #bca32d;
+  outline: solid 0.5rem #666d24;
   display: flex;
   width: 100%;
 }
