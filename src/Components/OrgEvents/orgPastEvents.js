@@ -1,17 +1,19 @@
 import { supabase } from "../../supabaseClient";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 //add on components
 import DiscoverInfo from "../../innerEventInfo/discoverInfo";
 
 function OrgPastEvents({ session }) {
-  const todaysdate = Date.now();
-
   const [fetchError, setFetchError] = useState(null);
   const [orgEvents, setOrgEvents] = useState(null);
   const [userOrg, setUserOrgId] = useState(null);
 
-  const userOrgId = async () => {
+  function isBeforeToday(eventDate) {
+    return eventDate < Date.now();
+  }
+
+  let userOrgId = useCallback(async () => {
     const { data } = await supabase
       .from("User")
       .select("id, OrgId")
@@ -21,9 +23,9 @@ function OrgPastEvents({ session }) {
       let userOrg = data[0].OrgId;
       setUserOrgId(userOrg);
     }
-  };
+  });
 
-  const fetchOrgEvents = async () => {
+  let fetchOrgEvents = useCallback(async () => {
     const { data, error } = await supabase
       .from("Events")
       .select("*")
@@ -38,31 +40,28 @@ function OrgPastEvents({ session }) {
       setOrgEvents(data);
       setFetchError(null);
     }
-  };
+  });
 
   useEffect(() => {
     userOrgId();
     if (userOrg) {
       fetchOrgEvents(userOrg);
     }
-  }, [userOrg]);
+  }, [userOrg, session]);
 
   return (
     <div className="container">
-      <h1>Org Events Page</h1>
       {fetchError && <p>{fetchError}</p>}
       {orgEvents && (
-        <div className="card-container">
+        <div>
+          <h1>Org Events Page</h1>
           {orgEvents
             .filter((orgEvent) => {
-              const eventDate = new Date(orgEvent.endDate).getTime();
-              if (eventDate < todaysdate) {
-                return orgEvent;
-              }
+              return isBeforeToday(new Date(orgEvent.endDate).getTime());
             })
             .map((activeEvent, idx) => {
               return (
-                <div className="card" key={idx}>
+                <div className="cardContainer" key={idx}>
                   <DiscoverInfo
                     key={activeEvent.id}
                     session={session}

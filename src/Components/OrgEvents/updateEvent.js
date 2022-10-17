@@ -71,73 +71,91 @@ function UpdateEvent({ orgEvent }) {
   return (
     <Popup trigger={<button>Update Event</button>} modal nested>
       {(close) => (
-        <div>
+        <div className="popup">
           <button onClick={close}>&times;</button>
           <form onSubmit={handleSubmit}>
-            <label htmlFor="title">Title: </label>
-            <input
-              type="text"
-              value={title}
-              onChange={(event) => setTitle(event.target.value)}
-              required
-            />
+            <div className="popup-content">
+              <label htmlFor="title">Title: </label>
+              <input
+                type="text"
+                value={title}
+                onChange={(event) => setTitle(event.target.value)}
+                required
+              />
+            </div>
 
-            <label htmlFor="description">Description: </label>
-            <input
-              type="text"
-              value={description}
-              onChange={(event) => setDescription(event.target.value)}
-              required
-            />
+            <div className="popup-content">
+              <label htmlFor="description">Description: </label>
+              <input
+                type="text"
+                value={description}
+                onChange={(event) => setDescription(event.target.value)}
+                required
+              />
+            </div>
 
-            <label htmlFor="startDate">Start Date: </label>
-            <input
-              type="date"
-              value={startDate}
-              onChange={(event) => setStartDate(event.target.value)}
-              required
-            />
+            <div className="popup-content">
+              <label htmlFor="startDate">Start Date: </label>
+              <input
+                type="date"
+                value={startDate}
+                onChange={(event) => setStartDate(event.target.value)}
+                required
+              />
+            </div>
 
-            <label htmlFor="endDate">End Date: </label>
-            <input
-              type="date"
-              value={endDate}
-              onChange={(event) => setEndDate(event.target.value)}
-              required
-            />
+            <div className="popup-content">
+              <label htmlFor="endDate">End Date: </label>
+              <input
+                type="date"
+                value={endDate}
+                onChange={(event) => setEndDate(event.target.value)}
+                required
+              />
+            </div>
 
-            <label htmlFor="startTime">Start Time: </label>
-            <input
-              type="time"
-              value={startTime}
-              onChange={(event) => setStartTime(event.target.value)}
-              required
-            />
+            <div className="popup-content">
+              <label htmlFor="startTime">Start Time: </label>
+              <input
+                type="time"
+                value={startTime}
+                onChange={(event) => setStartTime(event.target.value)}
+                required
+              />
+            </div>
 
-            <label htmlFor="endtime">End Time: </label>
-            <input
-              type="time"
-              value={endTime}
-              onChange={(event) => setEndTime(event.target.value)}
-              required
-            />
+            <div className="popup-content">
+              <label htmlFor="endtime">End Time: </label>
+              <input
+                type="time"
+                value={endTime}
+                onChange={(event) => setEndTime(event.target.value)}
+                required
+              />
+            </div>
 
-            <label htmlFor="location">Location: </label>
-            <input
-              type="text"
-              value={location}
-              onChange={(event) => setLocation(event.target.value)}
-              required
-            />
+            <div className="popup-content">
+              <label htmlFor="location">Location: </label>
+              <input
+                type="text"
+                value={location}
+                onChange={(event) => setLocation(event.target.value)}
+                required
+              />
+            </div>
 
-            <label htmlFor="imageUrl">Image: </label>
-            <input
-              type="text"
-              value={imageUrl}
-              onChange={(event) => setImage(event.target.value)}
-            />
+            <div className="popup-content">
+              <label htmlFor="imageUrl">Image: </label>
+              <input
+                type="text"
+                value={imageUrl}
+                onChange={(event) => setImage(event.target.value)}
+              />
+            </div>
 
-            <button>Update</button>
+            <div>
+              <button>Update</button>
+            </div>
 
             {formError && <p>{formError}</p>}
           </form>

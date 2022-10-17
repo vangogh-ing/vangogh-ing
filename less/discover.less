@@ -6,19 +6,34 @@
 }
 
 .order-buttons{
-    float: right;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
     flex-direction: row;
+    float: right;
 }
 
-.card-container{
-padding: 20px;
+.orderTitle{
+    color: @fontColor
+}
+
+.orderButton{
+    width: 8rem;
+    height: 2rem;
+    background-color: @metallicGold;
+    border-radius: 2rem;
+}
+
+.cardContainer{
+    justify-content: baseline;
+    padding: 1rem;
 }
 
 .card{
     display: flex;
-    width: 900px;
-    height: 300px;
-    padding: 20px;
+    width: 70rem;
+    height: 20rem;   
+    align-items: center;
     background-color: @bgColor;
     border-style: solid;
     border-width: 2px;
@@ -26,38 +41,50 @@ padding: 20px;
     box-shadow: 10px 10px @metallicGold;
 }
 
+// .card:hover{
+//     box-shadow: 12px 12px @metallicGold;
+// }
+
+
 .infocard{
-    text-align: end;
-   color: @fontColor;
-   padding-left: 10px;
+    display: flex;
+    float: right;
+    color: @fontColor;
+    padding-right: 1rem;
 }
 
 .eventTitle{
-    float: right;
-    padding-left: 40px;
+    // float: right;
+    // padding-left: 40px;
     color: @fontColor;
+    text-align: justify;
 }
 
 .details{
-    flex-direction: row;
+    // flex-direction: row;
     color: @fontColor;
+    text-align: justify;
 
 }
 
-// .description{
-//     width: 500px;
-//     float: inline-end;
-//     padding-bottom: 10px;
-//     color: @fontColor;
-// }
+.description{
+    text-align: justify;
+    width: 65rem;
+    // float: inline-end;
+    // padding-bottom: 10px;
+    color: @fontColor;
+}
 
 .imageCard{
-    float:left;
+    display:  flex;
+    float: left;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .image{
-    width: 20rem;
-    height: 20rem;
+    width: 18rem;
+    height: 18rem;
     border-style: solid;
     border-color: @oliveGreen;
     border-radius: 2px;;

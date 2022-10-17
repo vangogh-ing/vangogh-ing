@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Navbar({ session }) {
   const [userOrg, setUserOrgId] = useState(null);
@@ -12,22 +12,29 @@ export default function Navbar({ session }) {
     navigate("/login");
   };
 
-  const userOrgId = async () => {
-    const { data, error } = await supabase
-      .from("User")
-      .select("id, OrgId")
-      .eq("id", session.user.id);
+  //userOrgId();
 
-    if (error) {
-      console.log(error);
-    }
+  useEffect(() => {
+    const userOrgId = async () => {
+      const { data, error } = await supabase
+        .from("User")
+        .select("id, OrgId")
+        .eq("id", session.user.id);
 
-    if (data) {
-      let userOrg = data[0].OrgId;
-      setUserOrgId(userOrg);
+      if (error) {
+        console.log(error);
+      }
+
+      if (data) {
+        let userOrg = data[0].OrgId;
+        setUserOrgId(userOrg);
+      }
+    };
+
+    if (session) {
+      userOrgId();
     }
-  };
-  userOrgId();
+  }, [session]);
 
   return (
     <div>
