@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import UpdateEvent from "../Components/OrgEvents/updateEvent";
 import {
   DateDisplay,
   TimeDisplay,
@@ -17,10 +18,6 @@ function DiscoverInfo({ event, session, userOrgId }) {
             <div className="infoCard">
               <h3 className="eventTitle">{event.title}</h3>
               <div className="details">
-                {/* <p>
-                  {event.startTime} - {event.endTime} | {event.startDate} /
-                  {event.endDate} | {event.location}
-                </p> */}
                 <DateDisplay start={event.startDate} end={event.endDate} />
                 <TimeDisplay
                   startDate={event.startDate}
@@ -44,9 +41,6 @@ function DiscoverInfo({ event, session, userOrgId }) {
               <h3 className="eventTitle">{event.title}</h3>
               <div className="details">
                 <DateDisplay start={event.startDate} end={event.endDate} />
-                {/* <p>
-                  {event.startTime} - {event.endTime}
-                </p> */}
                 <TimeDisplay
                   startDate={event.startDate}
                   endDate={event.endDate}

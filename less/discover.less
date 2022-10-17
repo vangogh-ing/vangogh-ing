@@ -41,11 +41,15 @@
     box-shadow: 10px 10px @metallicGold;
 }
 
+.activeButtons{
+    display: flex;
+    justify-content: baseline;
+}
+
 .infocard{
     display: flex;
     float: right;
     color: @fontColor;
-    padding-right: 1rem;
 }
 
 .eventTitle{
@@ -63,12 +67,16 @@
 }
 
 .description{
+    display: -webkit-box;
+    padding-top: 3rem;
+    padding-right: 2rem;
     text-align: justify;
-    width: 65rem;
-    // float: inline-end;
-    // padding-bottom: 10px;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     color: @fontColor;
 }
+
 
 .imageCard{
     display:  flex;
@@ -85,3 +93,4 @@
     border-radius: 2px;;
     object-fit: cover;
 }
+

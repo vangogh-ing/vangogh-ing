@@ -431,14 +431,14 @@ body {
   border-color: #666d24;
   box-shadow: 10px 10px #bca32d;
 }
-.card:hover {
-  transform: scale(1, 1);
+.activeButtons {
+  display: flex;
+  justify-content: baseline;
 }
 .infocard {
   display: flex;
   float: right;
   color: black;
-  padding-right: 1rem;
 }
 .eventTitle {
   color: black;
@@ -449,8 +449,13 @@ body {
   text-align: justify;
 }
 .description {
+  display: -webkit-box;
+  padding-top: 3rem;
+  padding-right: 2rem;
   text-align: justify;
-  width: 65rem;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
   color: black;
 }
 .imageCard {

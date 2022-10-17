@@ -3,7 +3,7 @@ import { supabase } from "../../supabaseClient";
 import React from "react";
 import Popup from "reactjs-popup";
 
-function UpdateEvent({ orgEvent }) {
+function UpdateEvent({ orgEvent, onUpdate }) {
   const [title, setTitle] = useState(orgEvent.title);
   const [description, setDescription] = useState(orgEvent.description);
   const [startDate, setStartDate] = useState(orgEvent.startDate);
@@ -38,6 +38,7 @@ function UpdateEvent({ orgEvent }) {
 
     if (data) {
       setFormError(null);
+      return data;
     }
   };
 
@@ -69,7 +70,11 @@ function UpdateEvent({ orgEvent }) {
   }, [orgEvent.id]);
 
   return (
-    <Popup trigger={<button>Update Event</button>} modal nested>
+    <Popup
+      trigger={<button className="smallYellowButton">Update Event</button>}
+      modal
+      nested
+    >
       {(close) => (
         <div className="popup">
           <button onClick={close}>&times;</button>

@@ -2,7 +2,7 @@ import { supabase } from "../../supabaseClient";
 import { useCallback, useEffect, useState } from "react";
 
 //add on components
-import DiscoverInfo from "../../Utils/discoverInfo";
+import ActiveViewInfo from "../../Utils/activeViewInfo";
 import CreateEvent from "./createEvent";
 import UpdateEvent from "./updateEvent";
 
@@ -16,22 +16,10 @@ function OrgActiveEvents({ session }) {
     return eventDate > Date.now();
   }
 
-  const handleDelete = async (orgId) => {
-    const { data, error } = await supabase
-      .from("Events")
-      .delete()
-      .eq("id", orgId)
-      .select();
-
-    if (error) {
-      console.log(error);
-    }
-
-    if (data) {
-      setOrgEvents((prevEvents) => {
-        return prevEvents.filter((event) => event.id !== orgId);
-      });
-    }
+  const handleDelete = (id) => {
+    setOrgEvents((orgEvents) => {
+      return orgEvents.filter((event) => event.id !== id);
+    });
   };
 
   let userOrgId = useCallback(async () => {
@@ -69,7 +57,7 @@ function OrgActiveEvents({ session }) {
     if (userOrg) {
       fetchOrgEvents(userOrg);
     }
-  }, [userOrg, orderBy, session]);
+  }, [userOrg, orderBy, session, ActiveViewInfo]);
 
   return (
     <div className="container">
@@ -85,15 +73,15 @@ function OrgActiveEvents({ session }) {
             .map((activeEvent, idx) => {
               return (
                 <div className="cardContainer" key={idx}>
-                  <DiscoverInfo
+                  <ActiveViewInfo
                     key={activeEvent.id}
-                    session={session}
                     event={activeEvent}
+                    onDelete={() => handleDelete(activeEvent.id)}
                   />
-                  <button onClick={() => handleDelete(activeEvent.id)}>
+                  {/* <button onClick={() => handleDelete(activeEvent.id)}>
                     Delete
-                  </button>
-                  <UpdateEvent orgEvent={activeEvent} />
+                  </button> */}
+                  {/* <UpdateEvent orgEvent={activeEvent} /> */}
                 </div>
               );
             })}
