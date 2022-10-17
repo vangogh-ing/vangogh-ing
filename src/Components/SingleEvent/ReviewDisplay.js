@@ -6,10 +6,25 @@ import {
   Button,
   CircularProgress,
   Avatar,
+  Card,
+  CardHeader,
+  CardContent,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import DeleteIcon from "@mui/icons-material/Delete";
+import FilterVintageIcon from "@mui/icons-material/FilterVintage";
+// import FilterVintageOutlinedIcon from "@material-ui/icons/FilterVintageOutlined";
 import Popup from "reactjs-popup";
+
+const StyledRating = styled(Rating)({
+  "& .MuiRating-iconFilled": {
+    color: "#D59E20",
+  },
+  "& .MuiRating-iconHover": {
+    color: "#faaf00",
+  },
+});
 
 export default function ReviewDisplay(props) {
   const [rating, setRating] = useState(0);
@@ -106,19 +121,24 @@ export default function ReviewDisplay(props) {
   );
 
   return (
-    <div>
+    <div className="review-display">
       <section>
         {loading ? (
           <CircularProgress color="success" />
         ) : (
           <div>
-            User rating:
-            <Rating
-              name="average"
-              value={+ratingAverage}
-              size="large"
-              precision={0.1}
+            Average user rating:
+            <StyledRating
               readOnly
+              name="average-rating"
+              value={+rating}
+              precision={0.1}
+              size="large"
+              sx={{
+                fontSize: "2rem",
+              }}
+              icon={<FilterVintageIcon fontSize="inherit" />}
+              emptyIcon={<FilterVintageIcon fontSize="inherit" />}
             />
             {` (${ratingAverage})`}
           </div>
@@ -150,14 +170,16 @@ export default function ReviewDisplay(props) {
               </button>
             </div>
             <div className="interactive-popup_actions">
-              <Rating
-                name="simple-controlled"
+              <StyledRating
+                name="rating-input"
                 value={rating}
-                size="large"
                 precision={0.5}
+                size="large"
                 onChange={(event, newValue) => {
                   setRating(newValue);
                 }}
+                icon={<FilterVintageIcon fontSize="inherit" />}
+                emptyIcon={<FilterVintageIcon fontSize="inherit" />}
               />
               <div>
                 <TextField
@@ -210,22 +232,37 @@ export default function ReviewDisplay(props) {
           <div>No reviews... yet!</div>
         ) : (
           <div>
-            <section>
+            <section className="review-list">
               Reviews:
               {allReviews
                 .filter((review) => review.content)
                 .map((review) => (
                   <div key={review.id}>
-                    <Avatar alt={review.User.name} src={review.User.imageUrl} />
-                    {review.User.name}:
-                    <Rating
-                      name="read-only"
-                      value={review.rating}
-                      size="small"
-                      precision={0.5}
-                      readOnly
-                    />
-                    <span>{review.content}</span>
+                    <Card className="review-card" raised={true}>
+                      <CardHeader
+                        avatar={
+                          <Avatar
+                            alt={review.User.name}
+                            src={review.User.imageUrl}
+                          />
+                        }
+                        title={review.User.name}
+                        subheader={
+                          <StyledRating
+                            readOnly
+                            name="user-rating"
+                            value={review.rating}
+                            precision={0.5}
+                            size="medium"
+                            icon={<FilterVintageIcon fontSize="inherit" />}
+                            emptyIcon={<FilterVintageIcon fontSize="inherit" />}
+                          />
+                        }
+                      />
+                      <CardContent className="review-content">
+                        {review.content}
+                      </CardContent>
+                    </Card>
                   </div>
                 ))}
             </section>
