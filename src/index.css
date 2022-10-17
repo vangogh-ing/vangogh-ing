@@ -50,6 +50,13 @@
   font-weight: 800;
   transition: ease 0.3s;
 }
+.roundYellowInput {
+  border: solid 0.1rem #bca32d;
+  border-radius: 0.5rem;
+}
+.roundYellowInput_focus {
+  outline: solid 0.1rem #bca32d;
+}
 .yG_Borders {
   border: solid 0.5rem #bca32d;
   outline: solid 0.5rem #666d24;
@@ -69,6 +76,11 @@
   text-align: center;
   letter-spacing: 0.3rem;
   text-shadow: 0.1rem 0.1rem #bca32d;
+}
+.yG_TextShadow_Regular {
+  font-weight: 800;
+  letter-spacing: 0.3rem;
+  text-shadow: 0.07rem 0.07rem #bca32d;
 }
 * {
   font-family: "Gothic A1", sans-serif;
@@ -310,6 +322,70 @@ body {
   transition: ease 0.5s;
 }
 .editAccount_profile > div > button:hover {
+  background-color: #ac8c26;
+  transition: ease 0.5s;
+}
+.createOrgPopup {
+  background-color: #fffef9;
+  color: black;
+  width: 75%;
+  border-style: solid;
+  border-color: #bca32d;
+  box-shadow: 0.7rem 0.7rem #4c5e7d;
+  padding: 1rem;
+}
+.createOrgPopup_header {
+  display: flex;
+  justify-content: space-between;
+}
+.createOrgPopup_header > h1 {
+  width: 100%;
+  margin-left: 1.7rem;
+  text-align: center;
+}
+.createOrgPopup_header > button {
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  border-radius: 2px;
+  background-color: #bca32d;
+  color: #fffef9;
+}
+.createOrgPopup > p {
+  text-align: center;
+  font-style: italic;
+  font-size: 0.8rem;
+  margin-top: -0.5rem;
+}
+.createOrgPopup_form {
+  display: flex;
+  flex-direction: column;
+}
+.createOrgPopup_form > label {
+  font-weight: 800;
+  letter-spacing: 0.3rem;
+  text-shadow: 0.07rem 0.07rem #bca32d;
+  margin-bottom: 0.5rem;
+}
+.createOrgPopup_form > input {
+  border: solid 0.1rem #bca32d;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+.createOrgPopup_form > input:focus {
+  outline: solid 0.1rem #bca32d;
+}
+.createOrgPopup_form > button {
+  cursor: pointer;
+  background-color: #bca32d;
+  color: #fffef9;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  transition: ease 0.5s;
+}
+.createOrgPopup_form > button:hover {
   background-color: #ac8c26;
   transition: ease 0.5s;
 }

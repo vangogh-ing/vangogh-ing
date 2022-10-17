@@ -74,13 +74,13 @@ export default function SaveEventPopup(props) {
           <div className="popup_header">Loading...</div>
         </div>
       ) : (
-        <div className="popup">
-          <div className="popup_header">
+        <div className="createOrgPopup">
+          <div className="createOrgPopup_header">
             <h1>Create an Organization</h1>
             <button onClick={props.closePopup}>x</button>
           </div>
           <p>must provide at least organization name and email</p>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="createOrgPopup_form">
             <label htmlFor="name">Organization Name: </label>
             <input
               type="text"
