@@ -11,7 +11,7 @@
   width: 75%;
   border-style: solid;
   border-color: #bca32d;
-  box-shadow: 10px 10px #4c5e7d;
+  box-shadow: 0.7rem 0.7rem #4c5e7d;
   padding: 1rem;
 }
 .popup_header {
@@ -27,6 +27,61 @@
   background-color: #bca32d;
   color: #fffef9;
 }
+.smallYellowButton {
+  cursor: pointer;
+  background-color: #bca32d;
+  color: #fffef9;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  transition: ease 0.5s;
+}
+.smallYellowButtonHover {
+  background-color: #ac8c26;
+  transition: ease 0.5s;
+}
+.underlineOliveLink {
+  font-weight: 500;
+  color: #666d24;
+  transition: ease 0.3s;
+}
+.underlineOliveLinkHover {
+  color: #666d24;
+  font-weight: 800;
+  transition: ease 0.3s;
+}
+.roundYellowInput {
+  border: solid 0.1rem #bca32d;
+  border-radius: 0.5rem;
+}
+.roundYellowInput_focus {
+  outline: solid 0.1rem #bca32d;
+}
+.yG_Borders {
+  border: solid 0.5rem #bca32d;
+  outline: solid 0.5rem #666d24;
+}
+.yB_BoxShadow {
+  box-shadow: 0.7rem 0.7rem #bca32d, 1.4rem 1.4rem #4c5e7d;
+}
+.yB_BoxShadow_Transition {
+  box-shadow: 0.7rem 0.7rem #bca32d, 1.4rem 1.4rem #4c5e7d;
+  transition: transform ease 0.5s, box-shadow ease 0.5s;
+}
+.yB_BoxShadow_Hover {
+  box-shadow: 0.9rem 0.9rem #bca32d, 1.6rem 1.6rem #4c5e7d;
+  transition: transform ease 0.5s, box-shadow ease 0.5s;
+}
+.yG_TextShadow_Heading {
+  text-align: center;
+  letter-spacing: 0.3rem;
+  text-shadow: 0.1rem 0.1rem #bca32d;
+}
+.yG_TextShadow_Regular {
+  font-weight: 800;
+  letter-spacing: 0.3rem;
+  text-shadow: 0.07rem 0.07rem #bca32d;
+}
 * {
   font-family: "Gothic A1", sans-serif;
 }
@@ -40,30 +95,299 @@ body {
   align-items: center;
 }
 .auth {
+  box-shadow: 0.7rem 0.7rem #bca32d, 1.4rem 1.4rem #4c5e7d;
+  transition: transform ease 0.5s, box-shadow ease 0.5s;
   width: 75%;
   background-color: #fffef9;
   padding: 1.5rem;
   border: solid;
   border-color: #666d24;
-  box-shadow: 0.7rem 0.7rem #bca32d, 1.4rem 1.4rem #4c5e7d;
-  transition: transform ease 0.5s, box-shadow ease 0.5s;
   margin: 1rem;
 }
 .auth:hover {
   transform: translateY(-1rem);
-  transition: transform ease 0.5s, box-shadow ease 0.5s;
   box-shadow: 0.9rem 0.9rem #bca32d, 1.6rem 1.6rem #4c5e7d;
+  transition: transform ease 0.5s, box-shadow ease 0.5s;
 }
 .auth > h1 {
   display: flex;
   align-items: center;
 }
+.auth_icon {
+  width: 3rem;
+}
 .auth > input {
   border: solid 0.1rem #bca32d;
   border-radius: 0.5rem;
+  margin: 0.2rem;
 }
-.auth_icon {
-  width: 3rem;
+.auth > input:focus {
+  outline: solid 0.1rem #bca32d;
+}
+.auth > button {
+  cursor: pointer;
+  background-color: #bca32d;
+  color: #fffef9;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  transition: ease 0.5s;
+  margin: 0.1rem;
+}
+.auth > button:hover {
+  background-color: #ac8c26;
+  transition: ease 0.5s;
+}
+.auth_redirect > p {
+  margin-top: 2rem;
+}
+.auth_redirect > a {
+  font-weight: 500;
+  color: #666d24;
+  transition: ease 0.3s;
+}
+.auth_redirect > a:hover {
+  color: #666d24;
+  font-weight: 800;
+  transition: ease 0.3s;
+}
+.account_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3rem;
+  padding: 1rem;
+}
+.account_container > h1 {
+  text-align: center;
+  letter-spacing: 0.3rem;
+  text-shadow: 0.1rem 0.1rem #bca32d;
+}
+.account_info {
+  border: solid 0.5rem #bca32d;
+  outline: solid 0.5rem #666d24;
+  display: flex;
+  width: 80%;
+}
+.account_img > img {
+  border: dashed 0.5rem #666d24;
+  height: 9rem;
+  width: 9rem;
+  object-fit: cover;
+  padding: 1rem;
+  margin: 1.5rem;
+}
+.account_text {
+  width: 70%;
+  margin: 2rem;
+}
+.account_text > p > span {
+  font-weight: 800;
+  letter-spacing: 0.3rem;
+  text-shadow: 0.07rem 0.07rem #bca32d;
+  margin-right: 0.5rem;
+}
+.account_org {
+  margin-top: 2.5rem;
+}
+.account_org > a {
+  font-weight: 500;
+  color: #666d24;
+  transition: ease 0.3s;
+}
+.account_org > a:hover {
+  color: #666d24;
+  font-weight: 800;
+  transition: ease 0.3s;
+}
+.account_links {
+  width: 30%;
+  text-align: end;
+  margin: 1rem;
+}
+.account_links > a {
+  font-weight: 500;
+  color: #666d24;
+  transition: ease 0.3s;
+}
+.account_links > a:hover {
+  color: #666d24;
+  font-weight: 800;
+  transition: ease 0.3s;
+}
+.account_links > p {
+  font-style: italic;
+  margin-top: 2rem;
+}
+.editAccount_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+}
+.editAccount {
+  border: solid 0.5rem #bca32d;
+  outline: solid 0.5rem #666d24;
+  width: 75%;
+  padding: 1rem;
+}
+.editAccount_container > h1 {
+  text-align: center;
+  letter-spacing: 0.3rem;
+  text-shadow: 0.1rem 0.1rem #bca32d;
+}
+.editAccount > h2,
+.editAccount > h3 {
+  text-align: center;
+}
+.editAccount > h2 > a {
+  font-weight: 500;
+  color: #666d24;
+  transition: ease 0.3s;
+  text-align: center;
+  font-size: 1.2rem;
+}
+.editAccount > h2 > a:hover {
+  color: #666d24;
+  font-weight: 800;
+  transition: ease 0.3s;
+  text-align: center;
+}
+.editAccount > h3 > a {
+  font-weight: 500;
+  color: #666d24;
+  transition: ease 0.3s;
+}
+.editAccount > h3 > a:hover {
+  color: #666d24;
+  font-weight: 800;
+  transition: ease 0.3s;
+}
+.editAccount_info {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.editAccount_avatar {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+.editAccount_img > img {
+  border: dashed 0.5rem #666d24;
+  height: 9rem;
+  width: 9rem;
+  object-fit: cover;
+}
+.editAccount_avatar > label {
+  margin-top: 1rem;
+  font-style: italic;
+}
+.editAccount_avatar > input::file-selector-button {
+  cursor: pointer;
+  background-color: #bca32d;
+  color: #fffef9;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  transition: ease 0.5s;
+}
+.editAccount_avatar > input::file-selector-button:hover {
+  background-color: #ac8c26;
+  transition: ease 0.5s;
+}
+.editAccount_profile {
+  margin: 1rem;
+}
+.editAccount_bio {
+  margin-bottom: 1rem;
+}
+.editAccount_bio > div > span {
+  font-weight: 800;
+  letter-spacing: 0.3rem;
+  text-shadow: 0.07rem 0.07rem #bca32d;
+}
+.editAccount_bio > div > input {
+  border: solid 0.1rem #bca32d;
+  border-radius: 0.5rem;
+}
+.editAccount_profile > div > button {
+  cursor: pointer;
+  background-color: #bca32d;
+  color: #fffef9;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  transition: ease 0.5s;
+}
+.editAccount_profile > div > button:hover {
+  background-color: #ac8c26;
+  transition: ease 0.5s;
+}
+.createOrgPopup {
+  background-color: #fffef9;
+  color: black;
+  width: 75%;
+  border-style: solid;
+  border-color: #bca32d;
+  box-shadow: 0.7rem 0.7rem #4c5e7d;
+  padding: 1rem;
+}
+.createOrgPopup_header {
+  display: flex;
+  justify-content: space-between;
+}
+.createOrgPopup_header > h1 {
+  width: 100%;
+  margin-left: 1.7rem;
+  text-align: center;
+}
+.createOrgPopup_header > button {
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  border-radius: 2px;
+  background-color: #bca32d;
+  color: #fffef9;
+}
+.createOrgPopup > p {
+  text-align: center;
+  font-style: italic;
+  font-size: 0.8rem;
+  margin-top: -0.5rem;
+}
+.createOrgPopup_form {
+  display: flex;
+  flex-direction: column;
+}
+.createOrgPopup_form > label {
+  font-weight: 800;
+  letter-spacing: 0.3rem;
+  text-shadow: 0.07rem 0.07rem #bca32d;
+  margin-bottom: 0.5rem;
+}
+.createOrgPopup_form > input {
+  border: solid 0.1rem #bca32d;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+.createOrgPopup_form > input:focus {
+  outline: solid 0.1rem #bca32d;
+}
+.createOrgPopup_form > button {
+  cursor: pointer;
+  background-color: #bca32d;
+  color: #fffef9;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  transition: ease 0.5s;
+}
+.createOrgPopup_form > button:hover {
+  background-color: #ac8c26;
+  transition: ease 0.5s;
 }
 .slick-prev:before,
 .slick-next:before {

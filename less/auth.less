@@ -6,20 +6,18 @@
 }
 
 .auth {
+  .yB_BoxShadow_Transition;
   width: 75%;
   background-color: @bgColor;
   padding: 1.5rem;
   border: solid;
   border-color: @oliveGreen;
-  box-shadow: 0.7rem 0.7rem @metallicGold, 1.4rem 1.4rem @independenceBlue;
-  transition: transform ease 0.5s, box-shadow ease 0.5s;
   margin: 1rem;
 }
 
 .auth:hover {
   transform: translateY(-1rem);
-  transition: transform ease 0.5s, box-shadow ease 0.5s;
-  box-shadow: 0.9rem 0.9rem @metallicGold, 1.6rem 1.6rem @independenceBlue;
+  .yB_BoxShadow_Hover;
 }
 
 .auth > h1 {
@@ -27,11 +25,36 @@
   align-items: center;
 }
 
-.auth > input {
-  border: solid 0.1rem @metallicGold;
-  border-radius: 0.5rem;
-}
-
 .auth_icon {
   width: 3rem;
+}
+
+.auth > input {
+  .roundYellowInput;
+  margin: 0.2rem;
+}
+
+.auth > input:focus {
+  .roundYellowInput_focus;
+}
+
+.auth > button {
+  .smallYellowButton;
+  margin: 0.1rem;
+}
+
+.auth > button:hover {
+  .smallYellowButtonHover;
+}
+
+.auth_redirect > p {
+  margin-top: 2rem;
+}
+
+.auth_redirect > a {
+  .underlineOliveLink;
+}
+
+.auth_redirect > a:hover {
+  .underlineOliveLinkHover;
 }
