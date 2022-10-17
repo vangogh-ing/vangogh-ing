@@ -431,6 +431,9 @@ body {
   border-color: #666d24;
   box-shadow: 10px 10px #bca32d;
 }
+.card:hover {
+  transform: scale(1, 1);
+}
 .infocard {
   display: flex;
   float: right;

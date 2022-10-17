@@ -2,7 +2,7 @@ import { supabase } from "../../supabaseClient";
 import { useCallback, useEffect, useState } from "react";
 
 //add on components
-import DiscoverInfo from "../../innerEventInfo/discoverInfo";
+import DiscoverInfo from "../../Utils/discoverInfo";
 import CreateEvent from "./createEvent";
 import UpdateEvent from "./updateEvent";
 

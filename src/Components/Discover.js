@@ -1,7 +1,7 @@
 import { supabase } from "../supabaseClient";
 import { useCallback, useEffect, useState } from "react";
 //inner components
-import DiscoverInfo from "../innerEventInfo/discoverInfo";
+import DiscoverInfo from "../Utils/discoverInfo";
 
 function Discover() {
   const [fetchError, setFetchError] = useState(null);
@@ -21,7 +21,7 @@ function Discover() {
       setEvents(null);
       console.log(error);
     }
-    
+
     if (data) {
       setEvents(data);
       setFetchError(null);
