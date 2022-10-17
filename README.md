@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+<div id="header" align="center">
+<h1>Vangogh-ing</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<i>A one-stop-shop to view arts and culture focused events, promotions, and activities.
+<br>Link your account to an organization to be able to post and your own events.</i>
 
-## Available Scripts
+<a href="https://vangogh-ing.netlify.app/">View Deployment</a> <br>
+[![Netlify Status](https://api.netlify.com/api/v1/badges/28a0e61f-a660-4ea6-9d14-1ddc846a7e35/deploy-status)](https://app.netlify.com/sites/vangogh-ing/deploys)
 
-In the project directory, you can run:
+</div>
 
-### `npm start`
+<div>
+<h2>Tech Stack</h2>
+<a href='https://lesscss.org/'>
+<img src="https://img.shields.io/badge/less-2B4C80?style=for-the-badge&logo=less&logoColor=white" /> </a>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<a href='https://mui.com/'>
+<img src="https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white" /> </a>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<a href='https://www.netlify.com/'>
+<img src="https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7" /> </a>
 
-### `npm test`
+<a href='https://nodejs.org/en/'>
+<img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white" /> </a>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<a href='https://www.postgresql.org/'>
+<img src="https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white" /> </a>
 
-### `npm run build`
+<a href='https://reactjs.org/'>
+<img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" /> </a>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<a href='https://supabase.com/'>
+<img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" /> </a>
+</div>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<h2>Get Started</h2>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repo
 
-### `npm run eject`
+```
+git clone git@github.com:vangogh-ing/vangogh-ing.git
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Install necessary NPM packages
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Start the app locally
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+npm start
+```
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<h2>Icon Credits</h2>
+<a href='https://www.flaticon.com/free-icon/sunflower_2128152'><img src="https://cdn-icons-png.flaticon.com/512/2128/2128152.png" width='40px'/>
+<a href='https://www.flaticon.com/free-icon/sunflower_3367823'><img src="https://cdn-icons-png.flaticon.com/512/3367/3367823.png" width='40px'/>
+<a href='https://www.flaticon.com/free-icon/grain_575435'><img src="https://cdn-icons-png.flaticon.com/512/575/575435.png" width='40px'/>
