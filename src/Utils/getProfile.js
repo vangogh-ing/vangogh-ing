@@ -24,7 +24,9 @@ const getProfile = async (
     if (data) {
       setName(data.name);
       setImageUrl(data.imageUrl);
-      setUserOrgId(data.OrgId);
+      if (setUserOrgId) {
+        setUserOrgId(data.OrgId);
+      }
     }
   } catch (error) {
     alert(error.message);

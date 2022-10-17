@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 
 import getProfile from "../../Utils/getProfile";
+import CreateOrgPopup from "./CreateOrgPopup";
 
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true);
@@ -10,6 +11,9 @@ const Account = ({ session }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [userOrgId, setUserOrgId] = useState(null);
   const [orgName, setOrgName] = useState(null);
+
+  const [open, setOpen] = useState(false);
+  const closePopup = () => setOpen(false);
 
   const organizationName = useCallback(async () => {
     const { data } = await supabase
@@ -29,6 +33,10 @@ const Account = ({ session }) => {
       organizationName();
     }
   }, [session, userOrgId, organizationName]);
+
+  function handleOrgClick() {
+    setOpen(true);
+  }
 
   return (
     <div>
@@ -56,7 +64,15 @@ const Account = ({ session }) => {
               ) : (
                 <div className="account_org">
                   <p>No organization linked</p>
-                  <a>create an org?</a>
+                  <a href="#createOrg" onClick={handleOrgClick}>
+                    create an org?
+                  </a>
+                  <CreateOrgPopup
+                    open={open}
+                    closePopup={closePopup}
+                    session={session}
+                    setUserOrgId={setUserOrgId}
+                  />
                 </div>
               )}
             </div>
