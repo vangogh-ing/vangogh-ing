@@ -3,7 +3,10 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 import SingleOrgEvents from "./SingleOrgEvents";
-import { LinearProgress } from "@mui/material";
+import { LinearProgress, Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import { Remove } from "@mui/icons-material";
 
 export default function SingleOrg() {
   const { id } = useParams();
@@ -46,10 +49,6 @@ export default function SingleOrg() {
   useEffect(() => {
     fetchOrgUserInfo();
     handleFollowStatus();
-
-    return () => {
-      setSingleOrgInfo({});
-    };
   }, [fetchOrgUserInfo, handleFollowStatus]);
 
   const handleFollowOrg = useCallback(async () => {
@@ -77,7 +76,7 @@ export default function SingleOrg() {
           }}
           color="success"
         />
-      ) : !singleOrgInfo.id ? (
+      ) : !singleOrgInfo ? (
         <div>
           <h1>Organization Not Found!</h1>
         </div>
@@ -91,15 +90,19 @@ export default function SingleOrg() {
               </div>
               <div className="single-buttons">
                 {authUserId ? (
-                  !alreadyFollows ? (
-                    <button onClick={handleFollowOrg}>
-                      Follow Organization
-                    </button>
-                  ) : (
-                    <button onClick={handleUnfollowOrg}>
-                      Unfollow Organization
-                    </button>
-                  )
+                  <Button
+                    variant="contained"
+                    className="contained-button"
+                    color={!alreadyFollows ? "success" : "primary"}
+                    endIcon={!alreadyFollows ? <AddIcon /> : <RemoveIcon />}
+                    onClick={async () => {
+                      !alreadyFollows
+                        ? await handleFollowOrg()
+                        : await handleUnfollowOrg();
+                    }}
+                  >
+                    {!alreadyFollows ? "Follow" : "Unfollow"}
+                  </Button>
                 ) : (
                   <p>
                     <Link to={"/login"}>Log in</Link> or{" "}
@@ -118,12 +121,6 @@ export default function SingleOrg() {
               <div className="single-details">
                 <div className="single-details-top">
                   <p>{singleOrgInfo.description}</p>
-                  {/* <p>
-                    Rating:{" "}
-                    {singleOrgInfo.rating
-                      ? singleOrgInfo.rating
-                      : "not available"}
-                  </p> */}
                   <p>
                     Website:{" "}
                     {singleOrgInfo.webUrl ? (
