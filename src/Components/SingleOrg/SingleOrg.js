@@ -3,10 +3,10 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 import SingleOrgEvents from "./SingleOrgEvents";
-import { LinearProgress, Button } from "@mui/material";
+import LinearProgress from "@mui/material/LinearProgress";
+import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { Remove } from "@mui/icons-material";
 
 export default function SingleOrg() {
   const { id } = useParams();

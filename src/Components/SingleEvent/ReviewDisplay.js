@@ -1,15 +1,10 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { supabase } from "../../supabaseClient";
-import {
-  Rating,
-  TextField,
-  Button,
-  CircularProgress,
-  Avatar,
-  Card,
-  CardHeader,
-  CardContent,
-} from "@mui/material";
+import ReviewCard from "./ReviewCard";
+import Rating from "@mui/material/Rating";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 import { styled } from "@mui/material/styles";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -237,48 +232,15 @@ export default function ReviewDisplay(props) {
         ) : !allReviews.length ? (
           <div>No reviews... yet!</div>
         ) : (
-          <div>
-            <section className="reviews-list">
-              {allReviews
-                .filter((review) => review.content)
-                .map((review) => (
-                  <div key={review.id}>
-                    <Card
-                      className="review-card"
-                      raised={true}
-                      sx={{
-                        borderRadius: 0,
-                        backgroundColor: "#FFFEF9",
-                      }}
-                    >
-                      <CardHeader
-                        avatar={
-                          <Avatar
-                            alt={review.User.name}
-                            src={review.User.imageUrl}
-                          />
-                        }
-                        title={review.User.name}
-                        subheader={
-                          <StyledRating
-                            readOnly
-                            name="user-rating"
-                            value={review.rating}
-                            precision={0.5}
-                            size="medium"
-                            icon={<FilterVintageIcon fontSize="inherit" />}
-                            emptyIcon={<FilterVintageIcon fontSize="inherit" />}
-                          />
-                        }
-                      />
-                      <CardContent className="review-text">
-                        {review.content}
-                      </CardContent>
-                    </Card>
-                  </div>
-                ))}
-            </section>
-          </div>
+          <section className="reviews-list">
+            {allReviews
+              .filter((review) => review.content)
+              .map((review) => (
+                <div key={review.id}>
+                  <ReviewCard review={review} />
+                </div>
+              ))}
+          </section>
         )}
       </div>
     </div>

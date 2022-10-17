@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Popup from "reactjs-popup";
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";

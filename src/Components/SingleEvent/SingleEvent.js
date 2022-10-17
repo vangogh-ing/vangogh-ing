@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import SaveEventPopup from "./SaveEventPopup";
 import { DateDisplay, TimeDisplay } from "./DateTimeDisplay";
 import ReviewDisplay from "./ReviewDisplay";
-import { LinearProgress, IconButton } from "@mui/material";
+import LinearProgress from "@mui/material/LinearProgress";
+import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function SingleEvent() {
