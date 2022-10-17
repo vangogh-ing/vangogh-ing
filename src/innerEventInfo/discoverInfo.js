@@ -18,10 +18,17 @@ function DiscoverInfo({ event, session, userOrgId }) {
             <div className="infoCard">
               <h3 className="eventTitle">{event.title}</h3>
               <div className="details">
-                <p>
+                {/* <p>
                   {event.startTime} - {event.endTime} | {event.startDate} /
                   {event.endDate} | {event.location}
-                </p>
+                </p> */}
+                <DateDisplay start={event.startDate} end={event.endDate} />
+                <TimeDisplay
+                  startDate={event.startDate}
+                  endDate={event.endDate}
+                  startTime={event.startTime}
+                  endTime={event.endTime}
+                />
               </div>
               <p className="description">{event.description}</p>
             </div>
@@ -38,15 +45,15 @@ function DiscoverInfo({ event, session, userOrgId }) {
               <h3 className="eventTitle">{event.title}</h3>
               <div className="details">
                 <DateDisplay start={event.startDate} end={event.endDate} />
-                <p>
+                {/* <p>
                   {event.startTime} - {event.endTime}
-                </p>
-                {/* <TimeDisplay
+                </p> */}
+                <TimeDisplay
                   startDate={event.startDate}
                   endDate={event.endDate}
                   startTime={event.startTime}
                   endTime={event.endTime}
-                /> */}
+                />
               </div>
               <p className="description">{event.description}</p>
             </div>
