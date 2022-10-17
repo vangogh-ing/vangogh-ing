@@ -1,13 +1,19 @@
 import { supabase } from "../supabaseClient";
 
-const getProfile = async (session, setLoading, setName, setImageUrl) => {
+const getProfile = async (
+  session,
+  setLoading,
+  setName,
+  setImageUrl,
+  setUserOrgId
+) => {
   try {
     setLoading(true);
     const { user } = session;
 
     let { data, error, status } = await supabase
       .from("User")
-      .select(`name, email, imageUrl`)
+      .select(`name, email, imageUrl, OrgId`)
       .eq("id", user.id)
       .single();
 
@@ -18,6 +24,9 @@ const getProfile = async (session, setLoading, setName, setImageUrl) => {
     if (data) {
       setName(data.name);
       setImageUrl(data.imageUrl);
+      if (setUserOrgId) {
+        setUserOrgId(data.OrgId);
+      }
     }
   } catch (error) {
     alert(error.message);
