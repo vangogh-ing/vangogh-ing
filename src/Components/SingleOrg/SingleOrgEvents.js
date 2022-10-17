@@ -32,35 +32,25 @@ export default function SingleOrgEvents(props) {
   };
 
   return (
-    <div>
+    <div className="event-carousel-container">
       {relatedEventInfo.length ? (
-        <h2>Events Happening at {props.orgName}</h2>
+        <header className="event-carousel-header">
+          Events Happening at {props.orgName}
+        </header>
       ) : (
-        <h2>No events posted yet, check again later!</h2>
+        <header className="event-carousel-header">
+          No events posted yet, check again later!
+        </header>
       )}
       {relatedEventInfo.length > 0 && (
-        <Slider
-          {...settings}
-          style={{
-            marginLeft: "30px",
-            width: "25em",
-            textAlign: "center",
-          }}
-        >
+        <Slider className="event-carousel-slider" {...settings}>
           {relatedEventInfo.map((event) => (
             <div key={event.id}>
-              <h4>
+              <p>
                 <Link to={`/events/${event.id}`}>{event.title}</Link>
-              </h4>
-              {/* NOTE: PLACEHOLDER STYLING ON IMAGE TAG, TO BE CHANGED */}
+              </p>
               <img
-                style={{
-                  minWidth: "200px",
-                  maxHeight: "200px",
-                  objectFit: "contain",
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                }}
+                className="event-carousel-img"
                 alt="Event Img"
                 src={event.imageUrl}
               />

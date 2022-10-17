@@ -1,0 +1,47 @@
+.interactive-popup-overlay {
+  background: rgba(14, 28, 55, 0.5);
+}
+.interactive-popup {
+  display: flex;
+  flex-direction: column;
+  background-color: @bgColor;
+  color: black;
+  width: 25rem;
+  min-height: 14rem;
+  border-style: solid;
+  border-color: @metallicGold;
+  box-shadow: 10px 10px @independenceBlue;
+  padding: 1rem;
+}
+.interactive-popup_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-color: @metallicGold;
+}
+.interactive-popup_header * {
+  margin: 0.5rem;
+}
+.interactive-popup_actions {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+.interactive-popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.2rem;
+}
+.interactive-popup_header > button {
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  border-radius: 2px;
+  background-color: @metallicGold;
+  color: @bgColor;
+}

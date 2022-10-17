@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { supabase } from "./supabaseClient";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import AuthLogin from "./Components/Auth/AuthLogin";
 import AuthSignup from "./Components/Auth/AuthSignup";
@@ -17,6 +18,28 @@ import Calendar from "./Components/Calendar/Calendar";
 import OrgActiveEvents from "./Components/OrgEvents/orgActiveEvents";
 import OrgPastEvents from "./Components/OrgEvents/orgPastEvents";
 
+// notes: material ui theme test:
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#4C5E7D",
+      contrastText: "#fff",
+    },
+    secondary: {
+      main: "#BCA32D",
+      contrastText: "#fff",
+    },
+    success: {
+      main: "#495A20",
+      contrastText: "#fff",
+    },
+    error: {
+      main: "#B74815",
+      contrastText: "#fff",
+    },
+  },
+});
+
 export default function App() {
   const [session, setSession] = useState(null);
 
@@ -31,58 +54,62 @@ export default function App() {
   }, []);
 
   return (
-    <div>
-      <Navbar session={session || null} />
-      {!session ? (
-        <Routes>
-          <Route path="/" element={<Navigate to="/discover" replace />} />
-          <Route path="/login" element={<AuthLogin />} />
-          <Route path="/signup" element={<AuthSignup />} />
-          <Route path="/events/:id" element={<SingleEvent />} />
-          <Route path="/orgs/:id" element={<SingleOrg />} />
-          <Route path="/discover" element={<Discover />} />
-        </Routes>
-      ) : (
-        <Routes>
-          <Route
-            path="/welcome"
-            element={<NewAccount key={session.user.id} session={session} />}
-          />
-          <Route
-            path="/account"
-            element={<Account key={session.user.id} session={session} />}
-          />
-          <Route
-            path="/account/edit"
-            element={<EditAccount key={session.user.id} session={session} />}
-          />
-          <Route
-            path="/discover"
-            element={<Discover key={session.user} session={session} />}
-          />
-          <Route path="/events/:id" element={<SingleEvent />} />
-          <Route path="/orgs/:id" element={<SingleOrg />} />
-          <Route path="/foryou" element={<ForYouPage session={session} />} />
-          <Route
-            path="/savedevents"
-            element={<SavedEventPage session={session} />}
-          />
-          <Route
-            path="/activeevents"
-            element={
-              <OrgActiveEvents key={session.user.id} session={session} />
-            }
-          />
-          <Route
-            path="/pastevents"
-            element={<OrgPastEvents key={session.user.id} session={session} />}
-          />
-          <Route
-            path="/plan"
-            element={<Calendar key={session.user.id} session={session} />}
-          />
-        </Routes>
-      )}
-    </div>
+    <ThemeProvider theme={theme}>
+      <div>
+        <Navbar session={session || null} />
+        {!session ? (
+          <Routes>
+            <Route path="/" element={<Navigate to="/discover" replace />} />
+            <Route path="/login" element={<AuthLogin />} />
+            <Route path="/signup" element={<AuthSignup />} />
+            <Route path="/events/:id" element={<SingleEvent />} />
+            <Route path="/orgs/:id" element={<SingleOrg />} />
+            <Route path="/discover" element={<Discover />} />
+          </Routes>
+        ) : (
+          <Routes>
+            <Route
+              path="/welcome"
+              element={<NewAccount key={session.user.id} session={session} />}
+            />
+            <Route
+              path="/account"
+              element={<Account key={session.user.id} session={session} />}
+            />
+            <Route
+              path="/account/edit"
+              element={<EditAccount key={session.user.id} session={session} />}
+            />
+            <Route
+              path="/discover"
+              element={<Discover key={session.user} session={session} />}
+            />
+            <Route path="/events/:id" element={<SingleEvent />} />
+            <Route path="/orgs/:id" element={<SingleOrg />} />
+            <Route path="/foryou" element={<ForYouPage session={session} />} />
+            <Route
+              path="/savedevents"
+              element={<SavedEventPage session={session} />}
+            />
+            <Route
+              path="/activeevents"
+              element={
+                <OrgActiveEvents key={session.user.id} session={session} />
+              }
+            />
+            <Route
+              path="/pastevents"
+              element={
+                <OrgPastEvents key={session.user.id} session={session} />
+              }
+            />
+            <Route
+              path="/plan"
+              element={<Calendar key={session.user.id} session={session} />}
+            />
+          </Routes>
+        )}
+      </div>
+    </ThemeProvider>
   );
 }
