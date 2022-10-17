@@ -16,13 +16,12 @@ function Discover() {
       .select("*")
       .order(orderBy, { ascending: false });
 
-    console.log("DATA: ", data);
-
     if (error) {
       setFetchError("Could not fetch events");
       setEvents(null);
       console.log(error);
     }
+    
     if (data) {
       setEvents(data);
       setFetchError(null);
@@ -41,7 +40,6 @@ function Discover() {
     }
 
     if (data) {
-      console.log();
       let orgId = data[0].OrgId;
       setUserOrgId(orgId);
     }
