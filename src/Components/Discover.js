@@ -16,8 +16,6 @@ function Discover() {
       .select("*")
       .order(orderBy, { ascending: false });
 
-    console.log("DATA: ", data);
-
     if (error) {
       setFetchError("Could not fetch events");
       setEvents(null);
