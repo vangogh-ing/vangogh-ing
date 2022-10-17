@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   DateDisplay,
@@ -6,35 +5,7 @@ import {
 } from "../Components/SingleEvent/DateTimeDisplay";
 import { supabase } from "../supabaseClient";
 
-function DiscoverInfo({ event, session }) {
-  const [userOrgId, setUserOrgId] = useState(null);
-  useEffect(() => {
-    const findUser = async () => {
-      const { data, error } = await supabase
-        .from("User")
-        .select("id, OrgId")
-        .eq("id", session.user.id);
-
-      //NOTE: need edge case if user is not logged in -> they have no user id
-
-      if (error) {
-        console.log(error);
-        setUserOrgId(null);
-      }
-
-      if (data) {
-        console.log();
-        let orgId = data[0].OrgId;
-        setUserOrgId(orgId);
-      }
-    };
-    //findUser();
-
-    if (session) {
-      findUser();
-    }
-  }, [session]);
-
+function DiscoverInfo({ event, session, userOrgId }) {
   return (
     <div>
       {session && userOrgId !== null ? (
@@ -71,11 +42,11 @@ function DiscoverInfo({ event, session }) {
                   {event.startTime} - {event.endTime}
                 </p>
                 {/* <TimeDisplay
-                startDate={event.startDate}
-                endDate={event.endDate}
-                startTime={event.startTime}
-                endTime={event.endTime}
-              /> */}
+                  startDate={event.startDate}
+                  endDate={event.endDate}
+                  startTime={event.startTime}
+                  endTime={event.endTime}
+                /> */}
               </div>
               <p className="description">{event.description}</p>
             </div>

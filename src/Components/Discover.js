@@ -1,5 +1,5 @@
 import { supabase } from "../supabaseClient";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 //inner components
 import DiscoverInfo from "../innerEventInfo/discoverInfo";
 
@@ -8,24 +8,49 @@ function Discover() {
   const [events, setEvents] = useState(null);
   const [session, setSession] = useState(null);
   const [orderBy, setOrderBy] = useState("startDate");
+  const [userOrgId, setUserOrgId] = useState(null);
+
+  let fetchEvents = useCallback(async () => {
+    const { data, error } = await supabase
+      .from("Events")
+      .select("*")
+      .order(orderBy, { ascending: false });
+
+    console.log("DATA: ", data);
+
+    if (error) {
+      setFetchError("Could not fetch events");
+      setEvents(null);
+      console.log(error);
+    }
+    if (data) {
+      setEvents(data);
+      setFetchError(null);
+    }
+  });
+
+  let findUser = useCallback(async () => {
+    const { data, error } = await supabase
+      .from("User")
+      .select("id, OrgId")
+      .eq("id", session.user.id);
+
+    if (error) {
+      console.log(error);
+      setUserOrgId(null);
+    }
+
+    if (data) {
+      console.log();
+      let orgId = data[0].OrgId;
+      setUserOrgId(orgId);
+    }
+  });
 
   useEffect(() => {
-    const fetchEvents = async () => {
-      const { data, error } = await supabase
-        .from("Events")
-        .select("*")
-        .order(orderBy, { ascending: false });
-
-      if (error) {
-        setFetchError("Could not fetch events");
-        setEvents(null);
-        console.log(error);
-      }
-      if (data) {
-        setEvents(data);
-        setFetchError(null);
-      }
-    };
+    if (session) {
+      findUser();
+    }
     fetchEvents();
 
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -65,7 +90,11 @@ function Discover() {
               <h2>Placeholder: NOT LOGGED IN</h2>
               {events.map((event, idx) => (
                 <div className="cardContainer" key={idx}>
-                  <DiscoverInfo key={event.id} event={event} />
+                  <DiscoverInfo
+                    key={event.id}
+                    event={event}
+                    userOrgId={userOrgId}
+                  />
                 </div>
               ))}
             </div>

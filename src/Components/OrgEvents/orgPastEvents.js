@@ -1,5 +1,5 @@
 import { supabase } from "../../supabaseClient";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 //add on components
 import DiscoverInfo from "../../innerEventInfo/discoverInfo";
@@ -12,35 +12,37 @@ function OrgPastEvents({ session }) {
   function isBeforeToday(eventDate) {
     return eventDate < Date.now();
   }
+
+  let userOrgId = useCallback(async () => {
+    const { data } = await supabase
+      .from("User")
+      .select("id, OrgId")
+      .eq("id", session.user.id);
+
+    if (data) {
+      let userOrg = data[0].OrgId;
+      setUserOrgId(userOrg);
+    }
+  });
+
+  let fetchOrgEvents = useCallback(async () => {
+    const { data, error } = await supabase
+      .from("Events")
+      .select("*")
+      .eq("OrgId", userOrg);
+
+    if (error) {
+      console.log(error);
+      setFetchError("Couldnt fetch orgs events");
+      setOrgEvents(null);
+    }
+    if (data) {
+      setOrgEvents(data);
+      setFetchError(null);
+    }
+  });
+
   useEffect(() => {
-    const userOrgId = async () => {
-      const { data } = await supabase
-        .from("User")
-        .select("id, OrgId")
-        .eq("id", session.user.id);
-
-      if (data) {
-        let userOrg = data[0].OrgId;
-        setUserOrgId(userOrg);
-      }
-    };
-
-    const fetchOrgEvents = async () => {
-      const { data, error } = await supabase
-        .from("Events")
-        .select("*")
-        .eq("OrgId", userOrg);
-
-      if (error) {
-        console.log(error);
-        setFetchError("Couldnt fetch orgs events");
-        setOrgEvents(null);
-      }
-      if (data) {
-        setOrgEvents(data);
-        setFetchError(null);
-      }
-    };
     userOrgId();
     if (userOrg) {
       fetchOrgEvents(userOrg);
