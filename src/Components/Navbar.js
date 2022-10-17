@@ -38,22 +38,23 @@ export default function Navbar({ session }) {
 
   return (
     <div>
+      <span>VANGOGH-ING</span>
       {!session ? (
         //not logged in navbar
         <div>
-          <Link to="/login">login</Link>
-          <Link to="/discover"> | Discover</Link>
+          <Link to="/discover">Discover</Link>
+          <Link to="/login">| Login</Link>
         </div>
       ) : userOrg !== null ? (
         //org user navbar
         <div>
-          <Link to="/account">my account</Link>
-          <Link to="/discover"> | Discover</Link>
+          <Link to="/discover">Discover</Link>
           <Link to="/activeevents"> | Active Events</Link>
           <Link to="/pastevents"> | Past Events</Link>
-          <Link to="/foryou"> | for you </Link>
-          <Link to="/savedevents"> | saved events </Link>
-          <Link to="/plan"> | plan </Link>
+          <Link to="/foryou"> | For You </Link>
+          <Link to="/savedevents"> | Saved Events </Link>
+          <Link to="/plan"> | Plan </Link>
+          <Link to="/account">| My Account</Link>
           <button
             type="button"
             className="button block"
@@ -61,18 +62,15 @@ export default function Navbar({ session }) {
           >
             Sign Out
           </button>
-          <div>
-            <Link to="/plan">Plan</Link>
-          </div>
         </div>
       ) : (
         //reg user logged in
         <div>
-          <Link to="/account">my account</Link>
-          <Link to="/discover"> | Discover</Link>
-          <Link to="/foryou"> | for you </Link>
-          <Link to="/savedevents"> | saved events </Link>
-          <Link to="/plan"> | plan </Link>
+          <Link to="/discover">Discover</Link>
+          <Link to="/foryou"> | For You </Link>
+          <Link to="/savedevents"> | Saved Events </Link>
+          <Link to="/plan"> | Plan </Link>
+          <Link to="/account">| My Account</Link>
           <button
             type="button"
             className="button block"
@@ -80,9 +78,6 @@ export default function Navbar({ session }) {
           >
             Sign Out
           </button>
-          <div>
-            <Link to="/plan">Plan</Link>
-          </div>
         </div>
       )}
     </div>
