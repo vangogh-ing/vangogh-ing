@@ -3,7 +3,6 @@ import {
   DateDisplay,
   TimeDisplay,
 } from "../Components/SingleEvent/DateTimeDisplay";
-import { supabase } from "../supabaseClient";
 
 function DiscoverInfo({ event, session, userOrgId }) {
   return (
