@@ -2,28 +2,35 @@ import React, { useEffect, useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
-
 import SingleOrgEvents from "./SingleOrgEvents";
+import LinearProgress from "@mui/material/LinearProgress";
+import Button from "@mui/material/Button";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 export default function SingleOrg() {
   const { id } = useParams();
   const [authUserId, setAuthUserId] = useState();
 
   const [singleOrgInfo, setSingleOrgInfo] = useState({});
-  const [error, setError] = useState("");
   const [alreadyFollows, setAlreadyFollows] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchOrgUserInfo = useCallback(async () => {
-    let { data: Organization, error } = await supabase
+    let { data: Organization } = await supabase
       .from("Organization")
       .select("*")
-      .eq("id", id)
-      .single();
-    error ? setError(error.message) : setSingleOrgInfo(Organization);
+      .eq("id", id);
+
+    if (Organization[0]) {
+      setSingleOrgInfo(Organization[0]);
+    }
+
     let userSession = await supabase.auth.getSession();
     if (userSession.data.session) {
       setAuthUserId(userSession.data.session.user.id);
     }
+    setLoading(false);
   }, [id]);
 
   const handleFollowStatus = useCallback(async () => {
@@ -32,19 +39,16 @@ export default function SingleOrg() {
         .from("user_followed_orgs")
         .select("*")
         .eq("userId", authUserId)
-        .eq("orgId", id)
-        .single();
-      user_followed_orgs ? setAlreadyFollows(true) : setAlreadyFollows(false);
+        .eq("orgId", id);
+      user_followed_orgs.length
+        ? setAlreadyFollows(true)
+        : setAlreadyFollows(false);
     }
   }, [authUserId, id]);
 
   useEffect(() => {
     fetchOrgUserInfo();
     handleFollowStatus();
-
-    return () => {
-      setSingleOrgInfo({});
-    };
   }, [fetchOrgUserInfo, handleFollowStatus]);
 
   const handleFollowOrg = useCallback(async () => {
@@ -63,77 +67,102 @@ export default function SingleOrg() {
     if (!error) setAlreadyFollows(false);
   }, [authUserId, id]);
 
-  let {
-    name,
-    address,
-    phone,
-    email,
-    description,
-    imageUrl,
-    rating,
-    hours,
-    webUrl,
-  } = singleOrgInfo;
-
   return (
     <div>
-      {error && !singleOrgInfo.id ? (
+      {loading ? (
+        <LinearProgress
+          sx={{
+            height: 10,
+          }}
+          color="success"
+        />
+      ) : !singleOrgInfo ? (
         <div>
-          <h1>Organization Id Not Found!</h1>
-          <h3>Error: {error}</h3>
+          <h1>Organization Not Found!</h1>
         </div>
       ) : (
-        singleOrgInfo.id && (
-          <div>
-            <div className="single-org-info">
-              <h1>{name}</h1>
-              <p>{address}</p>
-              {/* NOTE: PLACEHOLDER STYLING ON IMAGE TAG, TO BE REMOVED */}
-              <img
-                style={{
-                  maxWidth: "500px",
-                  maxHeight: "500px",
-                  objectFit: "contain",
-                }}
-                alt="Organization Img"
-                src={imageUrl}
-              />
-              <h3>{description}</h3>
-              {authUserId ? (
-                !alreadyFollows ? (
-                  <button onClick={handleFollowOrg}>Follow Organization</button>
+        <div className="single-page">
+          <div className="single-org-container">
+            <header className="single-header">
+              <div className="single-header-left">
+                <h1>{singleOrgInfo.name}</h1>
+                <p>{singleOrgInfo.address}</p>
+              </div>
+              <div className="single-buttons">
+                {authUserId ? (
+                  <Button
+                    variant="contained"
+                    className="contained-button"
+                    color={!alreadyFollows ? "success" : "primary"}
+                    endIcon={!alreadyFollows ? <AddIcon /> : <RemoveIcon />}
+                    onClick={async () => {
+                      !alreadyFollows
+                        ? await handleFollowOrg()
+                        : await handleUnfollowOrg();
+                    }}
+                  >
+                    {!alreadyFollows ? "Follow" : "Unfollow"}
+                  </Button>
                 ) : (
-                  <button onClick={handleUnfollowOrg}>
-                    Unfollow Organization
-                  </button>
-                )
-              ) : (
-                <p>
-                  <Link to={"/login"}>Log in</Link> or{" "}
-                  <Link to={"/signup"}>sign up</Link> to follow organizations
-                  like {name}!
-                </p>
-              )}
-              <h4>Rating: {rating ? rating : "not available"}</h4>
-              <h4>
-                Website:{" "}
-                {webUrl ? (
-                  <a href={webUrl} rel="noreferrer" target="_blank">
-                    {webUrl}
-                  </a>
-                ) : (
-                  "not available"
+                  <p>
+                    <Link to={"/login"}>Log in</Link> or{" "}
+                    <Link to={"/signup"}>sign up</Link> to follow organizations
+                    like {singleOrgInfo.name}!
+                  </p>
                 )}
-              </h4>
-              <h4>Hours: {hours ? hours : "not available"}</h4>
-              <h4>Tel: {phone ? phone : "not available"} </h4>
-              <h4>Email: {email ? email : "not available"}</h4>
-            </div>
-            <div className="related-event-container">
-              <SingleOrgEvents orgName={name} orgId={id} />
+              </div>
+            </header>
+            <div className="single-info">
+              <img
+                className="single-org-img"
+                alt="Organization Img"
+                src={singleOrgInfo.imageUrl}
+              />
+              <div className="single-details">
+                <div className="single-details-top">
+                  <p>{singleOrgInfo.description}</p>
+                  <p>
+                    Website:{" "}
+                    {singleOrgInfo.webUrl ? (
+                      <a
+                        href={singleOrgInfo.webUrl}
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        {singleOrgInfo.webUrl}
+                      </a>
+                    ) : (
+                      "not available"
+                    )}
+                  </p>
+                </div>
+                <div className="single-details-bottom">
+                  <p>
+                    Hours:{" "}
+                    {singleOrgInfo.hours
+                      ? singleOrgInfo.hours
+                      : "not available"}
+                  </p>
+                  <p>
+                    Tel:{" "}
+                    {singleOrgInfo.phone
+                      ? singleOrgInfo.phone
+                      : "not available"}{" "}
+                  </p>
+                  <p>
+                    Email:{" "}
+                    {singleOrgInfo.email
+                      ? singleOrgInfo.email
+                      : "not available"}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-        )
+          <div className="related-event-container">
+            <SingleOrgEvents orgName={singleOrgInfo.name} orgId={id} />
+          </div>
+        </div>
       )}
     </div>
   );

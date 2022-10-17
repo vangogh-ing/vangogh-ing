@@ -4,40 +4,40 @@ import { supabase } from "../../supabaseClient";
 import { Link } from "react-router-dom";
 import SaveEventPopup from "./SaveEventPopup";
 import { DateDisplay, TimeDisplay } from "./DateTimeDisplay";
+import ReviewDisplay from "./ReviewDisplay";
+import LinearProgress from "@mui/material/LinearProgress";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function SingleEvent() {
   const { id } = useParams();
   const [authUserId, setAuthUserId] = useState();
-
   const [singleEventInfo, setSingleEventInfo] = useState({});
   const [relatedOrgName, setRelatedOrgName] = useState("");
-  const [error, setError] = useState("");
   const [alreadySaved, setAlreadySaved] = useState(false);
   const [currentInterestLevel, setCurrentInterestLevel] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const fetchSingleEvent = useCallback(async () => {
-    let { data: Events, error } = await supabase
+    let { data: Events } = await supabase
       .from("Events")
-      .select("*")
-      .eq("id", id)
-      .single();
-    error ? setError(error.message) : setSingleEventInfo(Events);
+      .select(
+        `*,
+         Organization (name)`
+      )
+      .eq("id", id);
 
-    if (singleEventInfo.OrgId) {
-      let { data: Organization } = await supabase
-        .from("Organization")
-        .select("name")
-        .eq("id", singleEventInfo.OrgId)
-        .single();
-
-      setRelatedOrgName(Organization.name);
+    if (Events[0]) {
+      setSingleEventInfo(Events[0]);
+      setRelatedOrgName(Events[0].Organization.name);
     }
 
     let userSession = await supabase.auth.getSession();
     if (userSession.data.session) {
       setAuthUserId(userSession.data.session.user.id);
     }
-  }, [id, singleEventInfo.OrgId]);
+    setLoading(false);
+  }, [id]);
 
   const handleSavedStatus = useCallback(async () => {
     if (authUserId) {
@@ -45,11 +45,11 @@ export default function SingleEvent() {
         .from("user_added_events")
         .select("*")
         .eq("userId", authUserId)
-        .eq("eventId", id)
-        .single();
-      if (user_added_events) {
+        .eq("eventId", id);
+
+      if (user_added_events[0]) {
         setAlreadySaved(true);
-        setCurrentInterestLevel(user_added_events.interest_level);
+        setCurrentInterestLevel(user_added_events[0].interest_level);
       } else {
         setAlreadySaved(false);
       }
@@ -86,85 +86,101 @@ export default function SingleEvent() {
     setCurrentInterestLevel("");
   }, [authUserId, id]);
 
-  let {
-    title,
-    description,
-    startDate,
-    endDate,
-    startTime,
-    endTime,
-    location,
-    imageUrl,
-    OrgId,
-  } = singleEventInfo;
-
   return (
     <div>
-      {error && !singleEventInfo.id ? (
+      {loading ? (
+        <LinearProgress
+          sx={{
+            height: 10,
+          }}
+          color="success"
+        />
+      ) : !singleEventInfo.id ? (
         <div>
-          <h1>Event Id Not Found!</h1>
-          <h3>Error: {error}</h3>
+          <h1>Event Not Found!</h1>
         </div>
       ) : (
-        singleEventInfo.id && (
-          <div>
-            <div className="single-event-info">
-              <h1>{title}</h1>
-              <p>
-                Hosted by: <Link to={`/orgs/${OrgId}`}>{relatedOrgName}</Link>
-              </p>
-              {/* NOTE: PLACEHOLDER STYLING ON IMAGE TAG, TO BE REMOVED */}
-              <img
-                style={{
-                  maxWidth: "400px",
-                  maxHeight: "400px",
-                  objectFit: "contain",
-                }}
-                alt="Organization Img"
-                src={imageUrl}
-              />
-              <p>{description}</p>
-              <DateDisplay start={startDate} end={endDate} />
-              <TimeDisplay
-                startDate={startDate}
-                endDate={endDate}
-                startTime={startTime}
-                endTime={endTime}
-              />
-              <h4>{location}</h4>
-            </div>
-            {authUserId ? (
-              !alreadySaved ? (
-                <SaveEventPopup
-                  userId={authUserId}
-                  handleSaveEvent={handleSaveEvent}
-                  handleRemoveEvent={handleRemoveEvent}
-                  alreadySaved={false}
-                  currentInterestLevel={currentInterestLevel}
-                />
-              ) : (
-                <div>
-                  <SaveEventPopup
-                    userId={authUserId}
-                    handleSaveEvent={handleSaveEvent}
-                    handleRemoveEvent={handleRemoveEvent}
-                    alreadySaved={true}
-                    currentInterestLevel={currentInterestLevel}
+        <div className="single-page">
+          <div className="single-container">
+            <header className="single-header">
+              <div className="single-header-left">
+                <h1>{singleEventInfo.title}</h1>
+                <h2>
+                  Hosted by:{" "}
+                  <Link to={`/orgs/${singleEventInfo.OrgId}`}>
+                    {relatedOrgName}
+                  </Link>
+                </h2>
+              </div>
+              <div className="single-buttons">
+                {authUserId ? (
+                  !alreadySaved ? (
+                    <SaveEventPopup
+                      userId={authUserId}
+                      handleSaveEvent={handleSaveEvent}
+                      handleRemoveEvent={handleRemoveEvent}
+                      alreadySaved={false}
+                      currentInterestLevel={currentInterestLevel}
+                    />
+                  ) : (
+                    <div>
+                      <SaveEventPopup
+                        userId={authUserId}
+                        handleSaveEvent={handleSaveEvent}
+                        handleRemoveEvent={handleRemoveEvent}
+                        alreadySaved={true}
+                        currentInterestLevel={currentInterestLevel}
+                      />
+                      <IconButton
+                        variant="contained"
+                        className="remove-event-button"
+                        color="error"
+                        onClick={handleRemoveEvent}
+                      >
+                        <DeleteIcon
+                          titleAccess="remove-event"
+                          fontSize="large"
+                        />
+                      </IconButton>
+                    </div>
+                  )
+                ) : (
+                  <p>
+                    <Link to={"/login"}>Log in</Link> or{" "}
+                    <Link to={"/signup"}>sign up</Link> to save events!
+                  </p>
+                )}
+              </div>
+            </header>
+            {/* NOTE: PLACEHOLDER STYLING ON IMAGE TAG, TO BE REMOVED */}
+            <div className="single-info">
+              {/* <div className="single-event-image"> */}
+              <img alt="Organization Img" src={singleEventInfo.imageUrl} />
+              {/* </div> */}
+              <div className="single-details">
+                <div className="single-details-top">
+                  <DateDisplay
+                    start={singleEventInfo.startDate}
+                    end={singleEventInfo.endDate}
                   />
-                  <button onClick={handleRemoveEvent}>
-                    Remove Event from Profile
-                  </button>
+                  <TimeDisplay
+                    startDate={singleEventInfo.startDate}
+                    endDate={singleEventInfo.endDate}
+                    startTime={singleEventInfo.startTime}
+                    endTime={singleEventInfo.endTime}
+                  />
+                  <p>{singleEventInfo.location}</p>
                 </div>
-              )
-            ) : (
-              <p>
-                <Link to={"/login"}>Log in</Link> or{" "}
-                <Link to={"/signup"}>sign up</Link> to add events to your
-                profile!
-              </p>
-            )}
+                <p>{singleEventInfo.description}</p>
+              </div>
+            </div>
           </div>
-        )
+          <ReviewDisplay
+            singleEventInfo={singleEventInfo}
+            userId={authUserId}
+            eventId={id}
+          />
+        </div>
       )}
     </div>
   );
