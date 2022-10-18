@@ -5,7 +5,7 @@ import { supabase } from "../../supabaseClient";
 import getProfile from "../../Utils/getProfile";
 import CreateOrgPopup from "./CreateOrgPopup";
 
-const Account = ({ session }) => {
+const Account = ({ session, handleAccount }) => {
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -36,6 +36,11 @@ const Account = ({ session }) => {
 
   function handleOrgClick() {
     setOpen(true);
+  }
+
+  function handleOrg(orgId) {
+    setUserOrgId(orgId);
+    handleAccount(orgId);
   }
 
   return (
@@ -71,7 +76,7 @@ const Account = ({ session }) => {
                     open={open}
                     closePopup={closePopup}
                     session={session}
-                    setUserOrgId={setUserOrgId}
+                    setUserOrgId={handleOrg}
                   />
                 </div>
               )}

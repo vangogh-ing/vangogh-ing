@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-export default function Navbar({ session }) {
+export default function Navbar({ session, propsOrgId }) {
   const [userOrg, setUserOrgId] = useState(null);
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -24,6 +24,10 @@ export default function Navbar({ session }) {
   };
 
   useEffect(() => {
+    if (propsOrgId) {
+      setUserOrgId(propsOrgId);
+    }
+
     const userOrgId = async () => {
       const { data, error } = await supabase
         .from("User")
@@ -43,7 +47,7 @@ export default function Navbar({ session }) {
     if (session) {
       userOrgId();
     }
-  }, [session]);
+  }, [session, propsOrgId]);
 
   return (
     <div className="navbar">
@@ -86,8 +90,8 @@ export default function Navbar({ session }) {
             <Link to="/account">My Account</Link>
             <button
               type="button"
-              className="button block"
               onClick={handleSignOut}
+              className="navbar_signout"
             >
               Sign Out
             </button>
@@ -106,8 +110,8 @@ export default function Navbar({ session }) {
             <Link to="/account">My Account</Link>
             <button
               type="button"
-              className="button block"
               onClick={handleSignOut}
+              className="navbar_signout"
             >
               Sign Out
             </button>
