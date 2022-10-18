@@ -10,7 +10,9 @@ function CreateEvent({ user }) {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [location, setLocation] = useState("");
-  const [imageUrl, setImage] = useState("");
+  const [imageUrl, setImage] = useState(
+    "https://xsmskhmvxuiondcfdoso.supabase.co/storage/v1/object/public/avatars/public/sunflower-pink.png"
+  );
   const [formError, setFormError] = useState(null);
 
   const OrgId = user;
@@ -69,8 +71,11 @@ function CreateEvent({ user }) {
             <label htmlFor="description">Description: </label>
             <input
               type="text"
+              id="description"
               value={description}
               onChange={(event) => setDescription(event.target.value)}
+              minLength="300"
+              placeholder="300 character minimum"
               required
             />
 
@@ -106,7 +111,7 @@ function CreateEvent({ user }) {
               required
             />
 
-            <label htmlFor="location">Location: </label>
+            <label htmlFor="location">Location:</label>
             <input
               type="text"
               value={location}
@@ -121,9 +126,7 @@ function CreateEvent({ user }) {
               onChange={(event) => setImage(event.target.value)}
             />
 
-            <button onClick={() => window.location.reload(false)}>
-              Create Event
-            </button>
+            <button>Create Event</button>
 
             {formError && <p>{formError}</p>}
           </form>

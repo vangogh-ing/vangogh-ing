@@ -24,6 +24,7 @@ function DiscoverInfo({ event, session, userOrgId }) {
                   startTime={event.startTime}
                   endTime={event.endTime}
                 />
+                <p>Hosted By: {event.Organization.name}</p>
               </div>
               <p className="description">{event.description}</p>
             </div>
@@ -46,6 +47,7 @@ function DiscoverInfo({ event, session, userOrgId }) {
                   startTime={event.startTime}
                   endTime={event.endTime}
                 />
+                <p>Hosted By: {event.Organization.name}</p>
               </div>
               <p className="description">{event.description}</p>
             </div>

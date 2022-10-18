@@ -13,7 +13,7 @@ function Discover() {
   let fetchEvents = useCallback(async () => {
     const { data, error } = await supabase
       .from("Events")
-      .select("*")
+      .select("*, Organization (name)")
       .order(orderBy, { ascending: false });
 
     if (error) {
