@@ -10,6 +10,7 @@
 .navbar_name {
   text-align: center;
   font-size: 1.3rem;
+  font-weight: 800;
   margin: 0.5rem;
   width: 20%;
 }
@@ -29,4 +30,39 @@
   text-decoration: none;
   color: @metallicGold;
   padding: 1rem;
+  transition: 0.3s;
+}
+
+.navbar_links > div > a:hover {
+  text-shadow: 0 0 15px @lightYellow;
+  transition: 0.3s;
+}
+
+.navbar_org {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: @metallicGold;
+  font-size: 1rem;
+  margin-left: 3rem;
+  transition: 0.3s;
+}
+
+.navbar_org:hover {
+  text-shadow: 0 0 15px @lightYellow;
+  transition: 0.3s;
+}
+
+.navbar_org_menu > a {
+  text-decoration: none;
+  font-weight: 700;
+  color: @oliveGreen;
+}
+
+.navbar_signout {
+  .smallYellowButton;
+}
+
+.navbar_signout:hover {
+  .smallYellowButtonHover;
 }

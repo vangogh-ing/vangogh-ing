@@ -74,14 +74,14 @@ export default function Navbar({ session, propsOrgId }) {
             <Link to="/foryou">For You</Link>
             <Link to="/savedevents">Saved Events</Link>
             <Link to="/plan">Plan </Link>
-          </div>
-          <div>
-            <button onClick={handleClick}>My Events</button>
+            <button onClick={handleClick} className="navbar_org">
+              My Org Events
+            </button>
             <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={handleClose} className="navbar_org_menu">
                 <Link to="/activeevents">Active Events</Link>
               </MenuItem>
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={handleClose} className="navbar_org_menu">
                 <Link to="/pastevents">Past Events</Link>
               </MenuItem>
             </Menu>
