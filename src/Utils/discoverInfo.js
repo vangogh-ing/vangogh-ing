@@ -26,12 +26,13 @@ function DiscoverInfo({ event, session, userOrgId }) {
                 />
               </div>
             </Link>
+
             <Link to={`/orgs/${event.OrgId}`}>
               <p>Hosted By: {event.Organization.name}</p>
             </Link>
-          </div>
-          <div>
-            <p className="description">{event.description}</p>
+            <div>
+              <p className="description">{event.description}</p>
+            </div>
           </div>
         </div>
       ) : (

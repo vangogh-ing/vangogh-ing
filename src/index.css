@@ -438,8 +438,10 @@ body {
 .infocard {
   display: flex;
   float: right;
+  flex-direction: column;
   padding-right: 2rem;
   color: black;
+  flex-wrap: wrap;
 }
 .eventTitle {
   color: black;
@@ -451,14 +453,12 @@ body {
 }
 .descriptionCard {
   display: flex;
-  justify-content: end ;
 }
 .description {
   display: -webkit-box;
   padding-top: 3rem;
   padding-right: 2rem;
   max-height: 5rem;
-  min-width: 60%;
   border-style: solid;
   text-align: justify;
   overflow: hidden;
