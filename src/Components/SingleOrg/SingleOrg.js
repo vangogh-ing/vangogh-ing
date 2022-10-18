@@ -113,11 +113,7 @@ export default function SingleOrg() {
               </div>
             </header>
             <div className="single-info">
-              <img
-                className="single-org-img"
-                alt="Organization Img"
-                src={singleOrgInfo.imageUrl}
-              />
+              <img alt="Organization Img" src={singleOrgInfo.imageUrl} />
               <div className="single-details">
                 <div className="single-details-top">
                   <p>{singleOrgInfo.description}</p>

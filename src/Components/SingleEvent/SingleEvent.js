@@ -152,11 +152,8 @@ export default function SingleEvent() {
                 )}
               </div>
             </header>
-            {/* NOTE: PLACEHOLDER STYLING ON IMAGE TAG, TO BE REMOVED */}
             <div className="single-info">
-              {/* <div className="single-event-image"> */}
               <img alt="Organization Img" src={singleEventInfo.imageUrl} />
-              {/* </div> */}
               <div className="single-details">
                 <div className="single-details-top">
                   <DateDisplay

@@ -515,10 +515,12 @@ body {
   margin-bottom: 2rem;
 }
 .single-info > img {
-  box-shadow: 1rem 1rem 0rem -0.5rem #4c5e7d;
   width: 29rem;
   height: 29rem;
   object-fit: cover;
+}
+.single-event-img {
+  box-shadow: 1rem 1rem 0rem -0.5rem #4c5e7d;
 }
 .single-org-img {
   box-shadow: 1rem 1rem 0rem -0.5rem #bca32d;
@@ -552,7 +554,7 @@ body {
   border-left: 0.2rem solid #4b5c4f;
   border-right: 0.2rem solid #4b5c4f;
   margin-top: 3rem;
-  min-width: 35rem;
+  min-width: 33rem;
 }
 .event-carousel-slider {
   text-align: center;
@@ -650,4 +652,73 @@ body {
   width: 24rem;
   border-radius: 0;
   background-color: #fffef9;
+}
+.for-you-page {
+  width: 100vw;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin-top: 2rem;
+}
+.for-you-page a {
+  color: #666d24;
+}
+.for-you-container {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 90vw;
+  border-left: 0.5rem solid #bca32d;
+  border-right: 0.5rem solid #bca32d;
+  border-top: 0.5rem solid #bca32d;
+  margin-bottom: 1rem;
+  outline: 0.5rem solid #4c5e7d;
+}
+.for-you-none-followed {
+  padding: 1rem;
+  margin: 0rem -0.1rem 0rem -0.1rem;
+  border-bottom: 0.5rem solid #bca32d;
+}
+.for-you-org {
+  border-bottom: 0.5rem solid #bca32d;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  min-height: 25rem;
+  padding-bottom: 1rem;
+}
+.for-you-org-info {
+  display: flex;
+  flex-direction: column;
+  width: 32rem;
+}
+.for-you-org-info-row {
+  display: flex;
+}
+.for-you-org-img {
+  display: inline-block;
+  width: 15rem;
+  height: 15rem;
+  object-fit: cover;
+  box-shadow: 0.3rem 0.3rem #4b5c4f;
+  transition: transform ease 0.5s, box-shadow ease 0.5s;
+}
+.for-you-org-img:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: 0.5rem 0.5rem #4b5c4f;
+  transition: transform ease 0.5s, box-shadow ease 0.5s;
+}
+.for-you-org-info-right {
+  margin: 0rem 0.5rem 0rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.for-you-org-events {
+  height: min-content;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1.5rem;
+  width: 50%;
 }
