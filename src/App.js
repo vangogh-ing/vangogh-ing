@@ -42,6 +42,7 @@ const theme = createTheme({
 
 export default function App() {
   const [session, setSession] = useState(null);
+  const [propsOrgId, setPropsOrgId] = useState(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -53,10 +54,14 @@ export default function App() {
     });
   }, []);
 
+  function handleAccount(id) {
+    setPropsOrgId(id);
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <Navbar session={session || null} />
+        <Navbar session={session || null} propsOrgId={propsOrgId} />
         {!session ? (
           <Routes>
             <Route path="/" element={<Navigate to="/discover" replace />} />
@@ -74,7 +79,13 @@ export default function App() {
             />
             <Route
               path="/account"
-              element={<Account key={session.user.id} session={session} />}
+              element={
+                <Account
+                  key={session.user.id}
+                  session={session}
+                  handleAccount={handleAccount}
+                />
+              }
             />
             <Route
               path="/account/edit"
