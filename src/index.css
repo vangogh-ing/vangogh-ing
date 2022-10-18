@@ -518,12 +518,13 @@ body {
   width: 29rem;
   height: 29rem;
   object-fit: cover;
-}
-.single-event-img {
   box-shadow: 1rem 1rem 0rem -0.5rem #4c5e7d;
+  transition: transform ease 0.5s, box-shadow ease 0.5s;
 }
-.single-org-img {
-  box-shadow: 1rem 1rem 0rem -0.5rem #bca32d;
+.single-info > img:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: 1.2rem 1.2rem 0rem -0.5rem #4c5e7d;
+  transition: transform ease 0.5s, box-shadow ease 0.5s;
 }
 .single-details {
   display: flex;
