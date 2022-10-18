@@ -12,8 +12,6 @@ export default function Navbar({ session }) {
     navigate("/login");
   };
 
-  //userOrgId();
-
   useEffect(() => {
     const userOrgId = async () => {
       const { data, error } = await supabase
@@ -37,47 +35,63 @@ export default function Navbar({ session }) {
   }, [session]);
 
   return (
-    <div>
-      <span>VANGOGH-ING</span>
+    <div className="navbar">
+      <div className="navbar_name">
+        VANGOGH
+        <img src="/sunflower.png" alt="" />
+        ING
+      </div>
       {!session ? (
         //not logged in navbar
-        <div>
-          <Link to="/discover">Discover</Link>
-          <Link to="/login">| Login</Link>
+        <div className="navbar_links">
+          <div>
+            <Link to="/discover">Discover</Link>
+          </div>
+          <Link to="/login">Login</Link>
         </div>
       ) : userOrg !== null ? (
         //org user navbar
-        <div>
-          <Link to="/discover">Discover</Link>
-          <Link to="/activeevents"> | Active Events</Link>
-          <Link to="/pastevents"> | Past Events</Link>
-          <Link to="/foryou"> | For You </Link>
-          <Link to="/savedevents"> | Saved Events </Link>
-          <Link to="/plan"> | Plan </Link>
-          <Link to="/account">| My Account</Link>
-          <button
-            type="button"
-            className="button block"
-            onClick={handleSignOut}
-          >
-            Sign Out
-          </button>
+        <div className="navbar_links">
+          <div>
+            <Link to="/discover">Discover</Link>
+            <Link to="/foryou">For You</Link>
+            <Link to="/savedevents">Saved Events</Link>
+            <Link to="/plan">Plan </Link>
+          </div>
+          <div>
+            <Link to="/activeevents">Active Events</Link>
+            <Link to="/pastevents">Past Events</Link>
+          </div>
+          <div>
+            <Link to="/account">My Account</Link>
+            <button
+              type="button"
+              className="button block"
+              onClick={handleSignOut}
+            >
+              Sign Out
+            </button>
+          </div>
         </div>
       ) : (
         //reg user logged in
-        <div>
-          <Link to="/discover">Discover</Link>
-          <Link to="/foryou"> | For You </Link>
-          <Link to="/savedevents"> | Saved Events </Link>
-          <Link to="/plan"> | Plan </Link>
-          <Link to="/account">| My Account</Link>
-          <button
-            type="button"
-            className="button block"
-            onClick={handleSignOut}
-          >
-            Sign Out
-          </button>
+        <div className="navbar_links">
+          <div>
+            <Link to="/discover">Discover</Link>
+            <Link to="/foryou">For You</Link>
+            <Link to="/savedevents">Saved Events</Link>
+            <Link to="/plan">Plan</Link>
+          </div>
+          <div>
+            <Link to="/account">My Account</Link>
+            <button
+              type="button"
+              className="button block"
+              onClick={handleSignOut}
+            >
+              Sign Out
+            </button>
+          </div>
         </div>
       )}
     </div>

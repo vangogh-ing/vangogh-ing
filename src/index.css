@@ -88,6 +88,30 @@
 body {
   background-color: #fffef9;
 }
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: #4c5e7d;
+  color: #bca32d;
+}
+.navbar_name {
+  font-size: 1.5rem;
+  margin: 0.5rem;
+  width: 20%;
+}
+.navbar_name > img {
+  width: 1.5rem;
+}
+.navbar_links {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+.navbar_links > div > a {
+  text-decoration: none;
+  color: #bca32d;
+  padding: 1rem;
+}
 .auth_container {
   display: flex;
   height: 90vh;
