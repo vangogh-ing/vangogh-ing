@@ -73,6 +73,7 @@ export default function SingleOrg() {
         <LinearProgress
           sx={{
             height: 10,
+            marginTop: "2rem",
           }}
           color="success"
         />

@@ -92,6 +92,7 @@ export default function SingleEvent() {
         <LinearProgress
           sx={{
             height: 10,
+            marginTop: "2rem",
           }}
           color="success"
         />

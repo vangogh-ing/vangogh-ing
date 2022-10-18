@@ -42,6 +42,7 @@ export default function ForYouPage(props) {
         <LinearProgress
           sx={{
             height: 10,
+            marginTop: "2rem",
           }}
           color="success"
         />
