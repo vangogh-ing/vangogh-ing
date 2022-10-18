@@ -10,12 +10,12 @@ function DiscoverInfo({ event, session, userOrgId }) {
       {session && userOrgId !== null ? (
         //Logged in as an org
         <div className="card">
-          <Link to={`/events/${event.id}`}>
-            <div className="imageCard">
-              <img className="image" src={event.imageUrl} alt="" />
-            </div>
-            <div className="infoCard">
-              <h3 className="eventTitle">{event.title}</h3>
+          <div className="imageCard">
+            <img className="image" src={event.imageUrl} alt="" />
+          </div>
+          <div className="infoCard">
+            <h3 className="eventTitle">{event.title}</h3>
+            <Link to={`/events/${event.id}`}>
               <div className="details">
                 <DateDisplay start={event.startDate} end={event.endDate} />
                 <TimeDisplay
@@ -24,11 +24,15 @@ function DiscoverInfo({ event, session, userOrgId }) {
                   startTime={event.startTime}
                   endTime={event.endTime}
                 />
-                <p>Hosted By: {event.Organization.name}</p>
               </div>
-              <p className="description">{event.description}</p>
-            </div>
-          </Link>
+            </Link>
+            <Link to={`/orgs/${event.OrgId}`}>
+              <p>Hosted By: {event.Organization.name}</p>
+            </Link>
+          </div>
+          <div>
+            <p className="description">{event.description}</p>
+          </div>
         </div>
       ) : (
         //logged in as regular user or not logged in at all

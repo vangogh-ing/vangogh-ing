@@ -28,7 +28,7 @@ function OrgPastEvents({ session }) {
   let fetchOrgEvents = useCallback(async () => {
     const { data, error } = await supabase
       .from("Events")
-      .select("*")
+      .select("*, Organization (name)")
       .eq("OrgId", userOrg);
 
     if (error) {
