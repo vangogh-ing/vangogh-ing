@@ -433,11 +433,12 @@ body {
 }
 .activeButtons {
   display: flex;
-  justify-content: baseline;
+  justify-content: end;
 }
 .infocard {
   display: flex;
   float: right;
+  padding-right: 2rem;
   color: black;
 }
 .eventTitle {
@@ -448,10 +449,17 @@ body {
   color: black;
   text-align: justify;
 }
+.descriptionCard {
+  display: flex;
+  justify-content: end ;
+}
 .description {
   display: -webkit-box;
   padding-top: 3rem;
   padding-right: 2rem;
+  max-height: 5rem;
+  min-width: 60%;
+  border-style: solid;
   text-align: justify;
   overflow: hidden;
   -webkit-line-clamp: 3;

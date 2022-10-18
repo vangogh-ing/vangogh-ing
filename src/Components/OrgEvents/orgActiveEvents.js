@@ -57,7 +57,7 @@ function OrgActiveEvents({ session }) {
     if (userOrg) {
       fetchOrgEvents(userOrg);
     }
-  }, [userOrg, orderBy, session, ActiveViewInfo]);
+  }, [userOrg, orderBy, session]);
 
   return (
     <div className="container">
@@ -78,10 +78,6 @@ function OrgActiveEvents({ session }) {
                     event={activeEvent}
                     onDelete={() => handleDelete(activeEvent.id)}
                   />
-                  {/* <button onClick={() => handleDelete(activeEvent.id)}>
-                    Delete
-                  </button> */}
-                  {/* <UpdateEvent orgEvent={activeEvent} /> */}
                 </div>
               );
             })}
