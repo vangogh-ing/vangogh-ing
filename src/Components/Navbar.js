@@ -7,13 +7,23 @@ import MenuItem from "@mui/material/MenuItem";
 export default function Navbar({ session, propsOrgId }) {
   const [userOrg, setUserOrgId] = useState(null);
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const [planMenu, setPlanMenu] = useState(null);
+  const [orgMenu, setOrgMenu] = useState(null);
+  const openPlan = Boolean(planMenu);
+  const openOrg = Boolean(orgMenu);
+
+  const handlePlan = (event) => {
+    setPlanMenu(event.currentTarget);
   };
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handlePlanClose = () => {
+    setPlanMenu(null);
+  };
+
+  const handleOrg = (event) => {
+    setOrgMenu(event.currentTarget);
+  };
+  const handleOrgClose = () => {
+    setOrgMenu(null);
   };
 
   const navigate = useNavigate();
@@ -71,17 +81,28 @@ export default function Navbar({ session, propsOrgId }) {
         <div className="navbar_links">
           <div>
             <Link to="/discover">Discover</Link>
-            <Link to="/foryou">For You</Link>
-            <Link to="/savedevents">Saved Events</Link>
-            <Link to="/plan">Plan </Link>
-            <button onClick={handleClick} className="navbar_org">
+            <Link to="/foryou">For&nbsp; You </Link>
+
+            <button onClick={handlePlan} className="navbar_org">
+              Plan
+            </button>
+            <Menu anchorEl={planMenu} open={openPlan} onClose={handlePlanClose}>
+              <MenuItem onClick={handlePlanClose} className="navbar_org_menu">
+                <Link to="/savedevents">Saved Events</Link>
+              </MenuItem>
+              <MenuItem onClick={handlePlanClose} className="navbar_org_menu">
+                <Link to="/plan">Calendar</Link>
+              </MenuItem>
+            </Menu>
+
+            <button onClick={handleOrg} className="navbar_org">
               My Org Events
             </button>
-            <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-              <MenuItem onClick={handleClose} className="navbar_org_menu">
+            <Menu anchorEl={orgMenu} open={openOrg} onClose={handleOrgClose}>
+              <MenuItem onClick={handleOrgClose} className="navbar_org_menu">
                 <Link to="/activeevents">Active Events</Link>
               </MenuItem>
-              <MenuItem onClick={handleClose} className="navbar_org_menu">
+              <MenuItem onClick={handleOrgClose} className="navbar_org_menu">
                 <Link to="/pastevents">Past Events</Link>
               </MenuItem>
             </Menu>
@@ -102,9 +123,19 @@ export default function Navbar({ session, propsOrgId }) {
         <div className="navbar_links">
           <div>
             <Link to="/discover">Discover</Link>
-            <Link to="/foryou">For You</Link>
-            <Link to="/savedevents">Saved Events</Link>
-            <Link to="/plan">Plan</Link>
+            <Link to="/foryou">For&nbsp; You</Link>
+
+            <button onClick={handlePlan} className="navbar_org">
+              Plan
+            </button>
+            <Menu anchorEl={planMenu} open={openPlan} onClose={handlePlanClose}>
+              <MenuItem onClick={handlePlanClose} className="navbar_org_menu">
+                <Link to="/savedevents">Saved Events</Link>
+              </MenuItem>
+              <MenuItem onClick={handlePlanClose} className="navbar_org_menu">
+                <Link to="/plan">Calendar</Link>
+              </MenuItem>
+            </Menu>
           </div>
           <div>
             <Link to="/account">My Account</Link>
