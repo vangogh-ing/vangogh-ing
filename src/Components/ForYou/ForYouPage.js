@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import ForYouInfo from "./ForYouInfo";
+import LinearProgress from "@mui/material/LinearProgress";
 
 export default function ForYouPage(props) {
   const userId = props.session.user.id;
@@ -37,7 +38,14 @@ export default function ForYouPage(props) {
 
   return (
     <div>
-      {!loading && (
+      {loading ? (
+        <LinearProgress
+          sx={{
+            height: 10,
+          }}
+          color="success"
+        />
+      ) : (
         <ForYouInfo
           followedOrgs={followedOrgs}
           userId={userId}
