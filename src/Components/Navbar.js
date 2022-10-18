@@ -1,9 +1,20 @@
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 import { useEffect, useState } from "react";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 export default function Navbar({ session }) {
   const [userOrg, setUserOrgId] = useState(null);
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const navigate = useNavigate();
 
@@ -47,7 +58,9 @@ export default function Navbar({ session }) {
           <div>
             <Link to="/discover">Discover</Link>
           </div>
-          <Link to="/login">Login</Link>
+          <div>
+            <Link to="/login">Login</Link>
+          </div>
         </div>
       ) : userOrg !== null ? (
         //org user navbar
@@ -59,8 +72,15 @@ export default function Navbar({ session }) {
             <Link to="/plan">Plan </Link>
           </div>
           <div>
-            <Link to="/activeevents">Active Events</Link>
-            <Link to="/pastevents">Past Events</Link>
+            <button onClick={handleClick}>My Events</button>
+            <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+              <MenuItem onClick={handleClose}>
+                <Link to="/activeevents">Active Events</Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link to="/pastevents">Past Events</Link>
+              </MenuItem>
+            </Menu>
           </div>
           <div>
             <Link to="/account">My Account</Link>
