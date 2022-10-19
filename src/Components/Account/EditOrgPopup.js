@@ -1,66 +1,119 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 
 import Popup from "reactjs-popup";
 
-export default function CreateOrgPopup(props) {
+export default function EditOrgPopup(props) {
   const [loading, setLoading] = useState(false);
 
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [hours, setHours] = useState("");
   const [webUrl, setWebUrl] = useState("");
-  const [description, setDescription] = useState("");
 
   const navigate = useNavigate();
 
+  const orgInfo = useCallback(async () => {
+    const { data } = await supabase
+      .from("Organization")
+      .select(
+        "id, name, address, phone, email, description, imageUrl, hours, webUrl"
+      )
+      .eq("id", props.orgId);
+
+    if (data) {
+      const info = data[0];
+
+      setName(info.name || "");
+      setAddress(info.address || "");
+      setPhone(info.phone || "");
+      setEmail(info.email || "");
+      setDescription(info.description || "");
+      setImageUrl(info.imageUrl || "");
+      setHours(info.hours || "");
+      setWebUrl(info.webUrl || "");
+    }
+  }, [props.orgId]);
+
+  useEffect(() => {
+    if (props.orgId) {
+      orgInfo();
+    }
+  }, [props.orgId, orgInfo]);
+
   const handleSubmit = async (event) => {
+    event.preventDefault();
+
     try {
       setLoading(true);
-      event.preventDefault();
 
-      const { data, error } = await supabase
-        .from("Organization")
-        .insert([
-          {
-            name,
-            address,
-            phone,
-            email,
-            hours,
-            webUrl,
-            description,
-          },
-        ])
-        .select();
+      const updates = {
+        id: props.orgId,
+        name,
+        address,
+        phone,
+        email,
+        description,
+        imageUrl,
+        hours,
+        webUrl,
+      };
+
+      let { error } = await supabase.from("Organization").upsert(updates);
+
       if (error) {
         throw error;
       }
-      if (data) {
-        let newOrgId = data[0].id;
-
-        const updates = {
-          id: props.session.user.id,
-          OrgId: newOrgId,
-          updated_at: new Date(),
-        };
-
-        let { error } = await supabase.from("User").upsert(updates);
-        if (error) {
-          throw error;
-        } else {
-          props.setUserOrgId(newOrgId);
-        }
-      }
     } catch (error) {
-      console.log(error);
+      alert(error.message);
     } finally {
       setLoading(false);
       props.closePopup();
       navigate("/account");
+    }
+  };
+
+  const handleUploadAvatar = async (e) => {
+    let file;
+
+    if (e.target.files) {
+      file = e.target.files[0];
+    }
+
+    const { data, error } = await supabase.storage
+      .from("avatars")
+      .upload("public/" + file?.name, file, {
+        cacheControl: "3600",
+        upsert: false,
+      });
+
+    if (data) {
+      const { data } = supabase.storage
+        .from("avatars")
+        .getPublicUrl(`public/${file.name}`);
+
+      if (data.error) {
+        throw data.error;
+      } else {
+        const avatar = {
+          id: props.orgId,
+          imageUrl: data.publicUrl,
+        };
+
+        let { error } = await supabase.from("Organization").upsert(avatar);
+        setImageUrl(data.publicUrl);
+
+        if (error) {
+          throw error;
+        }
+      }
+    } else if (error) {
+      console.log(error);
     }
   };
 
@@ -78,10 +131,9 @@ export default function CreateOrgPopup(props) {
       ) : (
         <div className="createOrgPopup">
           <div className="createOrgPopup_header">
-            <h1>Create an Organization</h1>
+            <h1>Edit Your Organization</h1>
             <button onClick={props.closePopup}>x</button>
           </div>
-          <p>must provide at least organization name and email</p>
           <form onSubmit={handleSubmit} className="createOrgPopup_form">
             <label htmlFor="name">Organization Name: </label>
             <input
@@ -129,7 +181,24 @@ export default function CreateOrgPopup(props) {
               value={description}
               onChange={(event) => setDescription(event.target.value)}
             />
-            <button>Create the Org!</button>
+            <div className="org_avatar">
+              <div className="org_avatar_img">
+                {imageUrl === "" ? (
+                  "no image uploaded"
+                ) : (
+                  <img src={imageUrl} alt="" />
+                )}
+              </div>
+              <label htmlFor="name">Upload an avatar</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  handleUploadAvatar(e);
+                }}
+              />
+            </div>
+            <button>Update the Org!</button>
           </form>
         </div>
       )}

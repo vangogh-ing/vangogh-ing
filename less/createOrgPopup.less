@@ -1,5 +1,7 @@
 .createOrgPopup {
   .popup;
+  height: 90vh;
+  overflow: scroll;
 }
 
 .createOrgPopup_header {
@@ -48,10 +50,47 @@
   .roundYellowInput_focus;
 }
 
+.createOrgPopup_form > textarea {
+  .roundYellowInput;
+  margin-bottom: 1rem;
+}
+
+.createOrgPopup_form > textarea:focus {
+  .roundYellowInput_focus;
+}
+
 .createOrgPopup_form > button {
   .smallYellowButton;
 }
 
 .createOrgPopup_form > button:hover {
+  .smallYellowButtonHover;
+}
+
+.org_avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+}
+
+.org_avatar_img > img {
+  border: dashed 0.5rem #666d24;
+  height: 9rem;
+  width: 9rem;
+  object-fit: cover;
+}
+
+.org_avatar > label {
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+.org_avatar > input::file-selector-button {
+  .smallYellowButton;
+  margin-left: 2.5rem;
+}
+
+.org_avatar > input::file-selector-button:hover {
   .smallYellowButtonHover;
 }

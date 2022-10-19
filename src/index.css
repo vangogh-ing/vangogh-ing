@@ -258,7 +258,8 @@ body {
   width: 70%;
   margin: 2rem;
 }
-.account_text > p > span {
+.account_text > p > span,
+.account_org > p > span {
   font-weight: 800;
   letter-spacing: 0.3rem;
   text-shadow: 0.07rem 0.07rem #bca32d;
@@ -267,7 +268,8 @@ body {
 .account_org {
   margin-top: 2.5rem;
 }
-.account_org > a {
+.account_org > a,
+.account_org > p > a {
   font-weight: 500;
   color: #666d24;
   transition: ease 0.3s;
@@ -410,6 +412,8 @@ body {
   border-color: #bca32d;
   box-shadow: 0.7rem 0.7rem #4c5e7d;
   padding: 1rem;
+  height: 90vh;
+  overflow: scroll;
 }
 .createOrgPopup_header {
   display: flex;
@@ -453,6 +457,14 @@ body {
 .createOrgPopup_form > input:focus {
   outline: solid 0.1rem #bca32d;
 }
+.createOrgPopup_form > textarea {
+  border: solid 0.1rem #bca32d;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+.createOrgPopup_form > textarea:focus {
+  outline: solid 0.1rem #bca32d;
+}
 .createOrgPopup_form > button {
   cursor: pointer;
   background-color: #bca32d;
@@ -463,6 +475,82 @@ body {
   transition: ease 0.5s;
 }
 .createOrgPopup_form > button:hover {
+  background-color: #ac8c26;
+  transition: ease 0.5s;
+}
+.org_avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+}
+.org_avatar_img > img {
+  border: dashed 0.5rem #666d24;
+  height: 9rem;
+  width: 9rem;
+  object-fit: cover;
+}
+.org_avatar > label {
+  margin-top: 1rem;
+  font-style: italic;
+}
+.org_avatar > input::file-selector-button {
+  cursor: pointer;
+  background-color: #bca32d;
+  color: #fffef9;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  transition: ease 0.5s;
+  margin-left: 2.5rem;
+}
+.org_avatar > input::file-selector-button:hover {
+  background-color: #ac8c26;
+  transition: ease 0.5s;
+}
+.deleteOrgPopup {
+  background-color: #fffef9;
+  color: black;
+  width: 75%;
+  border-style: solid;
+  border-color: #bca32d;
+  box-shadow: 0.7rem 0.7rem #4c5e7d;
+  padding: 1rem;
+}
+.deleteOrgPopup_header {
+  display: flex;
+  justify-content: space-between;
+}
+.deleteOrgPopup_header > h1 {
+  width: 100%;
+  margin-left: 1.7rem;
+  text-align: center;
+}
+.deleteOrgPopup_header > button {
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  border-radius: 2px;
+  background-color: #bca32d;
+  color: #fffef9;
+}
+.deleteOrgPopup_buttons {
+  display: flex;
+  justify-content: center;
+}
+.deleteOrgPopup_buttons > button {
+  cursor: pointer;
+  background-color: #bca32d;
+  color: #fffef9;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  transition: ease 0.5s;
+  font-size: 1rem;
+  margin: 1rem;
+}
+.deleteOrgPopup_buttons > button:hover {
   background-color: #ac8c26;
   transition: ease 0.5s;
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
+import LinearProgress from "@mui/material/LinearProgress";
 
 import getProfile from "../../Utils/getProfile";
 
@@ -82,7 +83,13 @@ const Account = ({ session }) => {
   return (
     <div aria-live="polite">
       {loading ? (
-        "Saving..."
+        <LinearProgress
+          sx={{
+            height: 10,
+            marginTop: "2rem",
+          }}
+          color="success"
+        />
       ) : (
         <div className="editAccount_container">
           <h1>Update Your Account</h1>

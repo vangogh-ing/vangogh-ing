@@ -1,9 +1,12 @@
 import { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
+import LinearProgress from "@mui/material/LinearProgress";
 
 import getProfile from "../../Utils/getProfile";
 import CreateOrgPopup from "./CreateOrgPopup";
+import EditOrgPopup from "./EditOrgPopup";
+import DeleteOrgPopup from "./DeleteOrgPopup";
 
 const Account = ({ session, handleAccount }) => {
   const [loading, setLoading] = useState(true);
@@ -14,6 +17,9 @@ const Account = ({ session, handleAccount }) => {
 
   const [open, setOpen] = useState(false);
   const closePopup = () => setOpen(false);
+
+  const [openDelete, setOpenDelete] = useState(false);
+  const closeDeletePopup = () => setOpenDelete(false);
 
   const organizationName = useCallback(async () => {
     const { data } = await supabase
@@ -38,15 +44,27 @@ const Account = ({ session, handleAccount }) => {
     setOpen(true);
   }
 
+  function handleDeleteClick() {
+    setOpenDelete(true);
+  }
+
   function handleOrg(orgId) {
     setUserOrgId(orgId);
     handleAccount(orgId);
   }
 
+  console.log(userOrgId);
+
   return (
     <div>
       {loading ? (
-        "Loading..."
+        <LinearProgress
+          sx={{
+            height: 10,
+            marginTop: "2rem",
+          }}
+          color="success"
+        />
       ) : (
         <div className="account_container">
           <h1>Your Profile</h1>
@@ -62,10 +80,32 @@ const Account = ({ session, handleAccount }) => {
                 <span>Email:</span> {session.user.email}
               </p>
               {userOrgId ? (
-                <p className="account_org">
-                  <span>Organization:</span>
-                  {orgName}
-                </p>
+                <div className="account_org">
+                  <p>
+                    <span>Organization:</span>
+                    <Link to={`/orgs/${userOrgId}`}>{orgName}</Link>
+                  </p>
+                  <a href="#editOrg" onClick={handleOrgClick}>
+                    edit your org?
+                  </a>
+                  <EditOrgPopup
+                    open={open}
+                    closePopup={closePopup}
+                    session={session}
+                    orgId={userOrgId}
+                  />
+                  <br />
+                  <a href="#deleteOrg" onClick={handleDeleteClick}>
+                    delete your org?
+                  </a>
+                  <DeleteOrgPopup
+                    open={openDelete}
+                    closePopup={closeDeletePopup}
+                    orgId={userOrgId}
+                    session={session}
+                    setUserOrgId={handleOrg}
+                  />
+                </div>
               ) : (
                 <div className="account_org">
                   <p>No organization linked</p>
