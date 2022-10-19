@@ -65,8 +65,8 @@ export default function ForYouInfo(props) {
                 <div className="for-you-org-events">
                   <SingleOrgEvents
                     orgInfo={entry.Organization}
-                    orgId={entry.orgId}
                     orgName={entry.Organization.name}
+                    orgEvents={entry.Organization.Events}
                   />
                 </div>
               </div>

@@ -19,7 +19,10 @@ export default function SingleOrg() {
   const fetchOrgUserInfo = useCallback(async () => {
     let { data: Organization } = await supabase
       .from("Organization")
-      .select("*")
+      .select(
+        `*,
+    Events (*)`
+      )
       .eq("id", id);
 
     if (Organization[0]) {
@@ -157,7 +160,10 @@ export default function SingleOrg() {
             </div>
           </div>
           <div className="related-event-container">
-            <SingleOrgEvents orgName={singleOrgInfo.name} orgId={id} />
+            <SingleOrgEvents
+              orgName={singleOrgInfo.name}
+              orgEvents={singleOrgInfo.Events}
+            />
           </div>
         </div>
       )}

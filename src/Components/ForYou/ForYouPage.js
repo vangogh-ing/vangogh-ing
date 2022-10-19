@@ -13,7 +13,7 @@ export default function ForYouPage(props) {
       .from("user_followed_orgs")
       .select(
         `orgId,
-         Organization (*)`
+         Organization (*, Events (*))`
       )
       .eq("userId", userId);
     setFollowedOrgs(user_followed_orgs);
