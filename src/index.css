@@ -563,11 +563,18 @@ body {
 }
 .container {
   display: flex;
+  justify-content: center;
   background-color: #fffef9;
+}
+.header {
+  padding-left: 1rem;
+  display: flex;
+  justify-content: space-between;
 }
 .order-buttons {
   display: flex;
-  gap: 1rem;
+  gap: 3px;
+  padding: 1rem;
   align-items: center;
   flex-direction: row;
   float: right;
@@ -596,11 +603,33 @@ body {
   border-color: #666d24;
   box-shadow: 10px 10px #bca32d;
 }
+.activeEventsHeader {
+  display: flex;
+  padding-left: 1rem;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-right: 1rem;
+}
+.activeViewHeader {
+  display: flex;
+  justify-content: space-between;
+}
+.activeButtons {
+  display: flex;
+  gap: 5px;
+  justify-content: flex-end;
+  padding: 1rem;
+  height: 2rem;
+  align-items: flex-start;
+  float: right;
+}
 .infocard {
   display: flex;
   float: right;
+  flex-direction: column;
+  padding-right: 2rem;
   color: black;
-  padding-right: 1rem;
+  flex-wrap: wrap;
 }
 .eventTitle {
   color: black;
@@ -610,9 +639,23 @@ body {
   color: black;
   text-align: justify;
 }
+.dateTime {
+  padding: 1rem;
+}
+.descriptionCard {
+  display: flex;
+}
 .description {
+  display: -webkit-box;
+  padding-top: 3rem;
+  padding-right: 2rem;
+  max-height: 5rem;
+  min-width: 85%;
+  max-width: 85%;
   text-align: justify;
-  width: 65rem;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
   color: black;
 }
 .imageCard {

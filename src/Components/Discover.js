@@ -1,7 +1,7 @@
 import { supabase } from "../supabaseClient";
 import { useCallback, useEffect, useState } from "react";
 //inner components
-import DiscoverInfo from "../innerEventInfo/discoverInfo";
+import DiscoverInfo from "../Utils/discoverInfo";
 
 function Discover() {
   const [fetchError, setFetchError] = useState(null);
@@ -13,7 +13,7 @@ function Discover() {
   let fetchEvents = useCallback(async () => {
     const { data, error } = await supabase
       .from("Events")
-      .select("*")
+      .select("*, Organization (name)")
       .order(orderBy, { ascending: false });
 
     if (error) {
@@ -21,12 +21,12 @@ function Discover() {
       setEvents(null);
       console.log(error);
     }
-    
+
     if (data) {
       setEvents(data);
       setFetchError(null);
     }
-  });
+  }, [orderBy]);
 
   let findUser = useCallback(async () => {
     const { data, error } = await supabase
@@ -43,7 +43,7 @@ function Discover() {
       let orgId = data[0].OrgId;
       setUserOrgId(orgId);
     }
-  });
+  }, [session]);
 
   useEffect(() => {
     if (session) {
@@ -58,7 +58,7 @@ function Discover() {
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
-  }, [orderBy]);
+  }, []);
 
   return (
     <div className="container">
@@ -66,26 +66,26 @@ function Discover() {
         //not logged in view
         <div className="card-container">
           {fetchError && <p>{fetchError}</p>}
-          <h1> DISCOVER </h1>
-          <div className="order-buttons">
-            <p> Order by: </p>
-            <button
-              className="orderButton"
-              onClick={() => setOrderBy("startDate")}
-            >
-              Start Date
-            </button>
-            <button
-              className="orderButton"
-              onClick={() => setOrderBy("created_at")}
-            >
-              Newest
-            </button>
-            {orderBy}
+          <div className="header">
+            <h1> DISCOVER </h1>
+            <div className="order-buttons">
+              <p className="orderTitle"> Order by: </p>
+              <button
+                className="smallYellowButton"
+                onClick={() => setOrderBy("startDate")}
+              >
+                Start Date
+              </button>
+              <button
+                className="smallYellowButton"
+                onClick={() => setOrderBy("created_at")}
+              >
+                Newest
+              </button>
+            </div>
           </div>
           {events && (
             <div>
-              <h2>Placeholder: NOT LOGGED IN</h2>
               {events.map((event, idx) => (
                 <div className="cardContainer" key={idx}>
                   <DiscoverInfo
@@ -93,6 +93,7 @@ function Discover() {
                     event={event}
                     userOrgId={userOrgId}
                   />
+                  <br />
                 </div>
               ))}
             </div>
@@ -102,26 +103,26 @@ function Discover() {
         //logged in as reg user or org user
         <div className="card-container">
           {fetchError && <p>{fetchError}</p>}
-          <h1> DISCOVER </h1>
-          <div className="order-buttons">
-            <p className="orderTitle"> Order by: </p>
-            <button
-              className="orderButton"
-              onClick={() => setOrderBy("startDate")}
-            >
-              Start Date
-            </button>
-            <button
-              className="orderButton"
-              onClick={() => setOrderBy("created_at")}
-            >
-              Newest
-            </button>
-            {orderBy}
+          <div className="header">
+            <h1> DISCOVER </h1>
+            <div className="order-buttons">
+              <p className="orderTitle"> Order by: </p>
+              <button
+                className="smallYellowButton"
+                onClick={() => setOrderBy("startDate")}
+              >
+                Start Date
+              </button>
+              <button
+                className="smallYellowButton"
+                onClick={() => setOrderBy("created_at")}
+              >
+                Newest
+              </button>
+            </div>
           </div>
           {events && (
             <div>
-              <h2>Placeholder: Logged in</h2>
               {events.map((event, idx) => (
                 <div className="cardContainer" key={idx}>
                   <DiscoverInfo
