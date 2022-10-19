@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
+import LinearProgress from "@mui/material/LinearProgress";
 
 export default function AuthLogin() {
   const [loading, setLoading] = useState(false);
@@ -32,7 +33,13 @@ export default function AuthLogin() {
   return (
     <div>
       {loading ? (
-        "Loading..."
+        <LinearProgress
+          sx={{
+            height: 10,
+            marginTop: "2rem",
+          }}
+          color="success"
+        />
       ) : (
         <div className="auth_container">
           <div className="auth">

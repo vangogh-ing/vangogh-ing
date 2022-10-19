@@ -3,6 +3,7 @@ import { supabase } from "../../supabaseClient";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import Popup from "reactjs-popup";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const Calendar = ({ session }) => {
   const userId = session.user.id;
@@ -124,7 +125,13 @@ const Calendar = ({ session }) => {
   return (
     <div>
       {loading ? (
-        "Loading..."
+        <LinearProgress
+          sx={{
+            height: 10,
+            marginTop: "2rem",
+          }}
+          color="success"
+        />
       ) : (
         <div>
           <div id="full_calendar">

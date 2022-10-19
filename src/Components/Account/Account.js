@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
+import LinearProgress from "@mui/material/LinearProgress";
 
 import getProfile from "../../Utils/getProfile";
 import CreateOrgPopup from "./CreateOrgPopup";
@@ -47,7 +48,13 @@ const Account = ({ session, handleAccount }) => {
   return (
     <div>
       {loading ? (
-        "Loading..."
+        <LinearProgress
+          sx={{
+            height: 10,
+            marginTop: "2rem",
+          }}
+          color="success"
+        />
       ) : (
         <div className="account_container">
           <h1>Your Profile</h1>
