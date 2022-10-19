@@ -64,8 +64,6 @@ export default function SaveEventPopup(props) {
         webUrl,
       };
 
-      console.log(updates);
-
       let { error } = await supabase.from("Organization").upsert(updates);
 
       if (error) {
@@ -77,6 +75,45 @@ export default function SaveEventPopup(props) {
       setLoading(false);
       props.closePopup();
       navigate("/account");
+    }
+  };
+
+  const handleUploadAvatar = async (e) => {
+    let file;
+
+    if (e.target.files) {
+      file = e.target.files[0];
+    }
+
+    const { data, error } = await supabase.storage
+      .from("avatars")
+      .upload("public/" + file?.name, file, {
+        cacheControl: "3600",
+        upsert: false,
+      });
+
+    if (data) {
+      const { data } = supabase.storage
+        .from("avatars")
+        .getPublicUrl(`public/${file.name}`);
+
+      if (data.error) {
+        throw data.error;
+      } else {
+        const avatar = {
+          id: props.orgId,
+          imageUrl: data.publicUrl,
+        };
+
+        let { error } = await supabase.from("Organization").upsert(avatar);
+        setImageUrl(data.publicUrl);
+
+        if (error) {
+          throw error;
+        }
+      }
+    } else if (error) {
+      console.log(error);
     }
   };
 
@@ -137,11 +174,30 @@ export default function SaveEventPopup(props) {
               onChange={(event) => setWebUrl(event.target.value)}
             />
             <label htmlFor="name">Description: </label>
-            <input
+            <textarea
               type="text"
+              cols="100"
+              rows="5"
               value={description}
               onChange={(event) => setDescription(event.target.value)}
             />
+            <div className="org_avatar">
+              <div className="org_avatar_img">
+                {imageUrl === "" ? (
+                  "no image uploaded"
+                ) : (
+                  <img src={imageUrl} alt="" />
+                )}
+              </div>
+              <label htmlFor="name">Upload an avatar</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  handleUploadAvatar(e);
+                }}
+              />
+            </div>
             <button>Update the Org!</button>
           </form>
         </div>
