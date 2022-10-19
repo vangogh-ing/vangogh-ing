@@ -23,7 +23,7 @@ function OrgPastEvents({ session }) {
       let userOrg = data[0].OrgId;
       setUserOrgId(userOrg);
     }
-  });
+  }, [session]);
 
   let fetchOrgEvents = useCallback(async () => {
     const { data, error } = await supabase
@@ -40,7 +40,7 @@ function OrgPastEvents({ session }) {
       setOrgEvents(data);
       setFetchError(null);
     }
-  });
+  }, [userOrg]);
 
   useEffect(() => {
     userOrgId();

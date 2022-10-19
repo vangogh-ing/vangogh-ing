@@ -58,7 +58,7 @@ function Discover() {
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
-  }, []);
+  }, [orderBy]);
 
   return (
     <div className="container">
