@@ -4,6 +4,7 @@ import { supabase } from "../../supabaseClient";
 
 import getProfile from "../../Utils/getProfile";
 import CreateOrgPopup from "./CreateOrgPopup";
+import EditOrgPopup from "./EditOrgPopup";
 
 const Account = ({ session, handleAccount }) => {
   const [loading, setLoading] = useState(true);
@@ -62,10 +63,21 @@ const Account = ({ session, handleAccount }) => {
                 <span>Email:</span> {session.user.email}
               </p>
               {userOrgId ? (
-                <p className="account_org">
-                  <span>Organization:</span>
-                  {orgName}
-                </p>
+                <div className="account_org">
+                  <p>
+                    <span>Organization:</span>
+                    {orgName}
+                  </p>
+                  <a href="#createOrg" onClick={handleOrgClick}>
+                    edit your org?
+                  </a>
+                  <EditOrgPopup
+                    open={open}
+                    closePopup={closePopup}
+                    session={session}
+                    orgId={userOrgId}
+                  />
+                </div>
               ) : (
                 <div className="account_org">
                   <p>No organization linked</p>
