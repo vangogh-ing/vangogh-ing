@@ -6,16 +6,16 @@
   margin-top: 2rem;
 }
 .saved-page a {
-  color: @oliveGreen;
+  color: #666d24;
 }
 .saved-container {
   display: flex;
   width: 90vw;
-  border-left: 0.5rem solid @metallicGold;
-  border-right: 0.5rem solid @metallicGold;
-  border-top: 0.5rem solid @metallicGold;
+  border-left: 0.5rem solid #bca32d;
+  border-right: 0.5rem solid #bca32d;
+  border-top: 0.5rem solid #bca32d;
   margin-bottom: 1rem;
-  outline: 0.5rem solid @independenceBlue;
+  outline: 0.5rem solid #4c5e7d;
 }
 #for-you-container {
   flex-flow: column nowrap;
@@ -26,10 +26,11 @@
 .none-saved {
   padding: 1rem;
   margin: 0rem -0.1rem 0rem -0.1rem;
-  border-bottom: 0.5rem solid @metallicGold;
+  width: 100%;
+  border-bottom: 0.5rem solid #bca32d;
 }
 .for-you-org {
-  border-bottom: 0.5rem solid @metallicGold;
+  border-bottom: 0.5rem solid #bca32d;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -50,12 +51,12 @@
   width: 15rem;
   height: 15rem;
   object-fit: cover;
-  box-shadow: 0.3rem 0.3rem @darkGreen;
+  box-shadow: 0.3rem 0.3rem #4b5c4f;
   transition: transform ease 0.5s, box-shadow ease 0.5s;
 }
 .for-you-org-img:hover {
   transform: translateY(-0.3rem);
-  box-shadow: 0.5rem 0.5rem @darkGreen;
+  box-shadow: 0.5rem 0.5rem #4b5c4f;
   transition: transform ease 0.5s, box-shadow ease 0.5s;
 }
 .saved-info-right {
@@ -77,21 +78,22 @@
   border-right: none;
 }
 .saved-event {
-  border-bottom: 0.5rem solid @metallicGold;
-  border-right: 0.5rem solid @metallicGold;
+  border-bottom: 0.5rem solid #bca32d;
+  border-right: 0.5rem solid #bca32d;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
   padding-bottom: 1rem;
   height: 16rem;
-  min-width: 15rem;
-  flex-basis: 21rem;
+  min-width: 18rem;
+  flex-basis: 24rem;
   flex-grow: 1;
   padding: 1rem;
 }
 .saved-event-info {
   display: flex;
   flex-direction: column;
-  width: 32rem;
+  width: max-content;
 }
 .saved-event-info > h2 {
   font-size: 1.1rem;
@@ -101,11 +103,11 @@
   width: 10rem;
   height: 10rem;
   object-fit: cover;
-  box-shadow: 0.3rem 0.3rem @darkGreen;
+  box-shadow: 0.3rem 0.3rem #4b5c4f;
   transition: transform ease 0.5s, box-shadow ease 0.5s;
 }
 .saved-event-img:hover {
   transform: translateY(-0.3rem);
-  box-shadow: 0.5rem 0.5rem @darkGreen;
+  box-shadow: 0.5rem 0.5rem #4b5c4f;
   transition: transform ease 0.5s, box-shadow ease 0.5s;
 }

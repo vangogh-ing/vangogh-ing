@@ -44,7 +44,6 @@ export default function ForYouInfo(props) {
                           src={entry.Organization.imageUrl}
                         />
                       </Link>
-                      {/* <img alt="Org Img" src={entry.Organization.imageUrl} /> */}
                     </div>
                     <div className="saved-info-right">
                       <p>{entry.Organization.address}</p>
