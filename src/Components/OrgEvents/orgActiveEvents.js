@@ -63,8 +63,12 @@ function OrgActiveEvents({ session }) {
       {fetchError && <p>{fetchError}</p>}
       {orgEvents && (
         <div>
-          <h1>Org Events Page</h1>
-          <CreateEvent user={userOrg} />
+          <div className="activeEventsHeader">
+            <h1>Org Events Page</h1>
+            <div>
+              <CreateEvent user={userOrg} />
+            </div>
+          </div>
           {orgEvents
             .filter((orgEvent) => {
               return isAfterToday(new Date(orgEvent.endDate).getTime());

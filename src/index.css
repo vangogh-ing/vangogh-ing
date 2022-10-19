@@ -514,9 +514,16 @@ body {
   border-color: #666d24;
   box-shadow: 10px 10px #bca32d;
 }
+.activeEventsHeader {
+  display: flex;
+  padding-left: 1rem;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-right: 1rem;
+}
 .activeViewHeader {
   display: flex;
-  justify-content: baseline;
+  justify-content: space-between;
 }
 .activeButtons {
   display: flex;

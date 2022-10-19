@@ -26,7 +26,7 @@ function Discover() {
       setEvents(data);
       setFetchError(null);
     }
-  });
+  }, [orderBy]);
 
   let findUser = useCallback(async () => {
     const { data, error } = await supabase
@@ -43,7 +43,7 @@ function Discover() {
       let orgId = data[0].OrgId;
       setUserOrgId(orgId);
     }
-  });
+  }, [session]);
 
   useEffect(() => {
     if (session) {
@@ -58,7 +58,7 @@ function Discover() {
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
-  }, [orderBy]);
+  }, []);
 
   return (
     <div className="container">

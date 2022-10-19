@@ -11,7 +11,7 @@ function CreateEvent({ user }) {
   const [endTime, setEndTime] = useState("");
   const [location, setLocation] = useState("");
   const [imageUrl, setImage] = useState(
-    "https://xsmskhmvxuiondcfdoso.supabase.co/storage/v1/object/public/avatars/public/sunflower-pink.png"
+    "https://xsmskhmvxuiondcfdoso.supabase.co/storage/v1/object/public/avatars/public/default.jpg"
   );
   const [formError, setFormError] = useState(null);
 
