@@ -2,7 +2,7 @@ import { useState } from "react";
 import { supabase } from "../../supabaseClient";
 import Popup from "reactjs-popup";
 
-function CreateEvent({ user }) {
+function CreateEvent({ user, fetchOrgEvents }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -44,6 +44,7 @@ function CreateEvent({ user }) {
     if (data) {
       setFormError(null);
     }
+    fetchOrgEvents();
   };
 
   return (

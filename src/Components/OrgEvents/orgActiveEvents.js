@@ -31,7 +31,7 @@ function OrgActiveEvents({ session }) {
       let userOrg = data[0].OrgId;
       setUserOrgId(userOrg);
     }
-  });
+  }, [session]);
 
   let fetchOrgEvents = useCallback(async () => {
     const { data, error } = await supabase
@@ -49,7 +49,7 @@ function OrgActiveEvents({ session }) {
       setOrgEvents(data);
       setFetchError(null);
     }
-  });
+  }, [orderBy, userOrg]);
 
   useEffect(() => {
     userOrgId();
@@ -66,7 +66,7 @@ function OrgActiveEvents({ session }) {
           <div className="activeEventsHeader">
             <h1>Org Events Page</h1>
             <div>
-              <CreateEvent user={userOrg} />
+              <CreateEvent fetchOrgEvents={fetchOrgEvents} user={userOrg} />
             </div>
           </div>
           {orgEvents
@@ -80,6 +80,7 @@ function OrgActiveEvents({ session }) {
                     key={activeEvent.id}
                     event={activeEvent}
                     onDelete={() => handleDelete(activeEvent.id)}
+                    fetchOrgEvents={fetchOrgEvents}
                   />
                 </div>
               );
