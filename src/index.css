@@ -736,7 +736,7 @@ body {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 .saved-page a {
   color: #666d24;
