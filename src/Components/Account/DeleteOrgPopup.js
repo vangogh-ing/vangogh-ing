@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 
@@ -55,13 +55,15 @@ export default function DeleteOrgPopup(props) {
           <div className="popup_header">Loading...</div>
         </div>
       ) : (
-        <div className="createOrgPopup">
-          <div className="createOrgPopup_header">
+        <div className="deleteOrgPopup">
+          <div className="deleteOrgPopup_header">
             <h1>Are you sure you want to delete?</h1>
             <button onClick={props.closePopup}>x</button>
           </div>
-          <button onClick={handleDelete}>Yes</button>
-          <button onClick={props.closePopup}>No</button>
+          <div className="deleteOrgPopup_buttons">
+            <button onClick={handleDelete}>Yes</button>
+            <button onClick={props.closePopup}>No</button>
+          </div>
         </div>
       )}
     </Popup>

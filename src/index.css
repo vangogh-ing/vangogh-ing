@@ -508,6 +508,52 @@ body {
   background-color: #ac8c26;
   transition: ease 0.5s;
 }
+.deleteOrgPopup {
+  background-color: #fffef9;
+  color: black;
+  width: 75%;
+  border-style: solid;
+  border-color: #bca32d;
+  box-shadow: 0.7rem 0.7rem #4c5e7d;
+  padding: 1rem;
+}
+.deleteOrgPopup_header {
+  display: flex;
+  justify-content: space-between;
+}
+.deleteOrgPopup_header > h1 {
+  width: 100%;
+  margin-left: 1.7rem;
+  text-align: center;
+}
+.deleteOrgPopup_header > button {
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  border-radius: 2px;
+  background-color: #bca32d;
+  color: #fffef9;
+}
+.deleteOrgPopup_buttons {
+  display: flex;
+  justify-content: center;
+}
+.deleteOrgPopup_buttons > button {
+  cursor: pointer;
+  background-color: #bca32d;
+  color: #fffef9;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  transition: ease 0.5s;
+  font-size: 1rem;
+  margin: 1rem;
+}
+.deleteOrgPopup_buttons > button:hover {
+  background-color: #ac8c26;
+  transition: ease 0.5s;
+}
 .slick-prev:before,
 .slick-next:before {
   color: black !important;
