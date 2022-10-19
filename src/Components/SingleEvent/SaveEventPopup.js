@@ -64,7 +64,7 @@ export default function SaveEventPopup(props) {
                 size="small"
                 endIcon={<BookmarkBorderIcon />}
                 onClick={async () => {
-                  await props.handleSaveEvent("interested");
+                  await props.handleSaveEvent("interested", props.eventId);
                   close();
                 }}
               >
@@ -76,7 +76,7 @@ export default function SaveEventPopup(props) {
                 size="small"
                 endIcon={<EventAvailableIcon />}
                 onClick={async () => {
-                  await props.handleSaveEvent("attending");
+                  await props.handleSaveEvent("attending", props.eventId);
                   close();
                 }}
               >

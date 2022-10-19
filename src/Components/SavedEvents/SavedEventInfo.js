@@ -2,7 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { DateDisplay, TimeDisplay } from "../SingleEvent/DateTimeDisplay";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import SaveEventPopup from "../SingleEvent/SaveEventPopup";
 
 export default function SavedEventInfo(props) {
   return (
@@ -58,18 +60,26 @@ export default function SavedEventInfo(props) {
                           endTime={entry.Events.endTime}
                         />
                       </div>
-                      <Button
-                        variant="contained"
-                        className="contained-button"
-                        color="primary"
-                        size="small"
-                        endIcon={<DeleteIcon />}
-                        onClick={async () => {
-                          props.handleRemove(entry.eventId);
-                        }}
-                      >
-                        Remove
-                      </Button>
+                      <div>
+                        <SaveEventPopup
+                          alreadySaved={true}
+                          currentInterestLevel={entry.interest_level}
+                          handleSaveEvent={props.handleSaveEvent}
+                          eventId={entry.eventId}
+                        />
+                        <IconButton
+                          variant="contained"
+                          className="remove-event-button"
+                          color="error"
+                          size="small"
+                          onClick={() => props.handleRemove(entry.eventId)}
+                        >
+                          <DeleteIcon
+                            titleAccess="remove-event"
+                            fontSize="large"
+                          />
+                        </IconButton>
+                      </div>
                     </div>
                   </div>
                 </div>

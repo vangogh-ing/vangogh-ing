@@ -128,7 +128,6 @@ export default function SingleEvent() {
                       <SaveEventPopup
                         userId={authUserId}
                         handleSaveEvent={handleSaveEvent}
-                        handleRemoveEvent={handleRemoveEvent}
                         alreadySaved={true}
                         currentInterestLevel={currentInterestLevel}
                       />
