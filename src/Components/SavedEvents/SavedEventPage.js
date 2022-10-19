@@ -1,12 +1,10 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import SavedEventInfo from "./SavedEventInfo";
-import SaveEventPopup from "../SingleEvent/SaveEventPopup";
 
 export default function FollowedPage(props) {
   const userId = props.session.user.id;
   const [savedEvents, setSavedEvents] = useState();
-  const [currentInterestLevel, setCurrentInterestLevel] = useState();
   const [loading, setLoading] = useState(true);
 
   const fetchSavedEvents = useCallback(async () => {
