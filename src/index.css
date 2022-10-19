@@ -475,6 +475,7 @@ body {
 }
 .container {
   display: flex;
+  justify-content: center;
   background-color: #fffef9;
 }
 .header {

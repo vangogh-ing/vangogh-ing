@@ -68,7 +68,9 @@ function CreateEvent({ user }) {
             />
 
             <label htmlFor="description">Description: </label>
-            <input
+            <textarea
+              cols="100"
+              rows="5"
               type="text"
               id="description"
               value={description}

@@ -43,7 +43,7 @@ function ActiveViewInfo({ event, onDelete }) {
           </div>
         </div>
         <div className="infoCard">
-          <Link to={`/events/${event.id}`}>
+          <Link className="underlineOliveLink" to={`/events/${event.id}`}>
             <div className="details">
               <DateDisplay start={event.startDate} end={event.endDate} />
               <TimeDisplay

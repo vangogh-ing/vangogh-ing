@@ -10,12 +10,14 @@ function DiscoverInfo({ event, session, userOrgId }) {
       {session && userOrgId !== null ? (
         //Logged in as an org
         <div className="card">
-          <div className="imageCard">
-            <img className="image" src={event.imageUrl} alt="" />
-          </div>
+          <Link className="underlineOliveLink" to={`/events/${event.id}`}>
+            <div className="imageCard">
+              <img className="image" src={event.imageUrl} alt="" />
+            </div>
+          </Link>
           <div className="infoCard">
-            <h3 className="eventTitle">{event.title}</h3>
-            <Link to={`/events/${event.id}`}>
+            <Link className="underlineOliveLink" to={`/events/${event.id}`}>
+              <h3 className="eventTitle">{event.title}</h3>
               <div className="details">
                 <DateDisplay start={event.startDate} end={event.endDate} />
                 <TimeDisplay
@@ -27,7 +29,7 @@ function DiscoverInfo({ event, session, userOrgId }) {
               </div>
             </Link>
 
-            <Link to={`/orgs/${event.OrgId}`}>
+            <Link className="underlineOliveLink" to={`/orgs/${event.OrgId}`}>
               <p>Hosted By: {event.Organization.name}</p>
             </Link>
             <div>
@@ -38,9 +40,11 @@ function DiscoverInfo({ event, session, userOrgId }) {
       ) : (
         //logged in as regular user or not logged in at all
         <div className="card">
-          <div className="imageCard">
-            <img className="image" src={event.imageUrl} alt="" />
-          </div>
+          <Link className="underlineOliveLink" to={`/events/${event.id}`}>
+            <div className="imageCard">
+              <img className="image" src={event.imageUrl} alt="" />
+            </div>
+          </Link>
           <div className="infoCard">
             <Link to={`/events/${event.id}`}>
               <h3 className="eventTitle">{event.title}</h3>

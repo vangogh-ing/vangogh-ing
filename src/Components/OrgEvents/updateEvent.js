@@ -91,7 +91,9 @@ function UpdateEvent({ orgEvent }) {
               />
 
               <label htmlFor="description">Description: </label>
-              <input
+              <textarea
+                cols="100"
+                rows="5"
                 type="text"
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
