@@ -12,10 +12,11 @@ export default function SaveEventPopup(props) {
       trigger={
         props.alreadySaved ? (
           <Button
-            variant="contained"
+            variant="outlined"
             className="contained-button"
             size="small"
             color="primary"
+            sx={{ fontWeight: "bold" }}
             endIcon={<EditIcon />}
           >
             {props.currentInterestLevel}
@@ -64,7 +65,7 @@ export default function SaveEventPopup(props) {
                 size="small"
                 endIcon={<BookmarkBorderIcon />}
                 onClick={async () => {
-                  await props.handleSaveEvent("interested");
+                  await props.handleSaveEvent("interested", props.eventId);
                   close();
                 }}
               >
@@ -76,7 +77,7 @@ export default function SaveEventPopup(props) {
                 size="small"
                 endIcon={<EventAvailableIcon />}
                 onClick={async () => {
-                  await props.handleSaveEvent("attending");
+                  await props.handleSaveEvent("attending", props.eventId);
                   close();
                 }}
               >

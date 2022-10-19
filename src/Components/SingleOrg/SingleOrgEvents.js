@@ -1,7 +1,6 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React from "react";
 // import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { supabase } from "../../supabaseClient";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -9,20 +8,6 @@ import "slick-carousel/slick/slick-theme.css";
 import { DateDisplay } from "../SingleEvent/DateTimeDisplay";
 
 export default function SingleOrgEvents(props) {
-  const [relatedEventInfo, setRelatedEventInfo] = useState([]);
-
-  const fetchRelatedEventInfo = useCallback(async () => {
-    let { data: Events } = await supabase
-      .from("Events")
-      .select("*")
-      .eq("OrgId", props.orgId);
-    setRelatedEventInfo(Events);
-  }, [props.orgId]);
-
-  useEffect(() => {
-    fetchRelatedEventInfo();
-  }, [fetchRelatedEventInfo]);
-
   const settings = {
     dots: true,
     infinite: true,
@@ -33,7 +18,7 @@ export default function SingleOrgEvents(props) {
 
   return (
     <div className="event-carousel-container">
-      {relatedEventInfo.length ? (
+      {props.orgEvents.length ? (
         <header className="event-carousel-header">
           Events Happening at {props.orgName}
         </header>
@@ -42,9 +27,9 @@ export default function SingleOrgEvents(props) {
           No events posted yet, check again later!
         </header>
       )}
-      {relatedEventInfo.length > 0 && (
+      {props.orgEvents.length > 0 && (
         <Slider className="event-carousel-slider" {...settings}>
-          {relatedEventInfo.map((event) => (
+          {props.orgEvents.map((event) => (
             <div key={event.id}>
               <p>
                 <Link to={`/events/${event.id}`}>{event.title}</Link>

@@ -60,6 +60,8 @@ export default function ReviewDisplay(props) {
           ) / Review.length
         ).toFixed(1)
       );
+    } else {
+      setRatingAverage(null);
     }
   }, [props.eventId, props.userId]);
 
