@@ -1,0 +1,113 @@
+.saved-page {
+  width: 100vw;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin-top: 1rem;
+}
+.saved-page a {
+  color: #666d24;
+}
+.saved-container {
+  display: flex;
+  width: 90vw;
+  border-left: 0.5rem solid @metallicGold;
+  border-right: 0.5rem solid @metallicGold;
+  border-top: 0.5rem solid @metallicGold;
+  margin-bottom: 1rem;
+  outline: 0.5rem solid @independenceBlue;
+}
+#for-you-container {
+  flex-flow: column nowrap;
+}
+#saved-events-container {
+  flex-flow: row wrap;
+}
+.none-saved {
+  padding: 1rem;
+  margin: 0rem -0.1rem 0rem -0.1rem;
+  width: 100%;
+  border-bottom: 0.5rem solid @metallicGold;
+}
+.for-you-org {
+  border-bottom: 0.5rem solid @metallicGold;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  min-height: 25rem;
+  padding-bottom: 1rem;
+}
+.for-you-org-info {
+  display: flex;
+  flex-direction: column;
+  width: 32rem;
+}
+.saved-info-row {
+  display: flex;
+}
+.for-you-org-img {
+  display: inline-block;
+  width: 15rem;
+  height: 15rem;
+  object-fit: cover;
+  box-shadow: 0.3rem 0.3rem @darkGreen;
+  transition: transform ease 0.5s, box-shadow ease 0.5s;
+}
+.for-you-org-img:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: 0.5rem 0.5rem @darkGreen;
+  transition: transform ease 0.5s, box-shadow ease 0.5s;
+}
+.saved-info-right {
+  margin: 0rem 0.5rem 0rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.for-you-org-events {
+  height: min-content;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1.5rem;
+  width: 50%;
+}
+#saved-events-container {
+  flex-flow: row wrap;
+  border-right: none;
+}
+.saved-event {
+  border-bottom: 0.5rem solid @metallicGold;
+  border-right: 0.5rem solid @metallicGold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 1rem;
+  height: 16rem;
+  min-width: 18rem;
+  flex-basis: 24rem;
+  flex-grow: 1;
+  padding: 1rem;
+}
+.saved-event-info {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+}
+.saved-event-info > h2 {
+  font-size: 1.1rem;
+}
+.saved-event-img {
+  display: inline-block;
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+  box-shadow: 0.3rem 0.3rem @darkGreen;
+  transition: transform ease 0.5s, box-shadow ease 0.5s;
+}
+.saved-event-img:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: 0.5rem 0.5rem @darkGreen;
+  transition: transform ease 0.5s, box-shadow ease 0.5s;
+}
