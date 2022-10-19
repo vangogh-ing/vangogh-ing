@@ -47,44 +47,32 @@ export default function SaveEventPopup(props) {
   }, [props.orgId, orgInfo]);
 
   const handleSubmit = async (event) => {
+    event.preventDefault();
+
     try {
       setLoading(true);
-      event.preventDefault();
 
-      const { data, error } = await supabase
-        .from("Organization")
-        .insert([
-          {
-            name,
-            address,
-            phone,
-            email,
-            hours,
-            webUrl,
-          },
-        ])
-        .select();
+      const updates = {
+        id: props.orgId,
+        name,
+        address,
+        phone,
+        email,
+        description,
+        imageUrl,
+        hours,
+        webUrl,
+      };
+
+      console.log(updates);
+
+      let { error } = await supabase.from("Organization").upsert(updates);
+
       if (error) {
         throw error;
       }
-      if (data) {
-        let newOrgId = data[0].id;
-
-        const updates = {
-          id: props.session.user.id,
-          OrgId: newOrgId,
-          updated_at: new Date(),
-        };
-
-        let { error } = await supabase.from("User").upsert(updates);
-        if (error) {
-          throw error;
-        } else {
-          props.setUserOrgId(newOrgId);
-        }
-      }
     } catch (error) {
-      console.log(error);
+      alert(error.message);
     } finally {
       setLoading(false);
       props.closePopup();
@@ -148,7 +136,13 @@ export default function SaveEventPopup(props) {
               value={webUrl}
               onChange={(event) => setWebUrl(event.target.value)}
             />
-            <button>Create the Org!</button>
+            <label htmlFor="name">Description: </label>
+            <input
+              type="text"
+              value={description}
+              onChange={(event) => setDescription(event.target.value)}
+            />
+            <button>Update the Org!</button>
           </form>
         </div>
       )}
