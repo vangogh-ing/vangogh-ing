@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import SavedEventInfo from "./SavedEventInfo";
+import LinearProgress from "@mui/material/LinearProgress";
 
 export default function FollowedPage(props) {
   const userId = props.session.user.id;
@@ -57,7 +58,15 @@ export default function FollowedPage(props) {
 
   return (
     <div>
-      {!loading && (
+      {loading ? (
+        <LinearProgress
+          sx={{
+            height: 10,
+            marginTop: "2rem",
+          }}
+          color="success"
+        />
+      ) : (
         <SavedEventInfo
           savedEvents={savedEvents}
           userId={userId}
