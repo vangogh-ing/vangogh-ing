@@ -4,7 +4,7 @@ import { supabase } from "../../supabaseClient";
 
 import Popup from "reactjs-popup";
 
-export default function SaveEventPopup(props) {
+export default function CreateOrgPopup(props) {
   const [loading, setLoading] = useState(false);
 
   const [name, setName] = useState("");
