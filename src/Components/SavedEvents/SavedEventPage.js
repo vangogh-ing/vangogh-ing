@@ -8,14 +8,18 @@ export default function FollowedPage(props) {
   const [loading, setLoading] = useState(true);
 
   const fetchSavedEvents = useCallback(async () => {
-    let { data: user_added_events, error } = await supabase
+    let { data: user_added_events } = await supabase
       .from("user_added_events")
       .select(
         `eventId,
          Events (*)`
       )
       .eq("userId", userId);
-    setSavedEvents(user_added_events);
+    setSavedEvents(
+      user_added_events.sort(
+        (a, b) => new Date(a.Events.startDate) - new Date(b.Events.startDate)
+      )
+    );
     setLoading(false);
   }, [userId]);
 
