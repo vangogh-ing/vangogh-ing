@@ -19,7 +19,10 @@ export default function SingleOrg() {
   const fetchOrgUserInfo = useCallback(async () => {
     let { data: Organization } = await supabase
       .from("Organization")
-      .select("*")
+      .select(
+        `*,
+    Events (*)`
+      )
       .eq("id", id);
 
     if (Organization[0]) {
@@ -73,6 +76,7 @@ export default function SingleOrg() {
         <LinearProgress
           sx={{
             height: 10,
+            marginTop: "2rem",
           }}
           color="success"
         />
@@ -113,11 +117,7 @@ export default function SingleOrg() {
               </div>
             </header>
             <div className="single-info">
-              <img
-                className="single-org-img"
-                alt="Organization Img"
-                src={singleOrgInfo.imageUrl}
-              />
+              <img alt="Organization Img" src={singleOrgInfo.imageUrl} />
               <div className="single-details">
                 <div className="single-details-top">
                   <p>{singleOrgInfo.description}</p>
@@ -160,7 +160,10 @@ export default function SingleOrg() {
             </div>
           </div>
           <div className="related-event-container">
-            <SingleOrgEvents orgName={singleOrgInfo.name} orgId={id} />
+            <SingleOrgEvents
+              orgName={singleOrgInfo.name}
+              orgEvents={singleOrgInfo.Events}
+            />
           </div>
         </div>
       )}
