@@ -5,9 +5,16 @@
     background-color: @bgColor;
 }
 
+.header{
+    padding-left: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
 .order-buttons{
     display: flex;
-    gap: 1rem;
+    gap: 3px;
+    padding: 1rem;
     align-items: center;
     flex-direction: row;
     float: right;
@@ -41,9 +48,19 @@
     box-shadow: 10px 10px @metallicGold;
 }
 
+.activeViewHeader{
+    display: flex;
+    justify-content: baseline;
+}
+
 .activeButtons{
     display: flex;
-    justify-content: end;
+    gap: 5px;
+    justify-content: flex-end;
+    padding: 1rem;
+    height: 2rem;
+    align-items: flex-start;
+    float: right;
 }
 
 .infocard{
@@ -63,6 +80,11 @@
 .details{
     color: @fontColor;
     text-align: justify;
+    
+}
+
+.dateTime{
+    padding:1rem;
 }
 
 .descriptionCard{
@@ -74,8 +96,8 @@
     padding-top: 3rem;
     padding-right: 2rem;
     max-height: 5rem;
-    // min-width: 60%;
-    border-style: solid;
+    min-width: 85%;
+    max-width: 85%;
     text-align: justify;
     overflow: hidden;
     -webkit-line-clamp: 3;

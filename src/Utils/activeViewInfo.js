@@ -26,14 +26,13 @@ function ActiveViewInfo({ event, onDelete }) {
   };
 
   return (
-    <div>
-      <div className="card">
-        <div>
-          <div className="imageCard">
-            <img className="image" src={event.imageUrl} alt="" />
-          </div>
-
-          <h3 className="eventTitle">{event.title}</h3>
+    <div className="card">
+      <div className="imageCard">
+        <img className="image" src={event.imageUrl} alt="" />
+      </div>
+      <div>
+        <div className="activeViewHeader">
+          <h3>{event.title}</h3>
           <div className="activeButtons">
             <UpdateEvent orgEvent={event} />
             <button
@@ -43,22 +42,23 @@ function ActiveViewInfo({ event, onDelete }) {
               Delete
             </button>
           </div>
+        </div>
+        <div className="infoCard">
           <Link to={`/events/${event.id}`}>
-            <div className="infoCard">
-              <div className="details">
-                <DateDisplay start={event.startDate} end={event.endDate} />
-                <TimeDisplay
-                  startDate={event.startDate}
-                  endDate={event.endDate}
-                  startTime={event.startTime}
-                  endTime={event.endTime}
-                />
-              </div>
-              <div className="descriptionCard">
-                <p className="description">{event.description}</p>
-              </div>
+            <div className="details">
+              <DateDisplay start={event.startDate} end={event.endDate} />
+              <TimeDisplay
+                startDate={event.startDate}
+                endDate={event.endDate}
+                startTime={event.startTime}
+                endTime={event.endTime}
+              />
             </div>
           </Link>
+
+          <div>
+            <p className="description">{event.description}</p>
+          </div>
         </div>
       </div>
     </div>

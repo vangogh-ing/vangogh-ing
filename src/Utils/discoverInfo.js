@@ -45,8 +45,14 @@ function DiscoverInfo({ event, session, userOrgId }) {
             <div className="infoCard">
               <h3 className="eventTitle">{event.title}</h3>
               <div className="details">
-                <DateDisplay start={event.startDate} end={event.endDate} />
+                <DateDisplay
+                  className="dateTime"
+                  start={event.startDate}
+                  end={event.endDate}
+                />
+                <br />
                 <TimeDisplay
+                  className="dateTime"
                   startDate={event.startDate}
                   endDate={event.endDate}
                   startTime={event.startTime}
