@@ -258,7 +258,8 @@ body {
   width: 70%;
   margin: 2rem;
 }
-.account_text > p > span {
+.account_text > p > span,
+.account_org > p > span {
   font-weight: 800;
   letter-spacing: 0.3rem;
   text-shadow: 0.07rem 0.07rem #bca32d;
@@ -267,7 +268,8 @@ body {
 .account_org {
   margin-top: 2.5rem;
 }
-.account_org > a {
+.account_org > a,
+.account_org > p > a {
   font-weight: 500;
   color: #666d24;
   transition: ease 0.3s;
