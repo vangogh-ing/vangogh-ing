@@ -13,6 +13,7 @@ export default function SaveEventPopup(props) {
   const [email, setEmail] = useState("");
   const [hours, setHours] = useState("");
   const [webUrl, setWebUrl] = useState("");
+  const [description, setDescription] = useState("");
 
   const navigate = useNavigate();
 
@@ -31,6 +32,7 @@ export default function SaveEventPopup(props) {
             email,
             hours,
             webUrl,
+            description,
           },
         ])
         .select();
@@ -118,6 +120,14 @@ export default function SaveEventPopup(props) {
               type="text"
               value={webUrl}
               onChange={(event) => setWebUrl(event.target.value)}
+            />
+            <label htmlFor="name">Description: </label>
+            <textarea
+              type="text"
+              cols="100"
+              rows="5"
+              value={description}
+              onChange={(event) => setDescription(event.target.value)}
             />
             <button>Create the Org!</button>
           </form>
