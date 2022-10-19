@@ -2,12 +2,20 @@
 
 .container{
     display: flex;
+    justify-content: center;
     background-color: @bgColor;
+}
+
+.header{
+    padding-left: 1rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 .order-buttons{
     display: flex;
-    gap: 1rem;
+    gap: 3px;
+    padding: 1rem;
     align-items: center;
     flex-direction: row;
     float: right;
@@ -41,39 +49,71 @@
     box-shadow: 10px 10px @metallicGold;
 }
 
-// .card:hover{
-//     box-shadow: 12px 12px @metallicGold;
-// }
+.activeEventsHeader{
+    display: flex;
+    padding-left: 1rem;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-right: 1rem;
+}
 
+.activeViewHeader{
+    display: flex;
+    justify-content: space-between;
+}
+
+.activeButtons{
+    display: flex;
+    gap: 5px;
+    justify-content: flex-end;
+    padding: 1rem;
+    height: 2rem;
+    align-items: flex-start;
+    float: right;
+}
 
 .infocard{
     display: flex;
     float: right;
+    flex-direction: column;
+    padding-right: 2rem;
     color: @fontColor;
-    padding-right: 1rem;
+    flex-wrap: wrap;
 }
 
 .eventTitle{
-    // float: right;
-    // padding-left: 40px;
     color: @fontColor;
     text-align: justify;
 }
 
 .details{
-    // flex-direction: row;
     color: @fontColor;
     text-align: justify;
+    
+}
 
+.dateTime{
+    padding:1rem;
+}
+
+.descriptionCard{
+    display: flex;
 }
 
 .description{
+    display: -webkit-box;
+    padding-top: 3rem;
+    padding-right: 2rem;
+    max-height: 5rem;
+    min-width: 85%;
+    max-width: 85%;
     text-align: justify;
-    width: 65rem;
-    // float: inline-end;
-    // padding-bottom: 10px;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     color: @fontColor;
 }
+
 
 .imageCard{
     display:  flex;
@@ -90,3 +130,4 @@
     border-radius: 2px;;
     object-fit: cover;
 }
+
