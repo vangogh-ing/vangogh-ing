@@ -12,10 +12,11 @@ export default function SaveEventPopup(props) {
       trigger={
         props.alreadySaved ? (
           <Button
-            variant="contained"
+            variant="outlined"
             className="contained-button"
             size="small"
             color="primary"
+            sx={{ fontWeight: "bold" }}
             endIcon={<EditIcon />}
           >
             {props.currentInterestLevel}

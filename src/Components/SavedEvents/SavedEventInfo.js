@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { DateDisplay, TimeDisplay } from "../SingleEvent/DateTimeDisplay";
-import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SaveEventPopup from "../SingleEvent/SaveEventPopup";
