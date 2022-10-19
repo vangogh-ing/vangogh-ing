@@ -2,7 +2,7 @@ import { supabase } from "../../supabaseClient";
 import { useCallback, useEffect, useState } from "react";
 
 //add on components
-import DiscoverInfo from "../../innerEventInfo/discoverInfo";
+import DiscoverInfo from "../../Utils/discoverInfo";
 
 function OrgPastEvents({ session }) {
   const [fetchError, setFetchError] = useState(null);
@@ -28,7 +28,7 @@ function OrgPastEvents({ session }) {
   let fetchOrgEvents = useCallback(async () => {
     const { data, error } = await supabase
       .from("Events")
-      .select("*")
+      .select("*, Organization (name)")
       .eq("OrgId", userOrg);
 
     if (error) {

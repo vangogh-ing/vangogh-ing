@@ -66,15 +66,22 @@ function UpdateEvent({ orgEvent }) {
     };
 
     fetchEvent();
-  }, [orgEvent.id]);
+  }, [orgEvent.id, orgEvent]);
 
   return (
-    <Popup trigger={<button>Update Event</button>} modal nested>
-      {(close) => (
-        <div className="popup">
-          <button onClick={close}>&times;</button>
-          <form onSubmit={handleSubmit}>
-            <div className="popup-content">
+    <div>
+      <Popup
+        trigger={<button className="smallYellowButton">Update Event</button>}
+        modal
+        nested
+      >
+        {(close) => (
+          <div className="popup">
+            <div className="createOrgPopup_header">
+              <h1> Update Event Form</h1>
+              <button onClick={close}>&times;</button>
+            </div>
+            <form onSubmit={handleSubmit} className="createOrgPopup_form">
               <label htmlFor="title">Title: </label>
               <input
                 type="text"
@@ -82,19 +89,17 @@ function UpdateEvent({ orgEvent }) {
                 onChange={(event) => setTitle(event.target.value)}
                 required
               />
-            </div>
 
-            <div className="popup-content">
               <label htmlFor="description">Description: </label>
-              <input
+              <textarea
+                cols="100"
+                rows="5"
                 type="text"
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
                 required
               />
-            </div>
 
-            <div className="popup-content">
               <label htmlFor="startDate">Start Date: </label>
               <input
                 type="date"
@@ -102,9 +107,7 @@ function UpdateEvent({ orgEvent }) {
                 onChange={(event) => setStartDate(event.target.value)}
                 required
               />
-            </div>
 
-            <div className="popup-content">
               <label htmlFor="endDate">End Date: </label>
               <input
                 type="date"
@@ -112,9 +115,7 @@ function UpdateEvent({ orgEvent }) {
                 onChange={(event) => setEndDate(event.target.value)}
                 required
               />
-            </div>
 
-            <div className="popup-content">
               <label htmlFor="startTime">Start Time: </label>
               <input
                 type="time"
@@ -122,9 +123,7 @@ function UpdateEvent({ orgEvent }) {
                 onChange={(event) => setStartTime(event.target.value)}
                 required
               />
-            </div>
 
-            <div className="popup-content">
               <label htmlFor="endtime">End Time: </label>
               <input
                 type="time"
@@ -132,9 +131,7 @@ function UpdateEvent({ orgEvent }) {
                 onChange={(event) => setEndTime(event.target.value)}
                 required
               />
-            </div>
 
-            <div className="popup-content">
               <label htmlFor="location">Location: </label>
               <input
                 type="text"
@@ -142,26 +139,22 @@ function UpdateEvent({ orgEvent }) {
                 onChange={(event) => setLocation(event.target.value)}
                 required
               />
-            </div>
 
-            <div className="popup-content">
               <label htmlFor="imageUrl">Image: </label>
               <input
                 type="text"
                 value={imageUrl}
                 onChange={(event) => setImage(event.target.value)}
               />
-            </div>
 
-            <div>
               <button>Update</button>
-            </div>
 
-            {formError && <p>{formError}</p>}
-          </form>
-        </div>
-      )}
-    </Popup>
+              {formError && <p>{formError}</p>}
+            </form>
+          </div>
+        )}
+      </Popup>
+    </div>
   );
 }
 

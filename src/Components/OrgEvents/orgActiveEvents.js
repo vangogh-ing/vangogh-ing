@@ -2,9 +2,8 @@ import { supabase } from "../../supabaseClient";
 import { useCallback, useEffect, useState } from "react";
 
 //add on components
-import DiscoverInfo from "../../innerEventInfo/discoverInfo";
+import ActiveViewInfo from "../../Utils/activeViewInfo";
 import CreateEvent from "./createEvent";
-import UpdateEvent from "./updateEvent";
 
 function OrgActiveEvents({ session }) {
   const [fetchError, setFetchError] = useState(null);
@@ -16,22 +15,10 @@ function OrgActiveEvents({ session }) {
     return eventDate > Date.now();
   }
 
-  const handleDelete = async (orgId) => {
-    const { data, error } = await supabase
-      .from("Events")
-      .delete()
-      .eq("id", orgId)
-      .select();
-
-    if (error) {
-      console.log(error);
-    }
-
-    if (data) {
-      setOrgEvents((prevEvents) => {
-        return prevEvents.filter((event) => event.id !== orgId);
-      });
-    }
+  const handleDelete = (id) => {
+    setOrgEvents((orgEvents) => {
+      return orgEvents.filter((event) => event.id !== id);
+    });
   };
 
   let userOrgId = useCallback(async () => {
@@ -76,8 +63,12 @@ function OrgActiveEvents({ session }) {
       {fetchError && <p>{fetchError}</p>}
       {orgEvents && (
         <div>
-          <h1>Org Events Page</h1>
-          <CreateEvent user={userOrg} />
+          <div className="activeEventsHeader">
+            <h1>Org Events Page</h1>
+            <div>
+              <CreateEvent user={userOrg} />
+            </div>
+          </div>
           {orgEvents
             .filter((orgEvent) => {
               return isAfterToday(new Date(orgEvent.endDate).getTime());
@@ -85,15 +76,11 @@ function OrgActiveEvents({ session }) {
             .map((activeEvent, idx) => {
               return (
                 <div className="cardContainer" key={idx}>
-                  <DiscoverInfo
+                  <ActiveViewInfo
                     key={activeEvent.id}
-                    session={session}
                     event={activeEvent}
+                    onDelete={() => handleDelete(activeEvent.id)}
                   />
-                  <button onClick={() => handleDelete(activeEvent.id)}>
-                    Delete
-                  </button>
-                  <UpdateEvent orgEvent={activeEvent} />
                 </div>
               );
             })}
