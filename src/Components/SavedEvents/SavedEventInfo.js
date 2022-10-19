@@ -37,11 +37,13 @@ export default function SavedEventInfo(props) {
                   </h2>
                   <div className="saved-info-row">
                     <div className="saved-info-left">
-                      <img
-                        className="saved-event-img"
-                        alt="Event Img"
-                        src={entry.Events.imageUrl}
-                      />
+                      <Link to={`/events/${entry.eventId}`}>
+                        <img
+                          className="saved-event-img"
+                          alt="Event Img"
+                          src={entry.Events.imageUrl}
+                        />
+                      </Link>
                     </div>
                     <div className="saved-info-right">
                       <div>
