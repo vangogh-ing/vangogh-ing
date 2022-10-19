@@ -6,6 +6,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import getProfile from "../../Utils/getProfile";
 import CreateOrgPopup from "./CreateOrgPopup";
 import EditOrgPopup from "./EditOrgPopup";
+import DeleteOrgPopup from "./DeleteOrgPopup";
 
 const Account = ({ session, handleAccount }) => {
   const [loading, setLoading] = useState(true);
@@ -16,6 +17,9 @@ const Account = ({ session, handleAccount }) => {
 
   const [open, setOpen] = useState(false);
   const closePopup = () => setOpen(false);
+
+  const [openDelete, setOpenDelete] = useState(false);
+  const closeDeletePopup = () => setOpenDelete(false);
 
   const organizationName = useCallback(async () => {
     const { data } = await supabase
@@ -40,10 +44,16 @@ const Account = ({ session, handleAccount }) => {
     setOpen(true);
   }
 
+  function handleDeleteClick() {
+    setOpenDelete(true);
+  }
+
   function handleOrg(orgId) {
     setUserOrgId(orgId);
     handleAccount(orgId);
   }
+
+  console.log(userOrgId);
 
   return (
     <div>
@@ -83,6 +93,17 @@ const Account = ({ session, handleAccount }) => {
                     closePopup={closePopup}
                     session={session}
                     orgId={userOrgId}
+                  />
+                  <br />
+                  <a href="#deleteOrg" onClick={handleDeleteClick}>
+                    delete your org?
+                  </a>
+                  <DeleteOrgPopup
+                    open={openDelete}
+                    closePopup={closeDeletePopup}
+                    orgId={userOrgId}
+                    session={session}
+                    setUserOrgId={handleOrg}
                   />
                 </div>
               ) : (
