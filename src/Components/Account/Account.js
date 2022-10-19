@@ -66,9 +66,9 @@ const Account = ({ session, handleAccount }) => {
                 <div className="account_org">
                   <p>
                     <span>Organization:</span>
-                    {orgName}
+                    <Link to={`/orgs/${userOrgId}`}>{orgName}</Link>
                   </p>
-                  <a href="#createOrg" onClick={handleOrgClick}>
+                  <a href="#editOrg" onClick={handleOrgClick}>
                     edit your org?
                   </a>
                   <EditOrgPopup
