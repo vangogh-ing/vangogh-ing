@@ -66,22 +66,23 @@ function Discover() {
         //not logged in view
         <div className="card-container">
           {fetchError && <p>{fetchError}</p>}
-
           <div className="header">
             <h1> DISCOVER </h1>
-            <p className="order-buttons"> Order by: </p>
-            <button
-              className="smallYellowButton"
-              onClick={() => setOrderBy("startDate")}
-            >
-              Start Date
-            </button>
-            <button
-              className="smallYellowButton"
-              onClick={() => setOrderBy("created_at")}
-            >
-              Newest
-            </button>
+            <div className="order-buttons">
+              <p className="orderTitle"> Order by: </p>
+              <button
+                className="smallYellowButton"
+                onClick={() => setOrderBy("startDate")}
+              >
+                Start Date
+              </button>
+              <button
+                className="smallYellowButton"
+                onClick={() => setOrderBy("created_at")}
+              >
+                Newest
+              </button>
+            </div>
           </div>
           {events && (
             <div>
@@ -92,6 +93,7 @@ function Discover() {
                     event={event}
                     userOrgId={userOrgId}
                   />
+                  <br />
                 </div>
               ))}
             </div>

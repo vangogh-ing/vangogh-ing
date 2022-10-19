@@ -38,31 +38,28 @@ function DiscoverInfo({ event, session, userOrgId }) {
       ) : (
         //logged in as regular user or not logged in at all
         <div className="card">
-          <Link to={`/events/${event.id}`}>
-            <div className="imageCard">
-              <img className="image" src={event.imageUrl} alt="" />
-            </div>
-            <div className="infoCard">
+          <div className="imageCard">
+            <img className="image" src={event.imageUrl} alt="" />
+          </div>
+          <div className="infoCard">
+            <Link to={`/events/${event.id}`}>
               <h3 className="eventTitle">{event.title}</h3>
               <div className="details">
-                <DateDisplay
-                  className="dateTime"
-                  start={event.startDate}
-                  end={event.endDate}
-                />
-                <br />
+                <DateDisplay start={event.startDate} end={event.endDate} />
                 <TimeDisplay
-                  className="dateTime"
                   startDate={event.startDate}
                   endDate={event.endDate}
                   startTime={event.startTime}
                   endTime={event.endTime}
                 />
-                <p>Hosted By: {event.Organization.name}</p>
               </div>
+            </Link>
+
+            <p>Hosted By: {event.Organization.name}</p>
+            <div>
               <p className="description">{event.description}</p>
             </div>
-          </Link>
+          </div>
         </div>
       )}
     </div>

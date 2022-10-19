@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react";
 //add on components
 import ActiveViewInfo from "../../Utils/activeViewInfo";
 import CreateEvent from "./createEvent";
-import UpdateEvent from "./updateEvent";
 
 function OrgActiveEvents({ session }) {
   const [fetchError, setFetchError] = useState(null);

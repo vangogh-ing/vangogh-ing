@@ -145,9 +145,7 @@ function UpdateEvent({ orgEvent }) {
                 onChange={(event) => setImage(event.target.value)}
               />
 
-              <button onClick={() => window.location.reload(false)}>
-                Update
-              </button>
+              <button>Update</button>
 
               {formError && <p>{formError}</p>}
             </form>

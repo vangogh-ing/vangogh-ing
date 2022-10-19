@@ -20,7 +20,6 @@ function ActiveViewInfo({ event, onDelete }) {
     }
 
     if (data) {
-      console.log(data);
       onDelete(data);
     }
   };

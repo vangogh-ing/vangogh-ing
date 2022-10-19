@@ -42,7 +42,6 @@ function CreateEvent({ user }) {
       setFormError("Please fill in all fields correctly");
     }
     if (data) {
-      console.log(data);
       setFormError(null);
     }
   };
