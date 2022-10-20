@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 import { supabase } from "../supabaseClient";
-import { useCallback } from "react";
 import UpdateEvent from "../Components/OrgEvents/updateEvent";
 import {
   DateDisplay,
   TimeDisplay,
 } from "../Components/SingleEvent/DateTimeDisplay";
 
-function ActiveViewInfo({ event, onDelete }) {
+function ActiveViewInfo({ event, onDelete, fetchOrgEvents }) {
   const handleDelete = async () => {
     const { data, error } = await supabase
       .from("Events")
@@ -33,7 +32,7 @@ function ActiveViewInfo({ event, onDelete }) {
         <div className="activeViewHeader">
           <h3>{event.title}</h3>
           <div className="activeButtons">
-            <UpdateEvent orgEvent={event} />
+            <UpdateEvent fetchOrgEvents={fetchOrgEvents} orgEvent={event} />
             <button
               onClick={() => handleDelete()}
               className="smallYellowButton"

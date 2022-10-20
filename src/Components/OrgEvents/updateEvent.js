@@ -3,7 +3,7 @@ import { supabase } from "../../supabaseClient";
 import React from "react";
 import Popup from "reactjs-popup";
 
-function UpdateEvent({ orgEvent }) {
+function UpdateEvent({ orgEvent, fetchOrgEvents }) {
   const [title, setTitle] = useState(orgEvent.title);
   const [description, setDescription] = useState(orgEvent.description);
   const [startDate, setStartDate] = useState(orgEvent.startDate);
@@ -39,6 +39,7 @@ function UpdateEvent({ orgEvent }) {
     if (data) {
       setFormError(null);
     }
+    fetchOrgEvents();
   };
 
   useEffect(() => {
