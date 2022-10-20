@@ -53,8 +53,6 @@ const Account = ({ session, handleAccount }) => {
     handleAccount(orgId);
   }
 
-  console.log(userOrgId);
-
   return (
     <div>
       {loading ? (

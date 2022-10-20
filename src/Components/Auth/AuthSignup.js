@@ -14,14 +14,23 @@ export default function AuthSignIn() {
     try {
       setLoading(true);
 
-      const { data } = await supabase.from("User").select().eq("email", email);
+      const regexEmail = /\S+@\S+\.\S+/;
 
-      if (data.length === 0) {
-        const { error } = await supabase.auth.signUp({ email, password });
-        if (error) throw error;
-        navigate("/welcome");
+      if (regexEmail.test(email)) {
+        const { data } = await supabase
+          .from("User")
+          .select()
+          .eq("email", email);
+
+        if (data.length === 0) {
+          const { error } = await supabase.auth.signUp({ email, password });
+          if (error) throw error;
+          navigate("/welcome");
+        } else {
+          alert("Email already in use");
+        }
       } else {
-        alert("Email already in use");
+        alert("Incorrect email format");
       }
     } catch (error) {
       alert(error.error_description || error.message);

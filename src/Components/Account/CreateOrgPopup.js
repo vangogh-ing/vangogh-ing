@@ -22,38 +22,46 @@ export default function CreateOrgPopup(props) {
       setLoading(true);
       event.preventDefault();
 
-      const { data, error } = await supabase
-        .from("Organization")
-        .insert([
-          {
-            name,
-            address,
-            phone,
-            email,
-            hours,
-            webUrl,
-            description,
-          },
-        ])
-        .select();
-      if (error) {
-        throw error;
-      }
-      if (data) {
-        let newOrgId = data[0].id;
+      const regexEmail = /\S+@\S+\.\S+/;
 
-        const updates = {
-          id: props.session.user.id,
-          OrgId: newOrgId,
-          updated_at: new Date(),
-        };
+      if (regexEmail.test(email)) {
+        const { data, error } = await supabase
+          .from("Organization")
+          .insert([
+            {
+              name,
+              address,
+              phone,
+              email,
+              hours,
+              webUrl,
+              description,
+            },
+          ])
+          .select();
 
-        let { error } = await supabase.from("User").upsert(updates);
         if (error) {
           throw error;
-        } else {
-          props.setUserOrgId(newOrgId);
         }
+
+        if (data) {
+          let newOrgId = data[0].id;
+
+          const updates = {
+            id: props.session.user.id,
+            OrgId: newOrgId,
+            updated_at: new Date(),
+          };
+
+          let { error } = await supabase.from("User").upsert(updates);
+          if (error) {
+            throw error;
+          } else {
+            props.setUserOrgId(newOrgId);
+          }
+        }
+      } else {
+        alert("Incorrect email format");
       }
     } catch (error) {
       console.log(error);
