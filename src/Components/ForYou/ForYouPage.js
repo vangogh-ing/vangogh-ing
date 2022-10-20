@@ -53,6 +53,7 @@ export default function ForYouPage(props) {
           handleUnfollow={handleUnfollow}
         />
       )}
+      <br />
     </div>
   );
 }
