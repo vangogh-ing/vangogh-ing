@@ -3,7 +3,8 @@
     display: flex;
     bottom: 0;
     width: 100%;
-    margin-top: auto;
+    color: @lightYellow;
+    margin-top: 3rem;
     align-items: flex-end;
     border-radius: 1rem 1rem 0 0;
     background-color: @independenceBlue;
@@ -31,6 +32,7 @@
 .footerInfoBlock{
     display: flex;
     padding-left: 10rem;
+    padding-bottom: 5px;
     justify-content: space-around;
 }
 
@@ -41,6 +43,17 @@
 }
 
 .footerLink{
-    padding: 2px;
+    padding: 5px;
     color: black;
 }
+
+@media only screen and (min-width: 0px) and (max-width: 900px) {
+    .footerContainer {
+      flex-direction: column;
+    }
+  
+    .footerPersonBlock {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
