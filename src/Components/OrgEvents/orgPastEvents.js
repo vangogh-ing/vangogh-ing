@@ -3,11 +3,13 @@ import { useCallback, useEffect, useState } from "react";
 
 //add on components
 import DiscoverInfo from "../../Utils/discoverInfo";
+import LinearProgress from "@mui/material/LinearProgress";
 
 function OrgPastEvents({ session }) {
   const [fetchError, setFetchError] = useState(null);
   const [orgEvents, setOrgEvents] = useState(null);
   const [userOrg, setUserOrgId] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   function isBeforeToday(eventDate) {
     return eventDate < Date.now();
@@ -40,6 +42,7 @@ function OrgPastEvents({ session }) {
       setOrgEvents(data);
       setFetchError(null);
     }
+    setLoading(false);
   }, [userOrg]);
 
   useEffect(() => {
@@ -49,7 +52,17 @@ function OrgPastEvents({ session }) {
     }
   }, [userOrg, session]);
 
-  return (
+  return loading ? (
+    <div className="loadingComponent">
+      <LinearProgress
+        sx={{
+          height: 10,
+          marginTop: "2rem",
+        }}
+        color="success"
+      />
+    </div>
+  ) : (
     <div className="container">
       {fetchError && <p>{fetchError}</p>}
       {orgEvents && (
