@@ -82,11 +82,16 @@
   letter-spacing: 0.3rem;
   text-shadow: 0.07rem 0.07rem #bca32d;
 }
+.loadingComponent {
+  max-width: 100vw;
+  min-height: 74vh;
+}
 * {
   font-family: "Gothic A1", sans-serif;
 }
 body {
   margin: 0;
+  min-height: 100vh;
   background-color: #fffef9;
 }
 .navbar {
@@ -565,6 +570,8 @@ body {
 }
 .container {
   display: flex;
+  max-width: 100vw;
+  min-height: 74vh;
   justify-content: center;
   background-color: #fffef9;
 }
@@ -704,7 +711,8 @@ body {
   }
 }
 .single-page {
-  width: 100vw;
+  max-width: 100vw;
+  min-height: 74vh;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -894,7 +902,8 @@ body {
   background-color: #fffef9;
 }
 .saved-page {
-  width: 100vw;
+  max-width: 100vw;
+  min-height: 74vh;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -1005,4 +1014,54 @@ body {
   transform: translateY(-0.3rem);
   box-shadow: 0.5rem 0.5rem #4b5c4f;
   transition: transform ease 0.5s, box-shadow ease 0.5s;
+}
+.footerContainer {
+  position: relative;
+  display: flex;
+  bottom: 0;
+  width: 100%;
+  color: #dbc96b;
+  margin-top: 2rem;
+  align-items: flex-end;
+  border-radius: 1rem 1rem 0 0;
+  background-color: #4c5e7d;
+}
+.footerName {
+  float: left;
+  padding-left: 2rem;
+  padding-bottom: 1rem;
+  padding-right: 10rem;
+}
+.footerTitle {
+  align-self: center;
+  padding-right: 3rem;
+  align-content: baseline;
+  padding-top: 1rem;
+}
+.footerPerson {
+  color: #dbc96b;
+}
+.footerInfoBlock {
+  display: flex;
+  padding-left: 10rem;
+  padding-bottom: 5px;
+  justify-content: space-around;
+}
+.footerPersonBlock {
+  padding-left: 3rem;
+  padding-right: 3rem;
+  text-align: center;
+}
+.footerLink {
+  padding: 5px;
+  color: black;
+}
+@media only screen and (min-width: 0px) and (max-width: 900px) {
+  .footerContainer {
+    flex-direction: column;
+  }
+  .footerPersonBlock {
+    flex-direction: column;
+    align-items: center;
+  }
 }

@@ -4,11 +4,13 @@ import { useCallback, useEffect, useState } from "react";
 //add on components
 import ActiveViewInfo from "../../Utils/activeViewInfo";
 import CreateEvent from "./createEvent";
+import LinearProgress from "@mui/material/LinearProgress";
 
 function OrgActiveEvents({ session }) {
   const [fetchError, setFetchError] = useState(null);
   const [orgEvents, setOrgEvents] = useState(null);
   const [userOrg, setUserOrgId] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [orderBy] = useState("created_at");
 
   function isAfterToday(eventDate) {
@@ -49,6 +51,7 @@ function OrgActiveEvents({ session }) {
       setOrgEvents(data);
       setFetchError(null);
     }
+    setLoading(false);
   }, [orderBy, userOrg]);
 
   useEffect(() => {
@@ -58,7 +61,17 @@ function OrgActiveEvents({ session }) {
     }
   }, [userOrg, orderBy, session]);
 
-  return (
+  return loading ? (
+    <div className="loadingComponent">
+      <LinearProgress
+        sx={{
+          height: 10,
+          marginTop: "2rem",
+        }}
+        color="success"
+      />
+    </div>
+  ) : (
     <div className="container">
       {fetchError && <p>{fetchError}</p>}
       {orgEvents && (

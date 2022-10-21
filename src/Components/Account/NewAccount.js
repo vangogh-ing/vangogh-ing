@@ -86,13 +86,15 @@ const Account = ({ session }) => {
   return (
     <div>
       {loading ? (
-        <LinearProgress
-          sx={{
-            height: 10,
-            marginTop: "2rem",
-          }}
-          color="success"
-        />
+        <div className="loadingComponent">
+          <LinearProgress
+            sx={{
+              height: 10,
+              marginTop: "2rem",
+            }}
+            color="success"
+          />
+        </div>
       ) : (
         <div className="editAccount_container">
           <h1>Welcome!</h1>
