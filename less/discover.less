@@ -41,8 +41,8 @@
 
 .card{
     display: flex;
-    width: 70rem;
-    height: 20rem;   
+    max-width: 70rem;
+    max-height: 20rem;   
     align-items: center;
     background-color: @bgColor;
     border-style: solid;
@@ -120,8 +120,7 @@
 .imageCard{
     display:  flex;
     float: left;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 1rem;
 }
 
 .image{
@@ -133,3 +132,38 @@
     object-fit: cover;
 }
 
+@media only screen and (min-width: 0px) and (max-width: 900px) {
+    .header{
+        display: flex;
+    }
+  
+    .cardContainer{
+        justify-content:flex-start;
+        padding: 0rem;
+    }
+
+    .card{
+        display: flex;   
+        box-shadow: 5px 5px @metallicGold;
+    }
+
+    .eventTitle{
+        display: -webkit-box;
+        text-align: justify;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .infocard{
+        flex-wrap: wrap;
+    }
+    
+    .dateTime{
+        display: -webkit-box;
+        text-align: justify;
+        overflow: hidden;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+  }

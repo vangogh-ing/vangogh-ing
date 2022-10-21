@@ -16,7 +16,7 @@ function Discover() {
     const { data, error } = await supabase
       .from("Events")
       .select("*, Organization (name)")
-      .order(orderBy, { ascending: false });
+      .order(orderBy, { ascending: true });
 
     if (error) {
       setFetchError("Could not fetch events");
