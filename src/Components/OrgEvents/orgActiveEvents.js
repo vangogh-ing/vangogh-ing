@@ -64,7 +64,7 @@ function OrgActiveEvents({ session }) {
       {orgEvents && (
         <div>
           <div className="activeEventsHeader">
-            <h1>Org Events Page</h1>
+            <h1>Organizations Active Events</h1>
             <div>
               <CreateEvent fetchOrgEvents={fetchOrgEvents} user={userOrg} />
             </div>

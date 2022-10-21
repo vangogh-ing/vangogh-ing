@@ -54,7 +54,9 @@ function OrgPastEvents({ session }) {
       {fetchError && <p>{fetchError}</p>}
       {orgEvents && (
         <div>
-          <h1>Org Events Page</h1>
+          <div className="activeEventsHeader">
+            <h1>Organizations Past Events</h1>
+          </div>
           {orgEvents
             .filter((orgEvent) => {
               return isBeforeToday(new Date(orgEvent.endDate).getTime());
