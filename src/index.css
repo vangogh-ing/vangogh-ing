@@ -91,8 +91,15 @@
 }
 body {
   margin: 0;
-  min-height: 100vh;
   background-color: #fffef9;
+  position: relative;
+}
+.allDiv {
+  display: flex;
+  flex-direction: column;
+}
+.navBodyDiv {
+  min-height: 100vh;
 }
 .navbar {
   display: flex;
@@ -423,7 +430,7 @@ body {
   background-color: #ac8c26;
   transition: ease 0.5s;
 }
-@media only screen and (max-width: 870px) {
+@media only screen and (max-width: 800px) {
   .editAccount_info {
     flex-direction: column;
     align-items: center;
@@ -1016,21 +1023,18 @@ body {
   transition: transform ease 0.5s, box-shadow ease 0.5s;
 }
 .footerContainer {
-  position: relative;
   display: flex;
   bottom: 0;
   width: 100%;
   color: #dbc96b;
-  margin-top: 2rem;
+  justify-content: space-around;
   align-items: flex-end;
   border-radius: 1rem 1rem 0 0;
   background-color: #4c5e7d;
 }
 .footerName {
   float: left;
-  padding-left: 2rem;
-  padding-bottom: 1rem;
-  padding-right: 10rem;
+  padding: 1rem;
 }
 .footerTitle {
   align-self: center;
@@ -1043,7 +1047,6 @@ body {
 }
 .footerInfoBlock {
   display: flex;
-  padding-left: 10rem;
   padding-bottom: 5px;
   justify-content: space-around;
 }
@@ -1059,6 +1062,12 @@ body {
 @media only screen and (min-width: 0px) and (max-width: 900px) {
   .footerContainer {
     flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footerInfoBlock {
+    justify-content: center;
+    align-items: center;
   }
   .footerPersonBlock {
     flex-direction: column;

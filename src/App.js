@@ -61,67 +61,74 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div>
+      <div className="allDiv">
         <Navbar session={session || null} propsOrgId={propsOrgId} />
-        {!session ? (
-          <Routes>
-            <Route path="/" element={<Navigate to="/discover" replace />} />
-            <Route path="/login" element={<AuthLogin />} />
-            <Route path="/signup" element={<AuthSignup />} />
-            <Route path="/events/:id" element={<SingleEvent />} />
-            <Route path="/orgs/:id" element={<SingleOrg />} />
-            <Route path="/discover" element={<Discover />} />
-          </Routes>
-        ) : (
-          <Routes>
-            <Route
-              path="/welcome"
-              element={<NewAccount key={session.user.id} session={session} />}
-            />
-            <Route
-              path="/account"
-              element={
-                <Account
-                  key={session.user.id}
-                  session={session}
-                  handleAccount={handleAccount}
-                />
-              }
-            />
-            <Route
-              path="/account/edit"
-              element={<EditAccount key={session.user.id} session={session} />}
-            />
-            <Route
-              path="/discover"
-              element={<Discover key={session.user} session={session} />}
-            />
-            <Route path="/events/:id" element={<SingleEvent />} />
-            <Route path="/orgs/:id" element={<SingleOrg />} />
-            <Route path="/foryou" element={<ForYouPage session={session} />} />
-            <Route
-              path="/savedevents"
-              element={<SavedEventPage session={session} />}
-            />
-            <Route
-              path="/activeevents"
-              element={
-                <OrgActiveEvents key={session.user.id} session={session} />
-              }
-            />
-            <Route
-              path="/pastevents"
-              element={
-                <OrgPastEvents key={session.user.id} session={session} />
-              }
-            />
-            <Route
-              path="/plan"
-              element={<Calendar key={session.user.id} session={session} />}
-            />
-          </Routes>
-        )}
-        <br />
+        <div className="navBodyDiv">
+          {!session ? (
+            <Routes>
+              <Route path="/" element={<Navigate to="/discover" replace />} />
+              <Route path="/login" element={<AuthLogin />} />
+              <Route path="/signup" element={<AuthSignup />} />
+              <Route path="/events/:id" element={<SingleEvent />} />
+              <Route path="/orgs/:id" element={<SingleOrg />} />
+              <Route path="/discover" element={<Discover />} />
+            </Routes>
+          ) : (
+            <Routes>
+              <Route
+                path="/welcome"
+                element={<NewAccount key={session.user.id} session={session} />}
+              />
+              <Route
+                path="/account"
+                element={
+                  <Account
+                    key={session.user.id}
+                    session={session}
+                    handleAccount={handleAccount}
+                  />
+                }
+              />
+              <Route
+                path="/account/edit"
+                element={
+                  <EditAccount key={session.user.id} session={session} />
+                }
+              />
+              <Route
+                path="/discover"
+                element={<Discover key={session.user} session={session} />}
+              />
+              <Route path="/events/:id" element={<SingleEvent />} />
+              <Route path="/orgs/:id" element={<SingleOrg />} />
+              <Route
+                path="/foryou"
+                element={<ForYouPage session={session} />}
+              />
+              <Route
+                path="/savedevents"
+                element={<SavedEventPage session={session} />}
+              />
+              <Route
+                path="/activeevents"
+                element={
+                  <OrgActiveEvents key={session.user.id} session={session} />
+                }
+              />
+              <Route
+                path="/pastevents"
+                element={
+                  <OrgPastEvents key={session.user.id} session={session} />
+                }
+              />
+              <Route
+                path="/plan"
+                element={<Calendar key={session.user.id} session={session} />}
+              />
+            </Routes>
+          )}
+          <br />
+        </div>
         <Footer />
       </div>
     </ThemeProvider>
