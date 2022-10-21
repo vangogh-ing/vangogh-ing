@@ -56,13 +56,15 @@ const Account = ({ session, handleAccount }) => {
   return (
     <div>
       {loading ? (
-        <LinearProgress
-          sx={{
-            height: 10,
-            marginTop: "2rem",
-          }}
-          color="success"
-        />
+        <div className="loadingComponent">
+          <LinearProgress
+            sx={{
+              height: 10,
+              marginTop: "2rem",
+            }}
+            color="success"
+          />
+        </div>
       ) : (
         <div className="account_container">
           <h1>Your Profile</h1>

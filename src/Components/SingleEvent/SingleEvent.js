@@ -89,13 +89,15 @@ export default function SingleEvent() {
   return (
     <div>
       {loading ? (
-        <LinearProgress
-          sx={{
-            height: 10,
-            marginTop: "2rem",
-          }}
-          color="success"
-        />
+        <div className="loadingComponent">
+          <LinearProgress
+            sx={{
+              height: 10,
+              marginTop: "2rem",
+            }}
+            color="success"
+          />
+        </div>
       ) : !singleEventInfo.id ? (
         <div>
           <h1>Event Not Found!</h1>

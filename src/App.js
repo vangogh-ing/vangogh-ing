@@ -17,6 +17,7 @@ import SavedEventPage from "./Components/SavedEvents/SavedEventPage";
 import Calendar from "./Components/Calendar/Calendar";
 import OrgActiveEvents from "./Components/OrgEvents/orgActiveEvents";
 import OrgPastEvents from "./Components/OrgEvents/orgPastEvents";
+import Footer from "./Components/Footer";
 
 // notes: material ui theme test:
 const theme = createTheme({
@@ -120,6 +121,8 @@ export default function App() {
             />
           </Routes>
         )}
+        <br />
+        <Footer />
       </div>
     </ThemeProvider>
   );
