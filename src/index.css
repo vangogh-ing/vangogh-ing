@@ -170,7 +170,7 @@ body {
   background-color: #ac8c26;
   transition: ease 0.5s;
 }
-@media only screen and (min-width: 0px) and (max-width: 900px) {
+@media screen and (max-width: 800px) {
   .navbar {
     flex-direction: column;
   }
@@ -602,7 +602,7 @@ body {
   color: black !important;
 }
 #full_calendar {
-  margin: 2rem;
+  margin: 3rem 7rem 2rem 7rem;
 }
 .container {
   display: flex;
