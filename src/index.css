@@ -300,6 +300,18 @@ body {
   font-style: italic;
   margin-top: 2rem;
 }
+@media only screen and (max-width: 800px) {
+  .account_info {
+    flex-direction: column;
+    align-items: center;
+  }
+  .account_text {
+    text-align: center;
+  }
+  .account_links {
+    text-align: center;
+  }
+}
 .editAccount_container {
   display: flex;
   flex-direction: column;
@@ -405,6 +417,23 @@ body {
 .editAccount_profile > div > button:hover {
   background-color: #ac8c26;
   transition: ease 0.5s;
+}
+@media only screen and (max-width: 800px) {
+  .editAccount_info {
+    flex-direction: column;
+    align-items: center;
+  }
+  .editAccount_avatar {
+    align-items: center;
+  }
+  .editAccount_avatar > input {
+    width: 70%;
+  }
+  .editAccount_profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 .createOrgPopup {
   background-color: #fffef9;
