@@ -73,13 +73,15 @@ export default function SingleOrg() {
   return (
     <div>
       {loading ? (
-        <LinearProgress
-          sx={{
-            height: 10,
-            marginTop: "2rem",
-          }}
-          color="success"
-        />
+        <div className="loadingComponent">
+          <LinearProgress
+            sx={{
+              height: 10,
+              marginTop: "2rem",
+            }}
+            color="success"
+          />
+        </div>
       ) : !singleOrgInfo ? (
         <div>
           <h1>Organization Not Found!</h1>

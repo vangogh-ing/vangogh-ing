@@ -83,13 +83,15 @@ const Account = ({ session }) => {
   return (
     <div aria-live="polite">
       {loading ? (
-        <LinearProgress
-          sx={{
-            height: 10,
-            marginTop: "2rem",
-          }}
-          color="success"
-        />
+        <div className="loadingComponent">
+          <LinearProgress
+            sx={{
+              height: 10,
+              marginTop: "2rem",
+            }}
+            color="success"
+          />
+        </div>
       ) : (
         <div className="editAccount_container">
           <h1>Update Your Account</h1>

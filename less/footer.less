@@ -1,0 +1,59 @@
+.footerContainer{
+    position: relative;
+    display: flex;
+    bottom: 0;
+    width: 100%;
+    color: @lightYellow;
+    margin-top: 2rem;
+    align-items: flex-end;
+    border-radius: 1rem 1rem 0 0;
+    background-color: @independenceBlue;
+}
+
+.footerName{
+    float: left;
+    padding-left: 2rem;
+    padding-bottom: 1rem;
+    padding-right: 10rem;
+    // align-content: baseline;
+}
+
+.footerTitle{
+    align-self: center;
+    padding-right: 3rem;
+    align-content: baseline;
+    padding-top: 1rem;
+}
+
+.footerPerson{
+    color: @lightYellow;
+}
+
+.footerInfoBlock{
+    display: flex;
+    padding-left: 10rem;
+    padding-bottom: 5px;
+    justify-content: space-around;
+}
+
+.footerPersonBlock{
+    padding-left: 3rem;
+    padding-right: 3rem;
+    text-align: center;
+}
+
+.footerLink{
+    padding: 5px;
+    color: black;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 900px) {
+    .footerContainer {
+      flex-direction: column;
+    }
+  
+    .footerPersonBlock {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
