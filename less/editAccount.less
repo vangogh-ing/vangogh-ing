@@ -98,3 +98,24 @@
 .editAccount_profile > div > button:hover {
   .smallYellowButtonHover;
 }
+
+@media only screen and (max-width: 800px) {
+  .editAccount_info {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .editAccount_avatar {
+    align-items: center;
+  }
+
+  .editAccount_avatar > input {
+    width: 70%;
+  }
+
+  .editAccount_profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

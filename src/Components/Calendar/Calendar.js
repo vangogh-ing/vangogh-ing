@@ -149,6 +149,7 @@ const Calendar = ({ session }) => {
               events={savedEvents}
               eventClick={renderEventContent}
               handleWindowResize="true"
+              contentHeight="auto"
             />
           </div>
           <Popup
