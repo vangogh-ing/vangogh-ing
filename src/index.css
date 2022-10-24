@@ -845,8 +845,8 @@ body {
   width: 25rem;
 }
 .event-carousel-img {
-  min-width: 15rem;
-  max-height: 15rem;
+  min-width: 12rem;
+  max-height: 12rem;
   object-fit: contain;
   margin-left: auto;
   margin-right: auto;
