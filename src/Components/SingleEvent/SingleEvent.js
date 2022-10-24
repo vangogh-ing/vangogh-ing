@@ -8,6 +8,7 @@ import ReviewDisplay from "./ReviewDisplay";
 import LinearProgress from "@mui/material/LinearProgress";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import NotFoundPage from "../NotFoundPage";
 
 export default function SingleEvent() {
   const { id } = useParams();
@@ -99,9 +100,7 @@ export default function SingleEvent() {
           />
         </div>
       ) : !singleEventInfo.id ? (
-        <div>
-          <h1>Event Not Found!</h1>
-        </div>
+        <NotFoundPage type="Event" />
       ) : (
         <div className="single-page">
           <div className="single-container">

@@ -7,6 +7,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import NotFoundPage from "../NotFoundPage";
 
 export default function SingleOrg() {
   const { id } = useParams();
@@ -82,9 +83,9 @@ export default function SingleOrg() {
             color="success"
           />
         </div>
-      ) : !singleOrgInfo ? (
+      ) : !singleOrgInfo.id ? (
         <div>
-          <h1>Organization Not Found!</h1>
+          <NotFoundPage type="Organization" />
         </div>
       ) : (
         <div className="single-page">

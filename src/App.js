@@ -18,6 +18,7 @@ import Calendar from "./Components/Calendar/Calendar";
 import OrgActiveEvents from "./Components/OrgEvents/orgActiveEvents";
 import OrgPastEvents from "./Components/OrgEvents/orgPastEvents";
 import Footer from "./Components/Footer";
+import NotFoundPage from "./Components/NotFoundPage";
 
 // notes: material ui theme test:
 const theme = createTheme({
@@ -72,6 +73,7 @@ export default function App() {
               <Route path="/events/:id" element={<SingleEvent />} />
               <Route path="/orgs/:id" element={<SingleOrg />} />
               <Route path="/discover" element={<Discover />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           ) : (
             <Routes>
@@ -125,6 +127,7 @@ export default function App() {
                 path="/plan"
                 element={<Calendar key={session.user.id} session={session} />}
               />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           )}
           <br />

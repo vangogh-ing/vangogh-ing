@@ -6,7 +6,8 @@ export default function NotFoundPage(props) {
       <h1>{props.type ? props.type : "Page"} Not Found!</h1>
       <img
         alt="At Eternity's Gate by Van Gogh"
-        src="../../public/notfoundvangogh.jpeg"
+        src="/notfoundvangogh.jpeg"
+        className="not-found-image"
       />
     </div>
   );
