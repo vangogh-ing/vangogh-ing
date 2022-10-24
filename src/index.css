@@ -838,6 +838,7 @@ body {
   border-left: 0.2rem solid #4b5c4f;
   border-right: 0.2rem solid #4b5c4f;
   margin-top: 3rem;
+  margin-bottom: 1rem;
   min-width: 33rem;
 }
 .event-carousel-slider {
@@ -845,8 +846,8 @@ body {
   width: 25rem;
 }
 .event-carousel-img {
-  min-width: 15rem;
-  max-height: 15rem;
+  min-width: 12rem;
+  max-height: 12rem;
   object-fit: contain;
   margin-left: auto;
   margin-right: auto;
