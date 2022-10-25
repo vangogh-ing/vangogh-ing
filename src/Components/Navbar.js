@@ -73,6 +73,7 @@ export default function Navbar({ session, propsOrgId }) {
             <Link to="/discover">Discover</Link>
           </div>
           <div>
+            <Link to="/faq">FAQ</Link>
             <Link to="/login">Login</Link>
           </div>
         </div>
@@ -108,6 +109,7 @@ export default function Navbar({ session, propsOrgId }) {
             </Menu>
           </div>
           <div>
+            <Link to="/faq">FAQ</Link>
             <Link to="/account">My Account</Link>
             <button
               type="button"
