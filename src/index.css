@@ -1126,3 +1126,14 @@ body {
     align-items: center;
   }
 }
+.not-found-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.not-found-image {
+  max-width: 35rem;
+  max-height: 35rem;
+  object-fit: contain;
+  border: 0.75rem solid #4c5e7d;
+}
