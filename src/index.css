@@ -1060,11 +1060,11 @@ body {
   margin-right: 1rem;
   margin-top: 2rem;
   margin-left: 1rem;
-  border-color: #4c5e7d;
   border-style: solid;
   border-width: 0.5rem;
-  max-width: 35rem;
-  max-height: 55rem;
+  border-color: #4c5e7d;
+  width: 35rem;
+  height: 55rem;
   float: right;
 }
 .faqCard {
@@ -1077,15 +1077,19 @@ body {
   text-align: justify;
 }
 @media only screen and (min-width: 0px) and (max-width: 900px) {
-  .faqImg {
-    float: right;
+  #container {
     padding: 1rem;
-    min-height: 15rem;
-    min-width: 10rem;
+  }
+  .faqImg {
+    border: 0px;
+    height: 0px;
+    width: 0px;
   }
   .faqCard {
-    float: left;
-    min-width: 10rem;
+    width: 10rem;
+  }
+  .faqBox {
+    width: 25rem;
   }
 }
 .footerContainer {
