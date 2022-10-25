@@ -18,6 +18,7 @@ import Calendar from "./Components/Calendar/Calendar";
 import OrgActiveEvents from "./Components/OrgEvents/orgActiveEvents";
 import OrgPastEvents from "./Components/OrgEvents/orgPastEvents";
 import Footer from "./Components/Footer";
+import FAQ from "./Components/faq";
 
 // notes: material ui theme test:
 const theme = createTheme({
@@ -67,6 +68,7 @@ export default function App() {
           {!session ? (
             <Routes>
               <Route path="/" element={<Navigate to="/discover" replace />} />
+              <Route path="/faq" element={<FAQ />} />
               <Route path="/login" element={<AuthLogin />} />
               <Route path="/signup" element={<AuthSignup />} />
               <Route path="/events/:id" element={<SingleEvent />} />
@@ -79,6 +81,7 @@ export default function App() {
                 path="/welcome"
                 element={<NewAccount key={session.user.id} session={session} />}
               />
+              <Route path="/faq" element={<FAQ />} />
               <Route
                 path="/account"
                 element={
