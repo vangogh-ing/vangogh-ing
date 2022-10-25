@@ -3,18 +3,20 @@
 }
 
 .faqImg{
+    display: flex;
     margin-right: 1rem;
     margin-top: 2rem;
     margin-left: 1rem;
     border-color: @independenceBlue;
     border-style: solid;
     border-width: .5rem;
-    width: 35rem;
-    height: 55rem;
+    max-width: 35rem;
+    max-height: 55rem;
     float: right;
 }
 
 .faqCard{
+
     float: left;
     margin-bottom: 1rem;
 }
@@ -22,4 +24,19 @@
 .faqBox{
     padding-left: 1rem;
     width: 50rem;
+    text-align: justify;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 900px) {
+ .faqImg {
+    float: right;
+    padding: 1rem;
+    min-height: 15rem;
+    min-width: 10rem;
+ }
+ 
+ .faqCard{
+    float: left;
+    min-width: 10rem;
+ }
 }

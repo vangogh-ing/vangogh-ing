@@ -2,7 +2,10 @@ const FAQ = () => {
   return (
     <div id="container">
       <h1>Frequently Asked Questions</h1>
-      <img className="faqImg" src="/vangoghfaq.jpg" />
+      <div className="faqImageDiv">
+        <img className="faqImg" src="/vangoghfaq.jpg" />
+      </div>
+
       <div className="faqCard">
         <div className="faqBox">
           <h2>WHAT IS VANGOGH-ING?</h2>
