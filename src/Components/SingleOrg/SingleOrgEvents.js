@@ -47,7 +47,6 @@ export default function SingleOrgEvents(props) {
 
   return (
     <div className="event-carousel-container">
-      {console.log("filteredEvents: ", filteredEvents)}
       {filteredEvents.length ? (
         <header className="event-carousel-header">
           <FormControlLabel
