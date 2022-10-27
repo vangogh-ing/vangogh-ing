@@ -1054,9 +1054,13 @@ body {
 }
 #container {
   display: flex;
-  align-content: center;
-  align-items: baseline;
+  flex-direction: column;
+  text-align: center;
   padding: 2rem;
+}
+.faqInfoContainer {
+  display: flex;
+  justify-content: space-between;
 }
 .faqImageDiv {
   display: flex;
@@ -1069,6 +1073,7 @@ body {
   margin-right: 1rem;
   margin-top: 2rem;
   margin-left: 1rem;
+  margin-right: 2rem;
   border-style: solid;
   border-width: 0.5rem;
   border-color: #4c5e7d;
@@ -1076,7 +1081,11 @@ body {
   height: 55rem;
   float: right;
 }
+.faqTitles {
+  width: 70vw;
+}
 .faqCard {
+  width: 70%;
   display: flex;
   flex-direction: column;
   float: left;
@@ -1090,19 +1099,23 @@ body {
   text-align: justify;
 }
 @media only screen and (min-width: 0px) and (max-width: 900px) {
-  #container {
-    padding: 1rem;
+  .faqInfoContainer {
+    flex-direction: column;
+    align-items: center;
   }
   .faqImg {
-    border: 0px;
-    height: 0px;
-    width: 0px;
+    height: 15rem;
+    width: 10rem;
+    margin-bottom: 3rem;
   }
   .faqCard {
-    width: 10rem;
+    width: 70vw;
   }
   .faqBox {
-    min-width: 25rem;
+    width: 70vw;
+  }
+  .faqWords {
+    width: 70vw;
   }
 }
 .footerContainer {
