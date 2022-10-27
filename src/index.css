@@ -1053,7 +1053,16 @@ body {
   transition: transform ease 0.5s, box-shadow ease 0.5s;
 }
 #container {
+  display: flex;
+  align-content: center;
+  align-items: baseline;
   padding: 2rem;
+}
+.faqImageDiv {
+  display: flex;
+  float: right;
+  max-width: 35rem;
+  max-height: 55rem;
 }
 .faqImg {
   display: flex;
@@ -1068,10 +1077,14 @@ body {
   float: right;
 }
 .faqCard {
+  display: flex;
+  flex-direction: column;
   float: left;
   margin-bottom: 1rem;
 }
 .faqBox {
+  display: flex;
+  flex-direction: column;
   padding-left: 1rem;
   width: 50rem;
   text-align: justify;
@@ -1089,7 +1102,7 @@ body {
     width: 10rem;
   }
   .faqBox {
-    width: 25rem;
+    min-width: 25rem;
   }
 }
 .footerContainer {

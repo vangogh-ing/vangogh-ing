@@ -1,8 +1,9 @@
 const FAQ = () => {
   return (
     <div id="container">
-      <h1>Frequently Asked Questions</h1>
-
+      <div>
+        <h1>Frequently Asked Questions</h1>
+      </div>
       <div className="faqImageDiv">
         <img className="faqImg" src="/vangoghfaq.jpg" />
       </div>
