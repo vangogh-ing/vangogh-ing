@@ -1,13 +1,42 @@
-import React from "react";
-// import { useParams } from "react-router-dom";
+import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { DateDisplay } from "../SingleEvent/DateTimeDisplay";
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 export default function SingleOrgEvents(props) {
+  const [filteredEvents, setFilteredEvents] = useState(
+    props.orgEvents.filter(
+      (eventEntry) => new Date(eventEntry.endDate).getTime() >= Date.now()
+    )
+  );
+  const [eventStatus, setEventStatus] = React.useState("Current");
+
+  const handleChange = useCallback(
+    async (event) => {
+      if (event.target.checked) {
+        setFilteredEvents(
+          props.orgEvents.filter(
+            (eventEntry) => new Date(eventEntry.endDate).getTime() >= Date.now()
+          )
+        );
+        setEventStatus("Current");
+      } else {
+        setFilteredEvents(
+          props.orgEvents.filter(
+            (eventEntry) => new Date(eventEntry.endDate).getTime() < Date.now()
+          )
+        );
+        setEventStatus("Past");
+      }
+    },
+    [props.orgEvents]
+  );
+
   const settings = {
     dots: true,
     infinite: true,
@@ -18,18 +47,27 @@ export default function SingleOrgEvents(props) {
 
   return (
     <div className="event-carousel-container">
-      {props.orgEvents.length ? (
+      {filteredEvents.length ? (
         <header className="event-carousel-header">
-          Events Happening at {props.orgName}
+          <FormControlLabel
+            control={<Switch defaultChecked onChange={handleChange} />}
+            label={`${eventStatus} Events: ${props.orgName}`}
+          />
         </header>
       ) : (
         <header className="event-carousel-header">
-          No events posted yet, check again later!
+          <FormControlLabel
+            control={<Switch defaultChecked onChange={handleChange} />}
+            label={`${eventStatus} Events: ${props.orgName}`}
+          />
+          <br />
+          No {eventStatus[0].toLowerCase() + eventStatus.slice(1)} events posted
+          yet, check again later!
         </header>
       )}
-      {props.orgEvents.length > 0 && (
+      {filteredEvents.length > 0 && (
         <Slider className="event-carousel-slider" {...settings}>
-          {props.orgEvents.map((event) => (
+          {filteredEvents.map((event) => (
             <div key={event.id}>
               <p>
                 <Link to={`/events/${event.id}`}>{event.title}</Link>
