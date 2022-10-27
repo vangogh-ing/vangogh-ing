@@ -1,25 +1,43 @@
-#container{
-    padding: 2rem;
+#container {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.faq-row {
+  text-align: left;
+  display: flex;
+  //   min-width: 70vw;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
 }
 
-.faqImg{
-    margin-right: 1rem;
-    margin-top: 2rem;
-    margin-left: 1rem;
-    border-color: @independenceBlue;
-    border-style: solid;
-    border-width: .5rem;
-    width: 35rem;
-    height: 55rem;
-    float: right;
+.faqImg {
+  margin-right: 1rem;
+  margin-top: 2rem;
+  margin-left: 1rem;
+  border-color: @independenceBlue;
+  border-style: solid;
+  border-width: 0.5rem;
+  min-width: 20rem;
+  max-width: 35rem;
+  object-fit: contain;
+  //   height: 55rem;
+  //   float: right;
 }
 
-.faqCard{
-    float: left;
-    margin-bottom: 1rem;
+.faqCard {
+  //   float: left;
+  margin-bottom: 1rem;
+  min-width: 30rem;
+  max-width: 40rem;
 }
 
-.faqBox{
-    padding-left: 1rem;
-    width: 50rem;
+.faqBox {
+  padding-left: 1rem;
+  max-width: 50rem;
+  display: flex;
+  flex-direction: column;
 }
