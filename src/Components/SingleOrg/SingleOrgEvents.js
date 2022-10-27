@@ -16,7 +16,26 @@ export default function SingleOrgEvents(props) {
   );
   const [eventStatus, setEventStatus] = React.useState("Current");
 
-  const handleChange = useCallback();
+  const handleChange = useCallback(
+    async (event) => {
+      if (event.target.checked) {
+        setFilteredEvents(
+          props.orgEvents.filter(
+            (eventEntry) => new Date(eventEntry.endDate).getTime() >= Date.now()
+          )
+        );
+        setEventStatus("Current");
+      } else {
+        setFilteredEvents(
+          props.orgEvents.filter(
+            (eventEntry) => new Date(eventEntry.endDate).getTime() < Date.now()
+          )
+        );
+        setEventStatus("Past");
+      }
+    },
+    [props.orgEvents]
+  );
 
   const settings = {
     dots: true,
