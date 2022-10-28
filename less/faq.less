@@ -1,25 +1,83 @@
 #container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
     padding: 2rem;
 }
 
+.faqInfoContainer{
+    display:flex;
+    justify-content: space-between;
+}
+
+.faqImageDiv{
+    display: flex;
+    float: right;
+    max-width: 35rem;
+    max-height: 55rem;
+}
+
 .faqImg{
+    display: flex;
     margin-right: 1rem;
     margin-top: 2rem;
     margin-left: 1rem;
-    border-color: @independenceBlue;
+    margin-right: 2rem;
     border-style: solid;
     border-width: .5rem;
+    border-color: @independenceBlue;    
     width: 35rem;
     height: 55rem;
     float: right;
 }
 
+.faqTitles{
+    width: 70vw;
+}
 .faqCard{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
     float: left;
     margin-bottom: 1rem;
 }
 
 .faqBox{
+    display: flex;
+    flex-direction: column;
     padding-left: 1rem;
     width: 50rem;
+    text-align: justify;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 900px) {
+    // .faqTitles{
+    //     width: 40vw;
+    // }
+    
+    .faqInfoContainer{
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    .faqImg {
+        height: 15rem;
+        width: 10rem;
+        margin-bottom: 3rem;
+    }
+
+    .faqCard{
+        width: 70vw;
+    }
+    .faqBox{
+        width: 70vw;  
+    }
+
+    .faqWords{
+        width: 70vw;
+    }
+
+
+
 }
