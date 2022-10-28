@@ -35,7 +35,6 @@ export default function ReviewCard(props) {
   const [expanded, setExpanded] = useState(false);
 
   const handleExpand = useCallback(async () => {
-    console.log("test");
     setExpanded((expanded) => !expanded);
   }, []);
 
